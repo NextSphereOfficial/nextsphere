@@ -135,7 +135,7 @@ export default function Home() {
         </motion.div>
 
         {/* Bottom fade into white */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
       </section>
 
       {/* ─── 2. HOW IT WORKS ─────────────────────────────────────── */}
@@ -289,7 +289,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <Accordion type="single" collapsible defaultValue="item-0" className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <Accordion type="single" collapsible className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               {[1, 2, 3, 4, 5, 6].map((i, idx) => (
                 <AccordionItem key={i} value={`item-${idx}`} className="px-6 border-b border-gray-100 last:border-0">
                   <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-primary transition-colors py-6">
