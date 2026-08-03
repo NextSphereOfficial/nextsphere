@@ -1,0 +1,1 @@
+- [Deployment pipeline](deployment-pipeline.md) — Replit → GitHub (NextSphereOfficial/nextsphere) → Vercel auto-deploy on push to main
