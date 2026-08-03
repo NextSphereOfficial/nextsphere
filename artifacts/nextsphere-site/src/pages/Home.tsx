@@ -3,7 +3,6 @@ import { useTranslation } from '../hooks/useTranslation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import decorativeSphere from '@assets/logo_ns_vector_1_1785754189944.png';
 
 // --- Animation variants ---
 const fadeUp = {
@@ -76,15 +75,8 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial="hidden" animate="visible" variants={fadeUp}
-              className="flex items-center justify-center gap-4 mb-8"
+              className="flex items-center justify-center mb-8"
             >
-              <motion.img
-                src={decorativeSphere}
-                alt=""
-                className="w-10 h-10 object-contain"
-                animate={{ rotate: [0, 8, -8, 0], opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-              />
               <span className="inline-block py-1.5 px-4 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">
                 ✨ {t('hero.badge')}
               </span>
