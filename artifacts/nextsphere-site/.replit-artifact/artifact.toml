@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "NextSphere Website"
+description = "A modern, elegant bilingual (IT/EN) showcase website for NextSphere — an AI chatbot platform connecting hospitality hosts with their guests via a customizable chatbot. Single-page landing site with gradient effects, scroll animations, pricing, FAQ, contact form, cookie banner, and GDPR legal pages."
+version = "1.0.0"
+id = "artifacts/nextsphere-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20721
+
+[services.development]
+run = "pnpm --filter @workspace/nextsphere-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nextsphere-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nextsphere-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20721"
+BASE_PATH = "/"
