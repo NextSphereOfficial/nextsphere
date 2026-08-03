@@ -1,10 +1,15 @@
 import { PRIVACY_POLICY_DATE } from './privacyPolicyDate';
+import { COOKIE_POLICY_DATE } from './cookiePolicyDate';
 
 // Use Date.UTC so the date is always interpreted in UTC, then pin timeZone: 'UTC'
 // in the formatter — this prevents the month from shifting for users west of UTC.
 const _privacyDate = new Date(Date.UTC(PRIVACY_POLICY_DATE.year, PRIVACY_POLICY_DATE.month - 1, 1));
 const privacyLastUpdatedEN = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_privacyDate);
 const privacyLastUpdatedIT = new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_privacyDate);
+
+const _cookieDate = new Date(Date.UTC(COOKIE_POLICY_DATE.year, COOKIE_POLICY_DATE.month - 1, 1));
+const cookieLastUpdatedEN = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_cookieDate);
+const cookieLastUpdatedIT = new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_cookieDate);
 
 export const translations = {
   en: {
@@ -139,14 +144,33 @@ export const translations = {
     'legal.privacy.h5': '5. Your Rights',
     'legal.privacy.h5.text': 'Under GDPR (Articles 15-20), you have the right to access, rectify, erase, or port your personal data. You may withdraw your consent to analytics cookies at any time via the cookie banner or by clearing your browser data. To exercise your rights, please contact privacy@nextsphere.it.',
     
+    // ─── COOKIE POLICY MAINTENANCE CHECKLIST ─────────────────────────────────
+    // When you add any new cookie or tracking tool, update the relevant sections
+    // below AND bump COOKIE_POLICY_DATE in ./cookiePolicyDate.ts.
+    //
+    // Feature → sections to revisit:
+    //   Analytics tool (e.g. Plausible, GA)  → h2 (cookies we use), h4 (third parties)
+    //   Payment processor (e.g. Stripe)       → h2 (cookies we use), h4 (third parties)
+    //   Chat widget / support tool            → h2 (cookies we use), h4 (third parties)
+    //   Marketing pixel (e.g. Meta, Google)   → h2 (cookies we use), h4 (third parties),
+    //                                           consider adding a new h5 for consent categories
+    //   A/B testing tool                      → h2 (cookies we use), h4 (third parties)
+    //   Session recording (e.g. Hotjar)       → h2 (cookies we use), h4 (third parties)
+    // ─────────────────────────────────────────────────────────────────────────
+
     'legal.cookie.title': 'Cookie Policy',
+    'legal.cookie.lastUpdated': `Last updated: ${cookieLastUpdatedEN}`,
     'legal.cookie.p1': 'Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and allows us to improve our site.',
+    // h1 — static definition; only revisit if adding a new storage mechanism (e.g. fingerprinting)
     'legal.cookie.h1': '1. What are cookies?',
     'legal.cookie.h1.text': 'A cookie is a small file of letters and numbers that we store on your browser or the hard drive of your computer if you agree.',
+    // h2 — revisit whenever a new cookie or tracking technology is introduced
     'legal.cookie.h2': '2. Cookies we use',
     'legal.cookie.h2.text': 'We use technical cookies (essential for session management, language preferences, and remembering your cookie consent choice). We only use analytics cookies if you explicitly accept them.',
+    // h3 — revisit if consent management changes (e.g. adding a consent management platform)
     'legal.cookie.h3': '3. Managing cookies',
     'legal.cookie.h3.text': 'You can block cookies by activating the setting on your browser that allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies (including essential cookies) you may not be able to access all or parts of our site.',
+    // h4 — revisit whenever a third-party service that sets cookies is added or removed
     'legal.cookie.h4': '4. Third Parties',
     'legal.cookie.h4.text': 'We currently do not use any third-party marketing cookies.'
   },
@@ -282,14 +306,33 @@ export const translations = {
     'legal.privacy.h5': '5. I Tuoi Diritti',
     'legal.privacy.h5.text': 'Ai sensi del GDPR (Art. 15-20), hai il diritto di accedere, rettificare, cancellare o trasferire i tuoi dati personali. Puoi revocare il consenso ai cookie analitici in qualsiasi momento tramite il banner dei cookie o cancellando i dati del browser. Per esercitare i tuoi diritti, contatta privacy@nextsphere.it.',
     
+    // ─── CHECKLIST MANUTENZIONE COOKIE POLICY ────────────────────────────────
+    // Quando aggiungi un nuovo cookie o strumento di tracciamento, aggiorna le
+    // sezioni pertinenti qui sotto E aggiorna COOKIE_POLICY_DATE in ./cookiePolicyDate.ts.
+    //
+    // Funzionalità → sezioni da rivedere:
+    //   Strumento analytics (es. Plausible, GA)  → h2 (cookie utilizzati), h4 (terze parti)
+    //   Processore pagamenti (es. Stripe)         → h2 (cookie utilizzati), h4 (terze parti)
+    //   Widget chat / supporto                    → h2 (cookie utilizzati), h4 (terze parti)
+    //   Pixel marketing (es. Meta, Google)        → h2 (cookie utilizzati), h4 (terze parti),
+    //                                               valutare nuova h5 per categorie di consenso
+    //   Strumento A/B testing                     → h2 (cookie utilizzati), h4 (terze parti)
+    //   Session recording (es. Hotjar)            → h2 (cookie utilizzati), h4 (terze parti)
+    // ─────────────────────────────────────────────────────────────────────────
+
     'legal.cookie.title': 'Cookie Policy',
+    'legal.cookie.lastUpdated': `Ultimo aggiornamento: ${cookieLastUpdatedIT}`,
     'legal.cookie.p1': 'Il nostro sito web utilizza i cookie per distinguerti dagli altri utenti. Questo ci aiuta a fornirti una buona esperienza durante la navigazione e ci permette di migliorare il sito.',
+    // h1 — statico; rivedere solo se si aggiunge un nuovo meccanismo di memorizzazione (es. fingerprinting)
     'legal.cookie.h1': '1. Cosa sono i cookie?',
     'legal.cookie.h1.text': 'Un cookie è un piccolo file di lettere e numeri che memorizziamo sul tuo browser o sul disco rigido del tuo computer se acconsenti.',
+    // h2 — aggiornare ogni volta che si introduce un nuovo cookie o tecnologia di tracciamento
     'legal.cookie.h2': '2. Cookie che utilizziamo',
     'legal.cookie.h2.text': 'Utilizziamo cookie tecnici (essenziali per la sessione, preferenze di lingua e scelta del consenso cookie). Utilizziamo cookie analitici solo se li accetti esplicitamente.',
+    // h3 — aggiornare se cambia la gestione del consenso (es. aggiunta di una CMP)
     'legal.cookie.h3': '3. Gestione dei cookie',
     'legal.cookie.h3.text': 'Puoi bloccare i cookie attivando le impostazioni del tuo browser. Tuttavia, se blocchi tutti i cookie (inclusi quelli essenziali) potresti non essere in grado di accedere a tutte le sezioni del sito.',
+    // h4 — aggiornare ogni volta che si aggiunge o rimuove un servizio terzo che imposta cookie
     'legal.cookie.h4': '4. Terze parti',
     'legal.cookie.h4.text': 'Attualmente non utilizziamo cookie di marketing di terze parti.'
   }

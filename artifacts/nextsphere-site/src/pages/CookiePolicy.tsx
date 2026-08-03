@@ -15,6 +15,7 @@ export default function CookiePolicy() {
       />
       <div className="max-w-3xl mx-auto px-6 bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('legal.cookie.title')}</h1>
+        <p className="text-sm text-gray-500 mb-10">{t('legal.cookie.lastUpdated')}</p>
         
         <div className="prose prose-gray max-w-none mt-10">
           <p className="text-gray-600 leading-relaxed mb-8">
