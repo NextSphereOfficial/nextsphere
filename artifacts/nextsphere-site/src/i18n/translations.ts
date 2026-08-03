@@ -97,18 +97,39 @@ export const translations = {
     'cookieBanner.accept': 'Accept',
     'cookieBanner.reject': 'Reject',
     
+    // ─── PRIVACY POLICY MAINTENANCE CHECKLIST ────────────────────────────────
+    // When you add any data-collecting feature, update the relevant sections
+    // below AND bump PRIVACY_POLICY_DATE in ./privacyPolicyDate.ts.
+    //
+    // Feature → sections to revisit:
+    //   User accounts / authentication  → h1 (controller contact), h2 (data collected),
+    //                                     h3 (purpose), h4 (retention), h5 (rights)
+    //   Contact form / email capture    → h2 (data collected), h3 (purpose), h4 (retention)
+    //   Payment processing              → h2 (data collected), h3 (purpose), h4 (retention),
+    //                                     new section for third-party processors (e.g. Stripe)
+    //   Third-party analytics tool      → h2 (data collected), h3 (purpose), cookie policy h4
+    //   Guest chatbot data              → h2 (data collected), h3 (purpose), h4 (retention)
+    //   Marketing emails / newsletter   → h2 (data collected), h3 (purpose), h4 (retention),
+    //                                     h5 (add right to unsubscribe / opt-out)
+    // ─────────────────────────────────────────────────────────────────────────
+
     // Legal Pages
     'legal.privacy.title': 'Privacy Policy',
     'legal.privacy.lastUpdated': `Last updated: ${privacyLastUpdatedEN}`,
     'legal.privacy.p1': 'This Privacy Policy describes how NextSphere ("we", "us", or "our") collects, uses, and shares your personal information when you use our website and services.',
+    // h1 — revisit if company name, address, or DPO contact changes
     'legal.privacy.h1': '1. Data Controller',
     'legal.privacy.h1.text': 'The data controller is NextSphere. You can contact us at info@nextsphere.it.',
+    // h2 — revisit whenever a new category of personal data is collected (accounts, forms, payments, etc.)
     'legal.privacy.h2': '2. Data Collected',
     'legal.privacy.h2.text': 'We store your language preference locally in your browser (localStorage). This data is never transmitted to our servers. If you accept our cookie banner, we may also collect anonymized usage analytics to help us understand how visitors use the site.',
+    // h3 — revisit if the purpose of processing expands (e.g. marketing, profiling)
     'legal.privacy.h3': '3. Purpose of Processing',
     'legal.privacy.h3.text': 'We use analytics data solely to improve our website and services. We do not sell your data to third parties.',
+    // h4 — revisit if retention periods change or new data stores are introduced
     'legal.privacy.h4': '4. Data Retention',
     'legal.privacy.h4.text': 'Language preference data is stored only in your browser\'s localStorage and can be cleared at any time by clearing your browser data. Analytics cookies, if accepted, are retained in accordance with our Cookie Policy.',
+    // h5 — revisit if new rights apply (e.g. right to object to automated decisions, right to unsubscribe)
     'legal.privacy.h5': '5. Your Rights',
     'legal.privacy.h5.text': 'Under GDPR (Articles 15-20), you have the right to access, rectify, erase, or port your personal data. You may withdraw your consent to analytics cookies at any time via the cookie banner or by clearing your browser data. To exercise your rights, please contact privacy@nextsphere.it.',
     
@@ -213,18 +234,39 @@ export const translations = {
     'cookieBanner.accept': 'Accetta',
     'cookieBanner.reject': 'Rifiuta',
     
+    // ─── CHECKLIST MANUTENZIONE PRIVACY POLICY ───────────────────────────────
+    // Quando aggiungi una funzionalità che raccoglie dati, aggiorna le sezioni
+    // pertinenti qui sotto E aggiorna PRIVACY_POLICY_DATE in ./privacyPolicyDate.ts.
+    //
+    // Funzionalità → sezioni da rivedere:
+    //   Account utente / autenticazione → h1 (titolare), h2 (dati raccolti),
+    //                                     h3 (finalità), h4 (conservazione), h5 (diritti)
+    //   Modulo contatto / email         → h2 (dati raccolti), h3 (finalità), h4 (conservazione)
+    //   Pagamenti                       → h2 (dati raccolti), h3 (finalità), h4 (conservazione),
+    //                                     nuova sezione per responsabili terzi (es. Stripe)
+    //   Strumento analytics terzo       → h2 (dati raccolti), h3 (finalità), cookie policy h4
+    //   Dati chatbot ospiti             → h2 (dati raccolti), h3 (finalità), h4 (conservazione)
+    //   Email marketing / newsletter    → h2 (dati raccolti), h3 (finalità), h4 (conservazione),
+    //                                     h5 (aggiungere diritto di opposizione / opt-out)
+    // ─────────────────────────────────────────────────────────────────────────
+
     // Legal Pages
     'legal.privacy.title': 'Privacy Policy',
     'legal.privacy.lastUpdated': `Ultimo aggiornamento: ${privacyLastUpdatedIT}`,
     'legal.privacy.p1': 'Questa Privacy Policy descrive come NextSphere ("noi", o "nostro") raccoglie, utilizza e condivide le tue informazioni personali quando utilizzi il nostro sito web e i nostri servizi.',
+    // h1 — aggiornare se cambia ragione sociale, sede o contatto DPO
     'legal.privacy.h1': '1. Titolare del Trattamento',
     'legal.privacy.h1.text': 'Il titolare del trattamento è NextSphere. Puoi contattarci a info@nextsphere.it.',
+    // h2 — aggiornare ogni volta che si raccoglie una nuova categoria di dati personali
     'legal.privacy.h2': '2. Dati Raccolti',
     'legal.privacy.h2.text': 'Memorizziamo la tua preferenza di lingua localmente nel tuo browser (localStorage). Questi dati non vengono mai trasmessi ai nostri server. Se accetti il nostro banner sui cookie, potremmo raccogliere anche dati analitici anonimi per capire come i visitatori utilizzano il sito.',
+    // h3 — aggiornare se le finalità si espandono (es. marketing, profilazione)
     'legal.privacy.h3': '3. Finalità del Trattamento',
     'legal.privacy.h3.text': 'Utilizziamo i dati analitici esclusivamente per migliorare il nostro sito web e i nostri servizi. Non vendiamo i tuoi dati a terze parti.',
+    // h4 — aggiornare se cambiano i periodi di conservazione o si aggiungono nuovi archivi
     'legal.privacy.h4': '4. Conservazione dei Dati',
     'legal.privacy.h4.text': 'La preferenza di lingua è memorizzata solo nel localStorage del tuo browser e può essere eliminata in qualsiasi momento cancellando i dati del browser. I cookie analitici, se accettati, vengono conservati in conformità con la nostra Cookie Policy.',
+    // h5 — aggiornare se si aggiungono nuovi diritti (es. opposizione a decisioni automatizzate, opt-out)
     'legal.privacy.h5': '5. I Tuoi Diritti',
     'legal.privacy.h5.text': 'Ai sensi del GDPR (Art. 15-20), hai il diritto di accedere, rettificare, cancellare o trasferire i tuoi dati personali. Puoi revocare il consenso ai cookie analitici in qualsiasi momento tramite il banner dei cookie o cancellando i dati del browser. Per esercitare i tuoi diritti, contatta privacy@nextsphere.it.',
     
