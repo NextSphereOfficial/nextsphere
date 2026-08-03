@@ -19,6 +19,9 @@ export function CookieBanner() {
 
   const handleConsent = (choice: 'accepted' | 'rejected') => {
     localStorage.setItem('ns_cookie_consent', choice);
+    window.dispatchEvent(
+      new CustomEvent('ns:cookie-consent-changed', { detail: { consent: choice } })
+    );
     setIsVisible(false);
   };
 

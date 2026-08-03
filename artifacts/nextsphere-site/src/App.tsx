@@ -10,6 +10,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
 }
 
 function App() {
+  useGoogleAnalytics();
   return (
     <LanguageProvider>
       <TooltipProvider>
