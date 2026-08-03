@@ -118,7 +118,7 @@ export default function Home() {
               </a>
               <a
                 href="#how-it-works"
-                className="inline-flex items-center justify-center px-8 py-4 bg-emerald-500 text-white border border-emerald-400 text-base font-semibold rounded-xl hover:bg-emerald-400 transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white border border-white/10 text-base font-semibold rounded-xl hover:bg-white/10 transition-all"
                 data-testid="hero-cta-secondary"
               >
                 {t('hero.cta.secondary')}
