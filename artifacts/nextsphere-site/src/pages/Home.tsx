@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
+import { SEO } from '../components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -26,7 +27,7 @@ const staggerGrid = {
 };
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
 
   // Parallax: hero background orbs drift upward as user scrolls
@@ -43,6 +44,12 @@ export default function Home() {
 
   return (
     <div className="w-full">
+      <SEO
+        title={t('meta.home.title')}
+        description={t('meta.home.description')}
+        canonical="https://nextsphere.it/"
+        lang={lang}
+      />
 
       {/* ─── 1. HERO ─────────────────────────────────────────────── */}
       <section

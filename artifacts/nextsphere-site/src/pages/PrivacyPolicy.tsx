@@ -1,11 +1,18 @@
 import React from 'react';
 import { useTranslation } from '../hooks/useTranslation';
+import { SEO } from '../components/SEO';
 
 export default function PrivacyPolicy() {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-50 pt-32 pb-20">
+      <SEO
+        title={`${t('legal.privacy.title')} | NextSphere`}
+        description={t('meta.privacy.description')}
+        canonical="https://nextsphere.it/privacy-policy"
+        lang={lang}
+      />
       <div className="max-w-3xl mx-auto px-6 bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('legal.privacy.title')}</h1>
         <p className="text-sm text-gray-500 mb-10">{t('legal.privacy.lastUpdated')}</p>

@@ -8,6 +8,12 @@ const privacyLastUpdatedIT = new Intl.DateTimeFormat('it-IT', { month: 'long', y
 
 export const translations = {
   en: {
+    // Meta tags (per-page SEO)
+    'meta.home.title': 'NextSphere | AI Chatbot for B&Bs & Holiday Rentals — 24/7 Answers',
+    'meta.home.description': 'NextSphere is the AI chatbot for B&B and vacation rental hosts. Guests scan a QR code and get instant 24/7 answers in their language. Zero effort for you.',
+    'meta.privacy.description': 'NextSphere Privacy Policy — how we collect, use and protect your personal data.',
+    'meta.cookie.description': 'NextSphere Cookie Policy — what cookies we use and how to manage them.',
+
     // Navbar
     'nav.startFreeTrial': 'Start free trial',
     'nav.howItWorks': 'How it works',
@@ -145,6 +151,12 @@ export const translations = {
     'legal.cookie.h4.text': 'We currently do not use any third-party marketing cookies.'
   },
   it: {
+    // Meta tags (per-page SEO)
+    'meta.home.title': 'NextSphere | Chatbot AI per B&B e Case Vacanze — Risposte 24/7',
+    'meta.home.description': 'NextSphere è il chatbot AI per host di B&B, case vacanze e appartamenti. Gli ospiti scansionano un QR code e ottengono risposte immediate 24/7 nella loro lingua. Zero sforzo per te.',
+    'meta.privacy.description': 'Informativa sulla Privacy di NextSphere — come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.',
+    'meta.cookie.description': 'Cookie Policy di NextSphere — quali cookie utilizziamo e come gestirli.',
+
     // Navbar
     'nav.startFreeTrial': 'Inizia la prova gratuita',
     'nav.howItWorks': 'Come funziona',
