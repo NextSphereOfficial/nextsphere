@@ -5,15 +5,15 @@ export const translations = {
     
     // Hero
     'hero.badge': 'The silent concierge for your property',
-    'hero.title': '24/7 answers for your guests. Zero effort for you.',
-    'hero.subtitle': 'NextSphere is the premium AI assistant for hospitality hosts. Guests scan a QR code and get instant answers in their language—no apps, no endless emails.',
+    'hero.title': 'Hours back. Guests delighted. Always.',
+    'hero.subtitle': 'NextSphere answers every guest question — automatically. No more midnight calls, no more repetitive emails. Just happy guests and free time for you.',
     'hero.cta.primary': 'Start your free trial',
     'hero.cta.secondary': 'How it works',
     
     // How it works
     'howItWorks.title': 'Effortless to set up, invisible to manage.',
     'howItWorks.step1.title': 'Guided onboarding',
-    'howItWorks.step1.desc': 'Connect your property and configure your AI assistant in minutes. We handle the complexity.',
+    'howItWorks.step1.desc': 'Enter your property details and configure your AI assistant in minutes. We handle the complexity.',
     'howItWorks.step2.title': 'QR code ready',
     'howItWorks.step2.desc': 'Place the elegant QR code in your property. No app downloads required for your guests.',
     'howItWorks.step3.title': 'Guests chat 24/7',
@@ -62,21 +62,8 @@ export const translations = {
     'faq.q6': 'Can I edit the chatbot\'s responses?',
     'faq.a6': 'Absolutely. You have full control over the knowledge base and can update house rules, Wi-Fi passwords, or recommendations at any time.',
     
-    // Contact
-    'contact.title': 'Want to try NextSphere at your property?',
-    'contact.subtitle': 'Send us a message and we\'ll get you set up.',
-    'contact.name': 'Name',
-    'contact.email': 'Email',
-    'contact.propertyType': 'Property type',
-    'contact.pt.bb': 'B&B',
-    'contact.pt.holiday': 'Vacation Rental',
-    'contact.pt.hotel': 'Hotel',
-    'contact.pt.other': 'Other',
-    'contact.message': 'Message',
-    'contact.submit': 'Send message',
-    
     // Footer & Legal
-    'footer.tagline': 'The premium AI assistant for hospitality hosts.',
+    'footer.tagline': 'Hosting, reimagined.',
     'footer.nav.product': 'Product',
     'footer.nav.howItWorks': 'How it works',
     'footer.nav.features': 'Features',
@@ -85,7 +72,7 @@ export const translations = {
     'footer.nav.legal': 'Legal',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
-    'footer.rights': '© 2025 NextSphere. All rights reserved.',
+    'footer.rights': '© 2026 NextSphere. All rights reserved.',
     
     'cookieBanner.text': 'We use cookies to improve your experience.',
     'cookieBanner.accept': 'Accept',
@@ -123,15 +110,15 @@ export const translations = {
     
     // Hero
     'hero.badge': 'Il concierge silenzioso per la tua struttura',
-    'hero.title': 'Risposte 24/7 per i tuoi ospiti. Zero sforzo per te.',
-    'hero.subtitle': 'NextSphere è l\'assistente AI premium per gli host. Gli ospiti scansionano un QR code e ottengono risposte immediate nella loro lingua — niente app, niente email infinite.',
+    'hero.title': 'Ore risparmiate. Ospiti felici. Sempre.',
+    'hero.subtitle': 'NextSphere risponde automaticamente a ogni domanda dei tuoi ospiti. Niente più chiamate notturne, niente più email ripetitive. Solo ospiti soddisfatti e tempo libero per te.',
     'hero.cta.primary': 'Inizia la prova gratuita',
     'hero.cta.secondary': 'Come funziona',
     
     // How it works
     'howItWorks.title': 'Semplice da configurare, invisibile da gestire.',
     'howItWorks.step1.title': 'Onboarding guidato',
-    'howItWorks.step1.desc': 'Collega la tua struttura e configura il tuo assistente AI in pochi minuti. Gestiamo noi la complessità.',
+    'howItWorks.step1.desc': 'Inserisci i dati della tua struttura e configura il tuo assistente AI in pochi minuti. Gestiamo noi la complessità.',
     'howItWorks.step2.title': 'QR code pronto',
     'howItWorks.step2.desc': 'Posiziona l\'elegante QR code nella tua struttura. Nessun download richiesto per gli ospiti.',
     'howItWorks.step3.title': 'Gli ospiti chattano 24/7',
@@ -180,21 +167,8 @@ export const translations = {
     'faq.q6': 'Posso modificare le risposte del chatbot?',
     'faq.a6': 'Certamente. Hai il controllo completo sulla base di conoscenza e puoi aggiornare regole della casa, password del Wi-Fi o raccomandazioni in qualsiasi momento.',
     
-    // Contact
-    'contact.title': 'Vuoi provare NextSphere nella tua struttura?',
-    'contact.subtitle': 'Inviaci un messaggio e ti aiuteremo a iniziare.',
-    'contact.name': 'Nome',
-    'contact.email': 'Email',
-    'contact.propertyType': 'Tipo di struttura',
-    'contact.pt.bb': 'B&B',
-    'contact.pt.holiday': 'Casa vacanze',
-    'contact.pt.hotel': 'Hotel',
-    'contact.pt.other': 'Altro',
-    'contact.message': 'Messaggio',
-    'contact.submit': 'Invia messaggio',
-    
     // Footer & Legal
-    'footer.tagline': 'L\'assistente AI premium per gli host.',
+    'footer.tagline': 'L\'ospitalità, reinventata.',
     'footer.nav.product': 'Prodotto',
     'footer.nav.howItWorks': 'Come funziona',
     'footer.nav.features': 'Funzionalità',
@@ -203,7 +177,7 @@ export const translations = {
     'footer.nav.legal': 'Legale',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
-    'footer.rights': '© 2025 NextSphere. Tutti i diritti riservati.',
+    'footer.rights': '© 2026 NextSphere. Tutti i diritti riservati.',
     
     'cookieBanner.text': 'Utilizziamo cookie per migliorare la tua esperienza.',
     'cookieBanner.accept': 'Accetta',

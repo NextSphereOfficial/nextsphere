@@ -1,70 +1,130 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import decorativeSphere from '@assets/logo_ns_vector_1_1785754189944.png';
 
+// --- Animation variants ---
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } }
 };
 
-const stagger = {
-  hidden: { opacity: 0 },
+// Feature cards get a blur-fade for a more premium feel
+const blurFade = {
+  hidden: { opacity: 0, y: 28, filter: 'blur(10px)' },
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }
   }
+};
+
+// Stagger container for feature grid
+const staggerGrid = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
 };
 
 export default function Home() {
   const { t } = useTranslation();
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Parallax: hero background orbs drift upward as user scrolls
+  const { scrollY } = useScroll();
+  const orb1Y = useTransform(scrollY, [0, 600], [0, -120]);
+  const orb2Y = useTransform(scrollY, [0, 600], [0, -80]);
+  const heroContentY = useTransform(scrollY, [0, 600], [0, 60]);
+
+  // Split headline: last word gets gold accent
+  const heroTitle = t('hero.title');
+  const lastSpace = heroTitle.lastIndexOf(' ');
+  const titleMain = heroTitle.slice(0, lastSpace);
+  const titleHighlight = heroTitle.slice(lastSpace + 1);
 
   return (
     <div className="w-full">
-      {/* 1. Hero Section (Dark Theme with Radial Glow) */}
-      <section className="relative min-h-[90vh] flex items-center bg-[#0D0D0D] overflow-hidden">
-        {/* Abstract gradient orbs */}
-        <div className="absolute inset-0 bg-radial-gradient opacity-60"></div>
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-amber-900/20 rounded-full blur-[100px] pointer-events-none"></div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-32 pb-20">
+
+      {/* ─── 1. HERO ─────────────────────────────────────────────── */}
+      <section
+        ref={heroRef}
+        className="relative min-h-[100vh] flex items-center bg-[#0D0D0D] overflow-hidden"
+      >
+        {/* Parallax background orbs */}
+        <motion.div
+          className="absolute inset-0 bg-radial-gradient opacity-60 pointer-events-none"
+          style={{ y: orb1Y }}
+        />
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[130px] pointer-events-none"
+          style={{ y: orb1Y, background: 'radial-gradient(circle, rgba(222,182,125,0.22) 0%, transparent 70%)' }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0.85, 0.6] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/4 w-[700px] h-[450px] rounded-full blur-[110px] pointer-events-none"
+          style={{ y: orb2Y, background: 'radial-gradient(circle, rgba(180,120,60,0.18) 0%, transparent 70%)' }}
+          animate={{ scale: [1, 1.08, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+
+        {/* Hero content with subtle scroll drift */}
+        <motion.div
+          className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-36 pb-24"
+          style={{ y: heroContentY }}
+        >
           <div className="max-w-3xl">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} className="flex items-center gap-4 mb-6">
-              <img src={decorativeSphere} alt="" className="w-10 h-10 object-contain opacity-80" />
+            <motion.div
+              initial="hidden" animate="visible" variants={fadeUp}
+              className="flex items-center gap-4 mb-8"
+            >
+              <motion.img
+                src={decorativeSphere}
+                alt=""
+                className="w-10 h-10 object-contain"
+                animate={{ rotate: [0, 8, -8, 0], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <span className="inline-block py-1.5 px-4 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">
                 ✨ {t('hero.badge')}
               </span>
             </motion.div>
-            
-            <motion.h1 
-              initial="hidden" animate="visible" variants={fadeUp} custom={1}
-              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+
+            {/* Headline with gold highlight on last word */}
+            <motion.h1
+              initial="hidden" animate="visible" variants={fadeUp}
+              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.08] tracking-tight"
             >
-              {t('hero.title')}
+              {titleMain}{' '}
+              <span className="text-primary relative inline-block">
+                {titleHighlight}
+                {/* Subtle glow under the highlight word */}
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-primary/40 blur-[4px]"
+                />
+              </span>
             </motion.h1>
-            
-            <motion.p 
-              initial="hidden" animate="visible" variants={fadeUp} custom={2}
+
+            <motion.p
+              initial="hidden" animate="visible" variants={fadeUp}
               className="text-xl text-gray-400 mb-10 max-w-2xl leading-relaxed"
             >
               {t('hero.subtitle')}
             </motion.p>
-            
-            <motion.div 
-              initial="hidden" animate="visible" variants={fadeUp} custom={3}
+
+            <motion.div
+              initial="hidden" animate="visible" variants={fadeUp}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a 
+              <a
                 href="#pricing"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(222,182,125,0.3)]"
+                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.35)]"
                 data-testid="hero-cta-primary"
               >
                 {t('hero.cta.primary')}
               </a>
-              <a 
+              <a
                 href="#how-it-works"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white border border-white/10 text-base font-semibold rounded-xl hover:bg-white/10 transition-all"
                 data-testid="hero-cta-secondary"
@@ -73,34 +133,39 @@ export default function Home() {
               </a>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Bottom fade into white */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
       </section>
 
-      {/* 2. How it works */}
+      {/* ─── 2. HOW IT WORKS ─────────────────────────────────────── */}
       <section id="how-it-works" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp}
             className="text-center max-w-3xl mx-auto mb-20"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t('howItWorks.title')}</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-12 relative">
-            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-[2px] bg-gray-100 -z-10"></div>
-            
+            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-[2px] bg-gray-100 -z-10" />
+
             {[
               { icon: ShieldCheck, title: t('howItWorks.step1.title'), desc: t('howItWorks.step1.desc') },
-              { icon: ScanLine, title: t('howItWorks.step2.title'), desc: t('howItWorks.step2.desc') },
-              { icon: Clock, title: t('howItWorks.step3.title'), desc: t('howItWorks.step3.desc') },
+              { icon: ScanLine,    title: t('howItWorks.step2.title'), desc: t('howItWorks.step2.desc') },
+              { icon: Clock,       title: t('howItWorks.step3.title'), desc: t('howItWorks.step3.desc') },
             ].map((step, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp}
+                initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-50px' }}
+                variants={fadeUp}
+                transition={{ delay: idx * 0.1 }}
                 className="flex flex-col items-center text-center group"
               >
                 <div className="w-24 h-24 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-8 relative">
-                  <div className="absolute inset-0 rounded-full border border-primary/20 scale-[1.15] opacity-0 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-500"></div>
+                  <div className="absolute inset-0 rounded-full border border-primary/20 scale-[1.15] opacity-0 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-500" />
                   <step.icon size={36} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
@@ -111,47 +176,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Features grid */}
+      {/* ─── 3. FEATURES GRID ────────────────────────────────────── */}
       <section id="features" className="py-32 bg-gray-50 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 max-w-2xl">{t('features.title')}</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={staggerGrid}
+          >
             {[
-              { icon: Clock, title: t('features.f1.title'), desc: t('features.f1.desc') },
-              { icon: Zap, title: t('features.f2.title'), desc: t('features.f2.desc') },
-              { icon: ScanLine, title: t('features.f3.title'), desc: t('features.f3.desc') },
-              { icon: PhoneOff, title: t('features.f4.title'), desc: t('features.f4.desc') },
-              { icon: Globe2, title: t('features.f5.title'), desc: t('features.f5.desc') },
-              { icon: ShieldCheck, title: t('features.f6.title'), desc: t('features.f6.desc') },
+              { icon: Clock,      title: t('features.f1.title'), desc: t('features.f1.desc') },
+              { icon: Zap,        title: t('features.f2.title'), desc: t('features.f2.desc') },
+              { icon: ScanLine,   title: t('features.f3.title'), desc: t('features.f3.desc') },
+              { icon: PhoneOff,   title: t('features.f4.title'), desc: t('features.f4.desc') },
+              { icon: Globe2,     title: t('features.f5.title'), desc: t('features.f5.desc') },
+              { icon: ShieldCheck,title: t('features.f6.title'), desc: t('features.f6.desc') },
             ].map((feat, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
-                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                variants={blurFade}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 mb-6">
-                  <feat.icon size={24} />
+                <div className="w-12 h-12 rounded-xl bg-primary/8 flex items-center justify-center text-primary mb-6">
+                  <feat.icon size={24} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{feat.title}</h3>
                 <p className="text-gray-600">{feat.desc}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 4. Pricing */}
+      {/* ─── 4. PRICING ──────────────────────────────────────────── */}
       <section id="pricing" className="py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-gray-50 to-white -z-10"></div>
-        
+        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-gray-50 to-white -z-10" />
+
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="text-center max-w-3xl mx-auto mb-16"
           >
@@ -159,20 +230,26 @@ export default function Home() {
             <p className="text-xl text-gray-600">{t('pricing.subtitle')}</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="max-w-2xl mx-auto"
           >
             <div className="bg-[#0D0D0D] rounded-[2rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
-              
+              {/* Animated pricing card glow */}
+              <motion.div
+                className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full blur-[90px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(222,182,125,0.25) 0%, transparent 70%)' }}
+                animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.9, 0.6] }}
+                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+              />
+
               <div className="space-y-6 relative z-10 mb-12">
                 {[
-                  { label: t('pricing.tier1'), price: "39" },
-                  { label: t('pricing.tier2'), price: "34", per: true },
-                  { label: t('pricing.tier3'), price: "29", per: true },
-                  { label: t('pricing.tier4'), price: "24", per: true },
-                  { label: t('pricing.tier5'), price: "19", per: true },
+                  { label: t('pricing.tier1'), price: '39' },
+                  { label: t('pricing.tier2'), price: '34', per: true },
+                  { label: t('pricing.tier3'), price: '29', per: true },
+                  { label: t('pricing.tier4'), price: '24', per: true },
+                  { label: t('pricing.tier5'), price: '19', per: true },
                 ].map((tier, i) => (
                   <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
                     <span className="text-lg font-medium text-gray-300">{tier.label}</span>
@@ -190,7 +267,7 @@ export default function Home() {
                 <p className="text-primary font-medium mb-6 text-sm">
                   ✓ {t('pricing.badge')}
                 </p>
-                <a 
+                <a
                   href="#"
                   className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
                 >
@@ -202,10 +279,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. FAQ */}
+      {/* ─── 5. FAQ ──────────────────────────────────────────────── */}
       <section id="faq" className="py-32 bg-gray-50 border-t border-gray-200">
         <div className="max-w-3xl mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="text-center mb-16"
           >
@@ -229,62 +306,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Contact / CTA */}
-      <section id="contact" className="py-32 bg-[#0D0D0D] relative overflow-hidden text-white">
-        <div className="absolute top-0 right-0 w-full h-full bg-radial-glow opacity-50 pointer-events-none"></div>
-        
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">{t('contact.title')}</h2>
-            <p className="text-xl text-gray-400">{t('contact.subtitle')}</p>
-          </motion.div>
+      {/* ─── 6. FINAL CTA BANNER ─────────────────────────────────── */}
+      <section className="py-28 bg-[#0D0D0D] relative overflow-hidden text-white">
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(222,182,125,0.18) 0%, transparent 70%)' }}
+          animate={{ opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
-          <motion.form 
+        <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="glass-card p-8 md:p-10 rounded-3xl"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const fd = new FormData(e.currentTarget);
-              const subject = `Richiesta info NextSphere da ${fd.get('name')}`;
-              const body = `Nome: ${fd.get('name')}%0AEmail: ${fd.get('email')}%0ATipo: ${fd.get('propertyType')}%0A%0AMessaggio:%0A${fd.get('message')}`;
-              window.location.href = `mailto:info@nextsphere.it?subject=${subject}&body=${body}`;
-            }}
           >
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{t('contact.name')}</label>
-                <input required name="name" type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{t('contact.email')}</label>
-                <input required name="email" type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" />
-              </div>
-            </div>
-            
-            <div className="space-y-2 mb-6">
-              <label className="text-sm font-medium text-gray-300">{t('contact.propertyType')}</label>
-              <select required name="propertyType" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none">
-                <option value="B&B">{t('contact.pt.bb')}</option>
-                <option value="Casa vacanze">{t('contact.pt.holiday')}</option>
-                <option value="Hotel">{t('contact.pt.hotel')}</option>
-                <option value="Altro">{t('contact.pt.other')}</option>
-              </select>
-            </div>
-            
-            <div className="space-y-2 mb-8">
-              <label className="text-sm font-medium text-gray-300">{t('contact.message')}</label>
-              <textarea required name="message" rows={4} className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
-            </div>
-            
-            <button type="submit" className="w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]">
-              {t('contact.submit')}
-            </button>
-          </motion.form>
+            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-6">NextSphere</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+              {t('hero.cta.primary')}
+            </h2>
+            <p className="text-gray-400 text-lg mb-10 leading-relaxed">
+              {t('hero.subtitle')}
+            </p>
+            <a
+              href="#"
+              className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
+            >
+              {t('hero.cta.primary')}
+            </a>
+          </motion.div>
         </div>
       </section>
+
     </div>
   );
 }
