@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { SEO } from '../components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { trackCta } from '../lib/trackCta';
+import { track } from '@vercel/analytics';
 
 // --- Animation variants ---
 const fadeUp = {
@@ -30,6 +31,28 @@ const staggerGrid = {
 export default function Home() {
   const { t, lang } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
+
+  // Scroll depth tracking: fire once per milestone (25/50/75/100%)
+  useEffect(() => {
+    const milestones = [25, 50, 75, 100];
+    const fired = new Set<number>();
+
+    function onScroll() {
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      const pct = (scrolled / total) * 100;
+
+      for (const m of milestones) {
+        if (!fired.has(m) && pct >= m) {
+          fired.add(m);
+          track('scroll_depth', { milestone: `${m}%` });
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Parallax: hero background orbs drift upward as user scrolls
   const { scrollY } = useScroll();
