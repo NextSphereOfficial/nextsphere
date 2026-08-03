@@ -32,6 +32,42 @@ export default function Home() {
   const { t, lang } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
 
+  // Section-level scroll heatmap: fire once per section when it enters the viewport
+  useEffect(() => {
+    const sections: { id: string; label: string }[] = [
+      { id: 'hero',      label: 'hero' },
+      { id: 'how-it-works', label: 'how_it_works' },
+      { id: 'features',  label: 'features' },
+      { id: 'pricing',   label: 'pricing' },
+      { id: 'faq',       label: 'faq' },
+      { id: 'final-cta', label: 'final_cta' },
+    ];
+
+    const fired = new Set<string>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const section = sections.find((s) => s.id === entry.target.id);
+            if (section && !fired.has(section.label)) {
+              fired.add(section.label);
+              track('section_view', { section: section.label });
+            }
+          }
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    for (const s of sections) {
+      const el = s.id === 'hero' ? heroRef.current : document.getElementById(s.id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   // Scroll depth tracking: fire once per milestone (25/50/75/100%)
   useEffect(() => {
     const milestones = [25, 50, 75, 100];
@@ -77,6 +113,7 @@ export default function Home() {
 
       {/* ─── 1. HERO ─────────────────────────────────────────────── */}
       <section
+        id="hero"
         ref={heroRef}
         className="relative min-h-[100vh] flex items-center bg-[#0D0D0D] overflow-hidden"
       >
@@ -333,7 +370,7 @@ export default function Home() {
       </section>
 
       {/* ─── 6. FINAL CTA BANNER ─────────────────────────────────── */}
-      <section className="py-28 bg-[#0D0D0D] relative overflow-hidden text-white">
+      <section id="final-cta" className="py-28 bg-[#0D0D0D] relative overflow-hidden text-white">
         {/* Animated radial glow from bottom center */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
