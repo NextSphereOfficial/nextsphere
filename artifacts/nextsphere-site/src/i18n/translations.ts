@@ -1,3 +1,11 @@
+import { PRIVACY_POLICY_DATE } from './privacyPolicyDate';
+
+// Use Date.UTC so the date is always interpreted in UTC, then pin timeZone: 'UTC'
+// in the formatter — this prevents the month from shifting for users west of UTC.
+const _privacyDate = new Date(Date.UTC(PRIVACY_POLICY_DATE.year, PRIVACY_POLICY_DATE.month - 1, 1));
+const privacyLastUpdatedEN = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_privacyDate);
+const privacyLastUpdatedIT = new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(_privacyDate);
+
 export const translations = {
   en: {
     // Navbar
@@ -91,7 +99,7 @@ export const translations = {
     
     // Legal Pages
     'legal.privacy.title': 'Privacy Policy',
-    'legal.privacy.lastUpdated': 'Last updated: August 2026',
+    'legal.privacy.lastUpdated': `Last updated: ${privacyLastUpdatedEN}`,
     'legal.privacy.p1': 'This Privacy Policy describes how NextSphere ("we", "us", or "our") collects, uses, and shares your personal information when you use our website and services.',
     'legal.privacy.h1': '1. Data Controller',
     'legal.privacy.h1.text': 'The data controller is NextSphere. You can contact us at info@nextsphere.it.',
@@ -207,7 +215,7 @@ export const translations = {
     
     // Legal Pages
     'legal.privacy.title': 'Privacy Policy',
-    'legal.privacy.lastUpdated': 'Ultimo aggiornamento: Agosto 2026',
+    'legal.privacy.lastUpdated': `Ultimo aggiornamento: ${privacyLastUpdatedIT}`,
     'legal.privacy.p1': 'Questa Privacy Policy descrive come NextSphere ("noi", o "nostro") raccoglie, utilizza e condivide le tue informazioni personali quando utilizzi il nostro sito web e i nostri servizi.',
     'legal.privacy.h1': '1. Titolare del Trattamento',
     'legal.privacy.h1.text': 'Il titolare del trattamento è NextSphere. Puoi contattarci a info@nextsphere.it.',
