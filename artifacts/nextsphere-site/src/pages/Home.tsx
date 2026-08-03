@@ -4,6 +4,7 @@ import { SEO } from '../components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { track } from '@vercel/analytics';
 
 // --- Animation variants ---
 const fadeUp = {
@@ -120,6 +121,7 @@ export default function Home() {
                 href="#pricing"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.35)]"
                 data-testid="hero-cta-primary"
+                onClick={() => track('cta_click', { location: 'hero_primary' })}
               >
                 {t('hero.cta.primary')}
               </a>
@@ -127,6 +129,7 @@ export default function Home() {
                 href="#how-it-works"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white border border-white/10 text-base font-semibold rounded-xl hover:bg-white/10 transition-all"
                 data-testid="hero-cta-secondary"
+                onClick={() => track('cta_click', { location: 'hero_secondary' })}
               >
                 {t('hero.cta.secondary')}
               </a>
@@ -269,6 +272,7 @@ export default function Home() {
                 <a
                   href="#"
                   className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
+                  onClick={() => track('cta_click', { location: 'pricing' })}
                 >
                   {t('pricing.cta')}
                 </a>
@@ -351,6 +355,7 @@ export default function Home() {
             <a
               href="#"
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
+              onClick={() => track('cta_click', { location: 'final_banner' })}
             >
               {t('nav.startFreeTrial')}
             </a>
