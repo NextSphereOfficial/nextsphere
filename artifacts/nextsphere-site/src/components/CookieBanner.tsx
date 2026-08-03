@@ -11,6 +11,10 @@ export function CookieBanner() {
     if (!consent) {
       setIsVisible(true);
     }
+
+    const handleOpen = () => setIsVisible(true);
+    window.addEventListener('ns:open-cookie-settings', handleOpen);
+    return () => window.removeEventListener('ns:open-cookie-settings', handleOpen);
   }, []);
 
   const handleConsent = (choice: 'accepted' | 'rejected') => {

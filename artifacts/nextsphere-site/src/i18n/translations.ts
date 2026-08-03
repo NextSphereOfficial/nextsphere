@@ -102,6 +102,7 @@ export const translations = {
     'footer.nav.legal': 'Legal',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
+    'footer.cookieSettings': 'Cookie Settings',
     'footer.rights': '© 2026 NextSphere. All rights reserved.',
     
     'cookieBanner.text': 'We use cookies to improve your experience.',
@@ -264,6 +265,7 @@ export const translations = {
     'footer.nav.legal': 'Legale',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
+    'footer.cookieSettings': 'Impostazioni Cookie',
     'footer.rights': '© 2026 NextSphere. Tutti i diritti riservati.',
     
     'cookieBanner.text': 'Utilizziamo cookie per migliorare la tua esperienza.',

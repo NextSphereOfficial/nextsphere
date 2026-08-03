@@ -3,6 +3,10 @@ import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import logoLight from '@assets/logo_trasparenza_chiaro_1785754195220.png';
 
+function openCookieSettings() {
+  window.dispatchEvent(new Event('ns:open-cookie-settings'));
+}
+
 export function Footer() {
   const { t } = useTranslation();
 
@@ -42,6 +46,15 @@ export function Footer() {
                   <Link href="/cookie-policy" className="hover:text-primary transition-colors">
                     {t('footer.cookie')}
                   </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={openCookieSettings}
+                    className="hover:text-primary transition-colors text-left"
+                    data-testid="btn-cookie-settings"
+                  >
+                    {t('footer.cookieSettings')}
+                  </button>
                 </li>
               </ul>
             </div>
