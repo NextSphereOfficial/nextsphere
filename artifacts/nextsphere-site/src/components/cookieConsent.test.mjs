@@ -2,14 +2,18 @@
  * Behavioural tests for cookie consent flow.
  * Run with: node src/components/cookieConsent.test.mjs
  *
- * Covers three scenarios without requiring a DOM or React:
+ * Covers four scenarios without requiring a DOM or React:
  *   1. Banner appears on load when localStorage has no consent stored.
  *   2. Banner reopens via the `ns:open-cookie-settings` event even after
  *      consent was previously stored.
  *   3. Accepting then rejecting updates ns_cookie_consent to "rejected".
+ *   4. Analytics opt-out: `ns:cookie-consent-changed` with "rejected" fires
+ *      gtag consent update with analytics_storage: "denied" (no page reload
+ *      required), matching the contract of useGoogleAnalytics.ts.
  *
- * The tests exercise the same logic that CookieBanner.tsx uses, keeping
- * them in sync with the implementation contract rather than its internals.
+ * The tests exercise the same logic that CookieBanner.tsx and
+ * useGoogleAnalytics.ts use, keeping them in sync with the implementation
+ * contract rather than its internals.
  */
 
 // ---------------------------------------------------------------------------
@@ -172,6 +176,110 @@ test('Accept then reject — ns_cookie_consent is updated to "rejected"', () => 
   assert('two consent events fired', events.length, 2);
   assert('first event was accepted', events[0], 'accepted');
   assert('second event was rejected', events[1], 'rejected');
+});
+
+// ---------------------------------------------------------------------------
+// Analytics opt-out tests (mirrors useGoogleAnalytics.ts contract)
+// ---------------------------------------------------------------------------
+
+/**
+ * Recreates the analytics hook logic in a testable, framework-free form.
+ * Mirrors useGoogleAnalytics.ts: reads stored consent on mount and reacts to
+ * ns:cookie-consent-changed events for the remainder of the session.
+ */
+function makeAnalyticsController(ls, bus, gtagFn) {
+  function updateConsent(consent) {
+    gtagFn('consent', 'update', {
+      analytics_storage: consent === 'accepted' ? 'granted' : 'denied',
+    });
+  }
+
+  function handleChange(e) {
+    updateConsent(e.detail.consent);
+  }
+
+  function mount() {
+    // Apply stored consent immediately (matches the hook's useEffect)
+    updateConsent(ls.getItem('ns_cookie_consent'));
+    bus.addEventListener('ns:cookie-consent-changed', handleChange);
+  }
+
+  function unmount() {
+    bus.removeEventListener('ns:cookie-consent-changed', handleChange);
+  }
+
+  return { mount, unmount };
+}
+
+test('Analytics: revoking consent mid-session calls gtag denied without page reload', () => {
+  const ls = makeLocalStorage();
+  ls.setItem('ns_cookie_consent', 'accepted'); // user previously accepted
+  const bus = makeEventBus();
+
+  const gtagCalls = [];
+  const mockGtag = (...args) => gtagCalls.push(args);
+
+  const analytics = makeAnalyticsController(ls, bus, mockGtag);
+  analytics.mount();
+
+  // On mount, should immediately apply "granted" for the stored "accepted" value
+  assert('mount applies granted for stored accepted', gtagCalls[0]?.[2]?.analytics_storage, 'granted');
+
+  // Simulate user revoking consent via the banner — no page reload
+  bus.dispatchEvent({
+    type: 'ns:cookie-consent-changed',
+    detail: { consent: 'rejected' },
+  });
+
+  assert('revoke triggers gtag consent update', gtagCalls.length, 2);
+  assert('revoke sets analytics_storage to denied', gtagCalls[1]?.[2]?.analytics_storage, 'denied');
+  assert('gtag command is consent update', gtagCalls[1]?.[1], 'update');
+});
+
+test('Analytics: accepting consent mid-session calls gtag granted without page reload', () => {
+  const ls = makeLocalStorage();
+  // No prior consent stored — mount applies "denied" by default
+  const bus = makeEventBus();
+
+  const gtagCalls = [];
+  const mockGtag = (...args) => gtagCalls.push(args);
+
+  const analytics = makeAnalyticsController(ls, bus, mockGtag);
+  analytics.mount();
+
+  assert('mount applies denied when no consent stored', gtagCalls[0]?.[2]?.analytics_storage, 'denied');
+
+  // Simulate user accepting consent via the banner
+  bus.dispatchEvent({
+    type: 'ns:cookie-consent-changed',
+    detail: { consent: 'accepted' },
+  });
+
+  assert('accept triggers gtag consent update', gtagCalls.length, 2);
+  assert('accept sets analytics_storage to granted', gtagCalls[1]?.[2]?.analytics_storage, 'granted');
+});
+
+test('Analytics: unmount stops reacting to consent events', () => {
+  const ls = makeLocalStorage();
+  ls.setItem('ns_cookie_consent', 'accepted');
+  const bus = makeEventBus();
+
+  const gtagCalls = [];
+  const mockGtag = (...args) => gtagCalls.push(args);
+
+  const analytics = makeAnalyticsController(ls, bus, mockGtag);
+  analytics.mount();
+  analytics.unmount();
+
+  const callsAfterMount = gtagCalls.length; // 1 (from mount)
+
+  // Fire a consent change — should be ignored after unmount
+  bus.dispatchEvent({
+    type: 'ns:cookie-consent-changed',
+    detail: { consent: 'rejected' },
+  });
+
+  assert('no additional gtag calls after unmount', gtagCalls.length, callsAfterMount);
 });
 
 // ---------------------------------------------------------------------------
