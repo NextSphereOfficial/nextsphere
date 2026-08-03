@@ -6,6 +6,7 @@ import { Route, Switch, Router as WouterRouter } from 'wouter';
 import Home from './pages/Home';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
+import Analytics from './pages/Analytics';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
@@ -14,19 +15,27 @@ import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-1">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/privacy-policy" component={PrivacyPolicy} />
-          <Route path="/cookie-policy" component={CookiePolicy} />
-          <Route component={NotFound} />
-        </Switch>
-      </main>
-      <Footer />
-      <CookieBanner />
-    </div>
+    <Switch>
+      {/* Analytics dashboard — standalone, no Navbar/Footer */}
+      <Route path="/analytics" component={Analytics} />
+
+      {/* Public site routes */}
+      <Route>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-1">
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/privacy-policy" component={PrivacyPolicy} />
+              <Route path="/cookie-policy" component={CookiePolicy} />
+              <Route component={NotFound} />
+            </Switch>
+          </main>
+          <Footer />
+          <CookieBanner />
+        </div>
+      </Route>
+    </Switch>
   );
 }
 

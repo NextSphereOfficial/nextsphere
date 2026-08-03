@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { track } from '@vercel/analytics';
+import { trackCta } from '../lib/trackCta';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../contexts/LanguageContext';
 import logoLight from '@assets/logo_trasparenza_chiaro_1785754195220.png';
@@ -123,7 +123,7 @@ export function Navbar() {
               href="#"
               className="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-sm"
               data-testid="btn-nav-cta"
-              onClick={() => track('cta_click', { location: 'navbar_desktop' })}
+              onClick={() => trackCta('navbar_desktop')}
             >
               {t('nav.startFreeTrial')}
             </a>
@@ -159,7 +159,7 @@ export function Navbar() {
 
             <motion.a
               href="#"
-              onClick={() => { setMenuOpen(false); track('cta_click', { location: 'navbar_mobile' }); }}
+              onClick={() => { setMenuOpen(false); trackCta('navbar_mobile'); }}
               className="px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all shadow-[0_0_40px_rgba(222,182,125,0.3)]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
