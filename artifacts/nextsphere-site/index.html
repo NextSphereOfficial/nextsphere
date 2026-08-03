@@ -1,21 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>NextSphere — Hosting, reimagined.</title>
-    <meta name="description" content="NextSphere è l'assistente AI premium per gli host. Gli ospiti scansionano un QR code e ottengono risposte immediate nella loro lingua — 24/7, senza sforzo per te." />
+    <title>NextSphere | Chatbot AI per B&B e Case Vacanze — Risposte 24/7</title>
+    <meta name="description" content="NextSphere è il chatbot AI per host di B&B, case vacanze e appartamenti. Gli ospiti scansionano un QR code e ottengono risposte immediate 24/7 nella loro lingua. Zero sforzo per te." />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="NextSphere — Hosting, reimagined." />
-    <meta property="og:description" content="L'assistente AI che risponde agli ospiti al posto tuo, 24/7." />
+    <link rel="canonical" href="https://nextsphere.it/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="NextSphere | Chatbot AI per B&B e Case Vacanze" />
+    <meta property="og:description" content="Risposte automatiche 24/7 per i tuoi ospiti. Niente più email ripetitive, niente più chiamate notturne." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nextsphere.it/" />
+    <meta property="og:image" content="https://nextsphere.it/og-image.png" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale:alternate" content="en_GB" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="NextSphere — Hosting, reimagined." />
-    <meta name="twitter:description" content="L'assistente AI che risponde agli ospiti al posto tuo, 24/7." />
+    <meta name="twitter:title" content="NextSphere | Chatbot AI per B&B e Case Vacanze" />
+    <meta name="twitter:description" content="Risposte automatiche 24/7 per i tuoi ospiti." />
+    <meta name="twitter:image" content="https://nextsphere.it/og-image.png" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NextSphere",
+      "url": "https://nextsphere.it",
+      "logo": "https://nextsphere.it/favicon.png",
+      "email": "info@nextsphere.it",
+      "description": "Chatbot AI premium per host di B&B, case vacanze e appartamenti.",
+      "foundingDate": "2025",
+      "areaServed": "IT"
+    }
+    </script>
+
+    <!-- JSON-LD: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "NextSphere",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Chatbot AI per host di affitti brevi e B&B. Gli ospiti scansionano un QR code e ottengono risposte 24/7 nella loro lingua.",
+      "offers": {
+        "@type": "Offer",
+        "price": "19.00",
+        "priceCurrency": "EUR",
+        "description": "Piano NextSphere Home — da €19/unità/mese"
+      },
+      "featureList": [
+        "Disponibile 24/7",
+        "Risponde in oltre 30 lingue",
+        "QR code pronto subito",
+        "Nessuna app per gli ospiti",
+        "Personalizzazione completa"
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "È difficile da configurare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Assolutamente no. L'onboarding guidato richiede meno di 10 minuti. Rispondi solo a qualche domanda sulla tua struttura e l'AI costruisce la base di conoscenza automaticamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Devo essere sempre online per farlo funzionare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, NextSphere funziona in totale autonomia, 24/7. Puoi dormire sonni tranquilli mentre lui risponde agli ospiti."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Funziona per qualsiasi tipo di struttura?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì! È perfettamente adattato per B&B, case vacanza, appartamenti e boutique hotel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il chatbot risponde in più lingue?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì, l'AI rileva automaticamente la lingua dell'ospite e risponde nativamente, supportando oltre 30 lingue in modo impeccabile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cosa succede dopo i 14 giorni di prova?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puoi scegliere il piano adatto al tuo numero di strutture. Se decidi di non continuare, il QR code smetterà semplicemente di funzionare — nessun addebito inaspettato."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso modificare le risposte del chatbot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Certamente. Hai il controllo completo sulla base di conoscenza e puoi aggiornare regole della casa, password del Wi-Fi o raccomandazioni in qualsiasi momento."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -2,6 +2,10 @@ export const translations = {
   en: {
     // Navbar
     'nav.startFreeTrial': 'Start free trial',
+    'nav.howItWorks': 'How it works',
+    'nav.features': 'Features',
+    'nav.pricing': 'Pricing',
+    'nav.faq': 'FAQ',
     
     // Hero
     'hero.badge': 'The silent concierge for your property',
@@ -62,6 +66,13 @@ export const translations = {
     'faq.q6': 'Can I edit the chatbot\'s responses?',
     'faq.a6': 'Absolutely. You have full control over the knowledge base and can update house rules, Wi-Fi passwords, or recommendations at any time.',
     
+    // Final CTA section
+    'cta.stat1': 'always on',
+    'cta.stat2': 'languages',
+    'cta.stat3': 'to set up',
+    'cta.final.title': 'Ready to reclaim your time?',
+    'cta.final.subtitle': 'Set up in under 10 minutes. Your guests get instant answers from day one — no calls, no emails, no stress.',
+
     // Footer & Legal
     'footer.tagline': 'Hosting, reimagined.',
     'footer.nav.product': 'Product',
@@ -107,6 +118,10 @@ export const translations = {
   it: {
     // Navbar
     'nav.startFreeTrial': 'Inizia la prova gratuita',
+    'nav.howItWorks': 'Come funziona',
+    'nav.features': 'Funzionalità',
+    'nav.pricing': 'Prezzi',
+    'nav.faq': 'FAQ',
     
     // Hero
     'hero.badge': 'Il concierge silenzioso per la tua struttura',
@@ -167,6 +182,13 @@ export const translations = {
     'faq.q6': 'Posso modificare le risposte del chatbot?',
     'faq.a6': 'Certamente. Hai il controllo completo sulla base di conoscenza e puoi aggiornare regole della casa, password del Wi-Fi o raccomandazioni in qualsiasi momento.',
     
+    // Final CTA section
+    'cta.stat1': 'sempre attivo',
+    'cta.stat2': 'lingue supportate',
+    'cta.stat3': 'per configurare',
+    'cta.final.title': 'Pronto a recuperare le tue ore?',
+    'cta.final.subtitle': 'Configura in meno di 10 minuti. I tuoi ospiti ricevono risposte immediate dal primo giorno — niente chiamate, niente email, zero stress.',
+
     // Footer & Legal
     'footer.tagline': 'L\'ospitalità, reinventata.',
     'footer.nav.product': 'Prodotto',

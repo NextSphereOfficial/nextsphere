@@ -19,6 +19,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('ns_lang', newLang);
   };
 
+  // Keep the HTML lang attribute in sync for accessibility and SEO
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   return (
     <LanguageContext.Provider value={{ lang, setLang }}>
       {children}

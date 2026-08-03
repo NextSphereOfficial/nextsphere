@@ -73,10 +73,10 @@ export default function Home() {
           className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-36 pb-24"
           style={{ y: heroContentY }}
         >
-          <div className="max-w-3xl">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial="hidden" animate="visible" variants={fadeUp}
-              className="flex items-center gap-4 mb-8"
+              className="flex items-center justify-center gap-4 mb-8"
             >
               <motion.img
                 src={decorativeSphere}
@@ -108,14 +108,14 @@ export default function Home() {
 
             <motion.p
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-xl text-gray-400 mb-10 max-w-2xl leading-relaxed"
+              className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
             >
               {t('hero.subtitle')}
             </motion.p>
 
             <motion.div
               initial="hidden" animate="visible" variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <a
                 href="#pricing"
@@ -308,30 +308,54 @@ export default function Home() {
 
       {/* ─── 6. FINAL CTA BANNER ─────────────────────────────────── */}
       <section className="py-28 bg-[#0D0D0D] relative overflow-hidden text-white">
+        {/* Animated radial glow from bottom center */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(222,182,125,0.18) 0%, transparent 70%)' }}
-          animate={{ opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 110%, rgba(222,182,125,0.22) 0%, transparent 65%)' }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        {/* Subtle grid texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px)', backgroundSize: '60px 60px' }}
         />
 
         <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
           >
-            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-6">NextSphere</p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-              {t('hero.cta.primary')}
+            {/* Stats row */}
+            <motion.div
+              className="flex flex-wrap items-center justify-center gap-10 mb-16"
+              initial="hidden" whileInView="visible" viewport={{ once: true }}
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+            >
+              {[
+                { value: '24/7', label: t('cta.stat1') },
+                { value: '30+', label: t('cta.stat2') },
+                { value: '< 10 min', label: t('cta.stat3') },
+              ].map((stat) => (
+                <motion.div key={stat.value} variants={fadeUp} className="text-center">
+                  <p className="text-3xl font-bold text-primary mb-1">{stat.value}</p>
+                  <p className="text-sm text-gray-500 tracking-wide">{stat.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              {t('cta.final.title')}
             </h2>
-            <p className="text-gray-400 text-lg mb-10 leading-relaxed">
-              {t('hero.subtitle')}
+            <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-xl mx-auto">
+              {t('cta.final.subtitle')}
             </p>
             <a
               href="#"
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
             >
-              {t('hero.cta.primary')}
+              {t('nav.startFreeTrial')}
             </a>
+            <p className="mt-5 text-sm text-gray-600">{t('pricing.badge')}</p>
           </motion.div>
         </div>
       </section>
