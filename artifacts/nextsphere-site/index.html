@@ -43,10 +43,11 @@
     <link rel="apple-touch-icon" href="/og-image.png" />
     <meta name="theme-color" content="#DEB67D" />
 
-    <!-- Fonts -->
+    <!-- Fonts: preconnect + non-render-blocking preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
     <!-- JSON-LD: Organization -->
     <script type="application/ld+json">
