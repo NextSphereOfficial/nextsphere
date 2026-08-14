@@ -305,8 +305,8 @@ export default function Home() {
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-[#0D0D0D] rounded-[2rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-              {/* Animated pricing card glow */}
+            <div className="bg-[#0D0D0D] rounded-[2rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden text-center">
+              {/* Animated glow */}
               <motion.div
                 className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full blur-[90px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(222,182,125,0.25) 0%, transparent 70%)' }}
@@ -314,42 +314,25 @@ export default function Home() {
                 transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
               />
 
-              <div className="space-y-6 relative z-10 mb-12">
-                {[
-                  { label: t('pricing.tier1'), price: '39' },
-                  { label: t('pricing.tier2'), price: '34', per: true },
-                  { label: t('pricing.tier3'), price: '29', per: true },
-                  { label: t('pricing.tier4'), price: '24', per: true },
-                  { label: t('pricing.tier5'), price: '19', per: true },
-                ].map((tier, i) => (
-                  <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
-                    <span className="text-lg font-medium text-gray-300">{tier.label}</span>
-                    <div className="text-right">
-                      <span className="text-2xl font-bold">€{tier.price}</span>
-                      <span className="text-sm text-gray-500 ml-1">
-                        {tier.per ? ` ${t('pricing.cad')} ` : ' '}{t('pricing.month')}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+              <div className="relative z-10 mb-8">
+                <p className="text-gray-400 text-sm uppercase tracking-widest mb-3">{t('pricing.from')}</p>
+                <div className="flex items-end justify-center gap-2 mb-2">
+                  <span className="text-6xl md:text-7xl font-bold">€39</span>
+                  <span className="text-gray-400 text-lg pb-2">{t('pricing.month')}</span>
+                </div>
+                <p className="text-gray-500 text-sm">{t('pricing.scalesDown')}</p>
               </div>
 
-              <div className="text-center relative z-10">
-                <p className="text-primary font-medium mb-6 text-sm">
-                  ✓ {t('pricing.badge')}
-                </p>
-                <a
-                  href="#"
+              <div className="relative z-10">
+                <p className="text-primary font-medium mb-6 text-sm">✓ {t('pricing.badge')}</p>
+                <Link
+                  href="/pricing"
                   className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
                   onClick={() => trackCta('pricing')}
                 >
                   {t('pricing.cta')}
-                </a>
-                <div className="mt-5">
-                  <Link href="/pricing" className="text-sm text-gray-400 hover:text-primary transition-colors">
-                    {t('home.pricing.viewAll')}
-                  </Link>
-                </div>
+                </Link>
+                <p className="mt-5 text-sm text-gray-600">{t('home.pricing.viewAll')}</p>
               </div>
             </div>
           </motion.div>

@@ -125,7 +125,9 @@ export const translations = {
     'meta.guideDigitale.description': "Create a digital guest guide in 10 minutes with NextSphere's Lumo. QR code, automatic answers about Wi-Fi, check-in, restaurants and more. Goodbye paper guides.",
 
     // Pricing page
-    'home.pricing.viewAll': 'View full pricing details →',
+    'home.pricing.viewAll': 'See full plan details on the pricing page',
+    'pricing.from': 'Starting from',
+    'pricing.scalesDown': 'Price drops to €19/mo for 10+ properties.',
     'home.howItWorks.learnMore': 'What is a digital guest guide? →',
     'pricing.page.hero.badge': 'Simple, transparent pricing',
     'pricing.page.hero.title': 'One price. Everything included.',
@@ -428,7 +430,9 @@ export const translations = {
     'meta.guideDigitale.description': 'Crea una guida digitale per i tuoi ospiti in 10 minuti con Lumo di NextSphere. QR code, risposte automatiche su Wi-Fi, check-in, ristoranti. Niente più guide cartacee.',
 
     // Pagina Prezzi
-    'home.pricing.viewAll': 'Vedi tutti i dettagli dei prezzi →',
+    'home.pricing.viewAll': 'Vedi tutti i dettagli nella pagina prezzi',
+    'pricing.from': 'A partire da',
+    'pricing.scalesDown': 'Scende fino a €19/mese per 10+ strutture.',
     'home.howItWorks.learnMore': 'Cos\'è una guida digitale per ospiti? →',
     'pricing.page.hero.badge': 'Prezzi semplici e trasparenti',
     'pricing.page.hero.title': 'Un piano. Tutto incluso.',
