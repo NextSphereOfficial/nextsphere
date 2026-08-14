@@ -15,6 +15,27 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
+const bookingSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',         item: 'https://nextsphere.it/' },
+      { '@type': 'ListItem', position: 2, name: 'Booking.com',  item: 'https://nextsphere.it/booking' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Lumo per host Booking.com — NextSphere',
+    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
+    serviceType: 'Assistente digitale per host Booking.com',
+    url: 'https://nextsphere.it/booking',
+    description: 'Lumo gestisce automaticamente le richieste degli ospiti Booking.com tramite QR code, in oltre 30 lingue.',
+    areaServed: 'IT',
+  },
+];
+
 export default function Booking() {
   const { t, lang } = useTranslation();
 
@@ -40,6 +61,7 @@ export default function Booking() {
         description={t('meta.booking.description')}
         canonical="https://nextsphere.it/booking"
         lang={lang}
+        schema={bookingSchema}
       />
 
       {/* ── HERO ── */}

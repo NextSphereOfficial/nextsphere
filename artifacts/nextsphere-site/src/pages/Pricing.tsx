@@ -12,6 +12,32 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
+const pricingSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://nextsphere.it/' },
+      { '@type': 'ListItem', position: 2, name: 'Prezzi', item: 'https://nextsphere.it/pricing' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'NextSphere — Chatbot AI per affitti brevi',
+    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
+    serviceType: 'Chatbot AI per host turistici',
+    url: 'https://nextsphere.it/pricing',
+    offers: {
+      '@type': 'AggregateOffer',
+      lowPrice: '19.00',
+      highPrice: '39.00',
+      priceCurrency: 'EUR',
+      offerCount: '5',
+    },
+  },
+];
+
 export default function Pricing() {
   const { t, lang } = useTranslation();
 
@@ -44,6 +70,7 @@ export default function Pricing() {
         description={t('meta.pricing.description')}
         canonical="https://nextsphere.it/pricing"
         lang={lang}
+        schema={pricingSchema}
       />
 
       {/* ── HERO ── */}

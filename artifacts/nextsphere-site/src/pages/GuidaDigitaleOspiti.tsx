@@ -28,6 +28,27 @@ const includes = [
   { icon: Phone },
 ];
 
+const guidaSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',                  item: 'https://nextsphere.it/' },
+      { '@type': 'ListItem', position: 2, name: 'Guida Digitale Ospiti', item: 'https://nextsphere.it/guida-digitale-ospiti' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Guida Digitale per Ospiti — NextSphere Lumo',
+    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
+    serviceType: 'Guida digitale interattiva per ospiti di strutture ricettive',
+    url: 'https://nextsphere.it/guida-digitale-ospiti',
+    description: 'Crea una guida digitale per i tuoi ospiti in 10 minuti. QR code, risposte automatiche su Wi-Fi, check-in, ristoranti e molto altro.',
+    areaServed: 'IT',
+  },
+];
+
 export default function GuidaDigitaleOspiti() {
   const { t, lang } = useTranslation();
 
@@ -49,6 +70,7 @@ export default function GuidaDigitaleOspiti() {
         description={t('meta.guideDigitale.description')}
         canonical="https://nextsphere.it/guida-digitale-ospiti"
         lang={lang}
+        schema={guidaSchema}
       />
 
       {/* ── HERO ── */}

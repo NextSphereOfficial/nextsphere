@@ -38,8 +38,10 @@
       gtag('config', 'G-Y5LPDQZCTX');
     </script>
 
-    <!-- Favicon -->
+    <!-- Favicon & app icons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/og-image.png" />
+    <meta name="theme-color" content="#DEB67D" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,11 +55,32 @@
       "@type": "Organization",
       "name": "NextSphere",
       "url": "https://nextsphere.it",
-      "logo": "https://nextsphere.it/favicon.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nextsphere.it/og-image.png",
+        "width": 1200,
+        "height": 630
+      },
       "email": "info@nextsphere.it",
       "description": "Chatbot AI premium per host di B&B, case vacanze e appartamenti.",
       "foundingDate": "2025",
       "areaServed": "IT"
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NextSphere",
+      "url": "https://nextsphere.it",
+      "description": "Chatbot AI per host di B&B, case vacanze e affitti brevi. Lumo risponde agli ospiti 24/7 via QR code.",
+      "inLanguage": ["it", "en"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "NextSphere"
+      }
     }
     </script>
 
@@ -66,15 +89,17 @@
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "NextSphere",
+      "name": "NextSphere — Lumo",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "Chatbot AI per host di affitti brevi e B&B. Gli ospiti scansionano un QR code e ottengono risposte 24/7 nella loro lingua.",
       "offers": {
-        "@type": "Offer",
-        "price": "39.00",
+        "@type": "AggregateOffer",
+        "lowPrice": "19.00",
+        "highPrice": "39.00",
         "priceCurrency": "EUR",
-        "description": "Piano NextSphere — da €39/unità/mese IVA inclusa"
+        "offerCount": "5",
+        "description": "Piani NextSphere da €19 a €39/unità/mese, IVA inclusa"
       },
       "featureList": [
         "Disponibile 24/7",
