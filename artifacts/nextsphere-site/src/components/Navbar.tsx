@@ -89,7 +89,7 @@ export function Navbar() {
 
           {/* ── Desktop nav links (fade in when scrolled) ── */}
           <motion.div
-            className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 pointer-events-none"
+            className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8"
             animate={{
               opacity: scrolled ? 1 : 0,
               y: scrolled ? 0 : -6,
