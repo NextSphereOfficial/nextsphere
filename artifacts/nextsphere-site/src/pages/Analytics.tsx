@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
 import {
   BarChart,
   Bar,
@@ -96,6 +97,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4">
+      <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-8">
           <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4">
@@ -222,6 +224,7 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white">
+      <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
       {/* Header */}
       <div className="border-b border-white/8 px-6 py-5 flex items-center justify-between">
         <div>
