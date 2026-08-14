@@ -1,0 +1,24 @@
+{
+  "name": "NextSphere — Chatbot AI per Host",
+  "short_name": "NextSphere",
+  "description": "Chatbot AI per B&B e case vacanze. Gli ospiti ottengono risposte 24/7 via QR code.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#DEB67D",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
