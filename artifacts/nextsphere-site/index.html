@@ -44,6 +44,17 @@
     <meta name="theme-color" content="#DEB67D" />
     <link rel="manifest" href="/manifest.json" />
 
+    <!-- Service Worker registration — required for PWA install prompt on Chrome/Android -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function (err) {
+            console.warn('SW registration failed:', err);
+          });
+        });
+      }
+    </script>
+
     <!-- Fonts: self-hosted woff2 — loaded via @font-face in index.css (zero external requests) -->
 
     <!-- JSON-LD: Organization -->
