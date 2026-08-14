@@ -84,7 +84,7 @@ export default function Pricing() {
                   <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
                     <span className="text-lg font-medium text-gray-300">{tier.label}</span>
                     <div className="text-right">
-                      <span className="text-2xl font-bold">€{tier.price}</span>
+                      <span className="text-2xl font-bold">€{tier.price}<sup className="text-sm align-super">*</sup></span>
                       <span className="text-sm text-gray-500 ml-1">
                         {tier.per ? ` ${t('pricing.cad')} ` : ' '}{t('pricing.month')}
                       </span>
@@ -102,6 +102,7 @@ export default function Pricing() {
                   {t('pricing.cta')}
                 </a>
               </div>
+              <p className="relative z-10 mt-8 text-xs text-gray-600 text-left">{t('pricing.vatNote')}</p>
             </div>
           </motion.div>
         </div>

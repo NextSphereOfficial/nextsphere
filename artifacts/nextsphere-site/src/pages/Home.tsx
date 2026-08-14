@@ -317,7 +317,7 @@ export default function Home() {
               <div className="relative z-10 mb-8">
                 <p className="text-gray-400 text-sm uppercase tracking-widest mb-3">{t('pricing.from')}</p>
                 <div className="flex items-end justify-center gap-2 mb-2">
-                  <span className="text-6xl md:text-7xl font-bold">€39</span>
+                  <span className="text-6xl md:text-7xl font-bold">€39<sup className="text-2xl align-super">*</sup></span>
                   <span className="text-gray-400 text-lg pb-2">{t('pricing.month')}</span>
                 </div>
                 <p className="text-gray-500 text-sm">{t('pricing.scalesDown')}</p>
@@ -334,6 +334,8 @@ export default function Home() {
                 </Link>
                 <p className="mt-5 text-sm text-gray-600">{t('home.pricing.viewAll')}</p>
               </div>
+
+              <p className="relative z-10 mt-8 text-xs text-gray-600 text-left">{t('pricing.vatNote')}</p>
             </div>
           </motion.div>
         </div>
