@@ -1,0 +1,286 @@
+Agisci come un **SEO specialist senior con competenze tecniche, copywriting SEO e CRO**, specializzato in siti B2B SaaS.
+
+Devi analizzare e ottimizzare il sito **NextSphere** per migliorarne il posizionamento organico su Google e aumentare il traffico qualificato proveniente da potenziali clienti.
+
+## Contesto del prodotto
+
+NextSphere offre **Lumo**, un assistente digitale per strutture ricettive e affitti brevi.
+
+Il servizio è rivolto principalmente a:
+
+* host con 1–3 appartamenti;
+* gestori di affitti brevi;
+* property manager;
+* B&B;
+* piccoli e medi hotel.
+
+Lumo viene utilizzato dagli ospiti tramite QR code o link e permette loro di ottenere autonomamente informazioni sulla struttura, ad esempio:
+
+* Wi-Fi;
+* check-in e check-out;
+* regole della casa;
+* parcheggio;
+* trasporti;
+* ristoranti;
+* supermercati;
+* emergenze;
+* contatto host;
+* altre informazioni utili durante il soggiorno.
+
+Il principale beneficio commerciale da comunicare è:
+
+**meno messaggi ripetitivi per l'host e maggiore autonomia per gli ospiti.**
+
+NextSphere è un servizio SaaS in abbonamento.
+
+Il prezzo base per un appartamento singolo è attualmente **39 €/mese IVA inclusa**.
+
+Evita di posizionare il prodotto semplicemente come un generico "chatbot AI". Il focus deve essere sulla soluzione concreta per hospitality, affitti brevi e gestione degli ospiti.
+
+## Obiettivo SEO
+
+Voglio intercettare persone che cercano soluzioni per:
+
+* automatizzare la comunicazione con gli ospiti;
+* ridurre i messaggi ripetitivi;
+* fornire informazioni digitali agli ospiti;
+* creare una guida digitale per appartamenti o strutture ricettive;
+* utilizzare assistenti digitali per Airbnb, Booking, B&B e hotel;
+* migliorare la gestione degli ospiti negli affitti brevi.
+
+Il traffico deve essere **commercialmente rilevante**, non semplicemente numeroso.
+
+## FASE 1 — Audit SEO
+
+Prima di modificare qualsiasi elemento del sito, analizza:
+
+1. struttura attuale del sito;
+2. URL e architettura delle pagine;
+3. title SEO;
+4. meta description;
+5. H1, H2, H3;
+6. contenuto testuale;
+7. internal linking;
+8. immagini e ALT text;
+9. sitemap.xml;
+10. robots.txt;
+11. canonical;
+12. indexing directives;
+13. Open Graph e metadata principali;
+14. eventuali structured data / Schema.org;
+15. performance e Core Web Vitals per quanto individuabile;
+16. mobile friendliness;
+17. eventuali problemi di contenuti duplicati;
+18. eventuali pagine troppo povere di contenuto;
+19. errori tecnici che potrebbero limitare crawling o indicizzazione.
+
+Non modificare ancora il sito.
+
+Produci prima un breve report diviso in:
+
+* problemi critici;
+* problemi importanti;
+* miglioramenti consigliati;
+* elementi già corretti.
+
+## FASE 2 — Keyword strategy
+
+Definisci una strategia di keyword in italiano.
+
+Non limitarti alle keyword con maggiore volume.
+
+Dai priorità alla **search intent commerciale** e alla probabilità che la persona che effettua la ricerca possa diventare cliente NextSphere.
+
+Analizza cluster come:
+
+* assistente digitale Airbnb;
+* assistente virtuale Airbnb;
+* chatbot Airbnb;
+* chatbot per hotel;
+* chatbot per B&B;
+* assistente digitale hotel;
+* assistente virtuale hotel;
+* guida digitale appartamento;
+* guida digitale per ospiti;
+* guest guide digitale;
+* digital guestbook;
+* automazione messaggi Airbnb;
+* automazione comunicazione ospiti;
+* software gestione ospiti;
+* software affitti brevi;
+* strumenti per host Airbnb;
+* ridurre messaggi ospiti Airbnb;
+* QR code informazioni appartamento;
+* concierge digitale hotel;
+* assistente AI hospitality.
+
+Non considerare questo elenco definitivo.
+
+Trova eventuali keyword più pertinenti.
+
+Per ogni cluster indica:
+
+* keyword principale;
+* keyword secondarie;
+* intento di ricerca;
+* pagina del sito che dovrebbe intercettarla;
+* eventuale necessità di creare una nuova landing page.
+
+Evita il keyword stuffing.
+
+## FASE 3 — Architettura SEO
+
+Valuta se l'attuale struttura del sito è sufficiente.
+
+Se necessario proponi una struttura scalabile, ad esempio:
+
+* Homepage
+* Pricing
+* Soluzioni per host
+* Soluzioni per property manager
+* Soluzioni per B&B
+* Soluzioni per hotel
+* Assistente digitale per Airbnb
+* Guida digitale per ospiti
+* Automazione comunicazione ospiti
+* FAQ
+* eventuale sezione risorse/blog
+
+Non creare pagine inutili o quasi duplicate solamente per intercettare keyword.
+
+Ogni pagina deve avere un intento di ricerca distinto e offrire reale valore all'utente.
+
+## FASE 4 — On-page SEO
+
+Successivamente ottimizza le pagine esistenti.
+
+Per ogni pagina definisci e implementa:
+
+* keyword primaria;
+* keyword secondarie;
+* SEO title;
+* meta description;
+* H1;
+* gerarchia H2/H3;
+* copy;
+* anchor text;
+* internal linking;
+* ALT text immagini;
+* URL slug se necessario.
+
+Mantieni il tono del brand:
+
+* professionale;
+* chiaro;
+* moderno;
+* semplice;
+* concreto;
+* orientato ai vantaggi per l'host.
+
+Evita:
+
+* testi artificiali scritti palesemente per Google;
+* ripetizioni eccessive di keyword;
+* frasi generiche sull'intelligenza artificiale;
+* promesse esagerate;
+* linguaggio troppo tecnico.
+
+La pagina deve prima di tutto essere convincente per una persona reale.
+
+## FASE 5 — SEO tecnica
+
+Implementa, dove appropriato:
+
+* sitemap XML corretta;
+* robots.txt;
+* canonical;
+* meta robots;
+* structured data Schema.org;
+* Organization;
+* SoftwareApplication o schema più appropriato;
+* FAQPage solamente dove realmente utilizzabile;
+* BreadcrumbList quando pertinente;
+* Open Graph;
+* Twitter/X cards;
+* gestione corretta di 404 e redirect;
+* URL puliti;
+* HTTPS;
+* preload/lazy loading immagini quando appropriato;
+* ottimizzazione delle performance.
+
+Non utilizzare structured data non coerenti con il contenuto reale della pagina.
+
+## FASE 6 — Conversione
+
+SEO e conversione devono essere progettate insieme.
+
+Per ogni pagina con intento commerciale verifica che:
+
+* sia immediatamente comprensibile cosa offre NextSphere;
+* sia chiaro a chi è rivolto;
+* emerga il problema risolto;
+* emergano i benefici;
+* sia presente una CTA coerente;
+* l'utente possa facilmente raggiungere Pricing o il contatto commerciale.
+
+Non sacrificare la chiarezza commerciale per inserire keyword.
+
+## FASE 7 — Contenuti futuri
+
+Suggerisci successivamente 15–20 possibili contenuti SEO, ma dividili in:
+
+1. contenuti con intento commerciale;
+2. contenuti comparativi;
+3. contenuti informativi;
+4. long-tail keyword.
+
+Privilegia temi che possano concretamente attirare host, property manager, B&B e hotel.
+
+Evita articoli generici sull'intelligenza artificiale se non hanno una reale correlazione con il potenziale cliente.
+
+## Regole operative
+
+IMPORTANTE:
+
+1. Prima fai l'audit.
+2. Poi proponi strategia e modifiche.
+3. Non modificare massivamente il sito senza spiegare cosa stai cambiando.
+4. Non inventare dati su volumi di ricerca o concorrenza se non hai accesso a strumenti SEO reali.
+5. Se non puoi conoscere il volume di una keyword, dichiaralo.
+6. Non creare pagine doorway o contenuti duplicati.
+7. Segui le linee guida Google Search Essentials.
+8. Ottimizza per utenti reali, non per manipolare l'algoritmo.
+9. Non compromettere design, leggibilità o velocità per motivi SEO.
+10. Mantieni invariata la funzionalità del sito.
+
+## Output iniziale richiesto
+
+NON iniziare modificando il sito.
+
+Come prima risposta forniscimi esclusivamente:
+
+### A. Stato attuale
+
+Sintesi dell'audit SEO.
+
+### B. Keyword
+
+Tabella dei principali cluster di keyword consigliati.
+
+### C. Architettura
+
+Eventuali nuove pagine che consiglieresti di creare.
+
+### D. Priorità
+
+Elenco delle 10 modifiche SEO con maggiore impatto atteso, ordinate dalla più importante alla meno importante.
+
+### E. Piano operativo
+
+Dividi le attività in:
+
+* Fase 1: indispensabile;
+* Fase 2: importante;
+* Fase 3: crescita futura.
+
+Aspetta la mia approvazione prima di effettuare modifiche strutturali importanti al sito.
