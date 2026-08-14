@@ -4,6 +4,10 @@ import NotFound from '@/pages/not-found';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 
 import Home from './pages/Home';
+import Pricing from './pages/Pricing';
+import Airbnb from './pages/Airbnb';
+import Booking from './pages/Booking';
+import GuidaDigitaleOspiti from './pages/GuidaDigitaleOspiti';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import Analytics from './pages/Analytics';
@@ -26,6 +30,10 @@ function Router() {
           <main className="flex-1">
             <Switch>
               <Route path="/" component={Home} />
+              <Route path="/pricing" component={Pricing} />
+              <Route path="/airbnb" component={Airbnb} />
+              <Route path="/booking" component={Booking} />
+              <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />
               <Route path="/privacy-policy" component={PrivacyPolicy} />
               <Route path="/cookie-policy" component={CookiePolicy} />
               <Route component={NotFound} />

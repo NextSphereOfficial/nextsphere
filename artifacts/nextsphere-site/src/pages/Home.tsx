@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { SEO } from '../components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -235,6 +236,14 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            className="text-center mt-14"
+          >
+            <Link href="/guida-digitale-ospiti" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+              {t('home.howItWorks.learnMore')}
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -336,6 +345,11 @@ export default function Home() {
                 >
                   {t('pricing.cta')}
                 </a>
+                <div className="mt-5">
+                  <Link href="/pricing" className="text-sm text-gray-400 hover:text-primary transition-colors">
+                    {t('home.pricing.viewAll')}
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>
