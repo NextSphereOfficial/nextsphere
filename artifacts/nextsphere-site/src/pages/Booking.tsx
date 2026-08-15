@@ -27,11 +27,11 @@ const bookingSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Lumo per host Booking.com — NextSphere',
+    name: 'NextSphere per host Booking.com',
     provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
     serviceType: 'Assistente digitale per host Booking.com',
     url: 'https://nextsphere.it/booking',
-    description: 'Lumo gestisce automaticamente le richieste degli ospiti Booking.com tramite QR code, in oltre 30 lingue.',
+    description: 'NextSphere gestisce automaticamente le richieste degli ospiti Booking.com tramite QR code, in oltre 30 lingue.',
     areaServed: 'IT',
   },
 ];

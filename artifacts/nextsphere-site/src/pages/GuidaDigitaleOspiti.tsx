@@ -40,7 +40,7 @@ const guidaSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Guida Digitale per Ospiti — NextSphere Lumo',
+    name: 'Guida Digitale per Ospiti — NextSphere',
     provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
     serviceType: 'Guida digitale interattiva per ospiti di strutture ricettive',
     url: 'https://nextsphere.it/guida-digitale-ospiti',

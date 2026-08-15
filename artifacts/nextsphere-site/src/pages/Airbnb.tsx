@@ -27,11 +27,11 @@ const airbnbSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Lumo per host Airbnb — NextSphere',
+    name: 'NextSphere per host Airbnb',
     provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
     serviceType: 'Assistente digitale per host Airbnb',
     url: 'https://nextsphere.it/airbnb',
-    description: 'Lumo risponde automaticamente alle domande degli ospiti Airbnb tramite QR code, 24/7, in oltre 30 lingue.',
+    description: 'NextSphere risponde automaticamente alle domande degli ospiti Airbnb tramite QR code, 24/7, in oltre 30 lingue.',
     areaServed: 'IT',
   },
 ];
