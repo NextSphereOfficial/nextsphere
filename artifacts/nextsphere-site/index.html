@@ -28,13 +28,15 @@
     <meta name="twitter:description" content="Risposte automatiche 24/7 per i tuoi ospiti." />
     <meta name="twitter:image" content="https://nextsphere.it/og-image.png" />
 
-    <!-- Google Analytics 4 (consent-mode: analytics denied by default until user accepts) -->
+    <!-- Cookiebot: gestione consenso cookie GDPR — deve precedere qualsiasi altro script tracciante -->
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8e716c22-e3f3-49b6-b6ef-b91a5d3920c5" data-blockingmode="auto" type="text/javascript"></script>
+
+    <!-- Google Analytics 4 — Cookiebot lo blocca automaticamente finché l'utente non accetta i cookie analitici -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5LPDQZCTX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('consent', 'default', { analytics_storage: 'denied' });
       gtag('config', 'G-Y5LPDQZCTX');
     </script>
 

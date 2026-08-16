@@ -13,9 +13,7 @@ import CookiePolicy from './pages/CookiePolicy';
 import Analytics from './pages/Analytics';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { CookieBanner } from './components/CookieBanner';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
 
 function Router() {
   return (
@@ -40,7 +38,6 @@ function Router() {
             </Switch>
           </main>
           <Footer />
-          <CookieBanner />
         </div>
       </Route>
     </Switch>
@@ -48,7 +45,6 @@ function Router() {
 }
 
 function App() {
-  useGoogleAnalytics();
   return (
     <LanguageProvider>
       <TooltipProvider>
