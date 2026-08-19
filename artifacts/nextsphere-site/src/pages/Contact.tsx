@@ -288,6 +288,9 @@ function FormField({
   type?: 'text' | 'email' | 'tel';
   onChange: (value: string) => void;
 }) {
+  const inputMode = type === 'email' ? 'email' : type === 'tel' ? 'tel' : 'text';
+  const autoComplete = id === 'contact-name' ? 'name' : id === 'contact-email' ? 'email' : id === 'contact-phone' ? 'tel' : 'off';
+
   return (
     <div>
       <label htmlFor={id} className="mb-2 block text-sm font-semibold text-gray-800">{label}</label>
@@ -296,6 +299,8 @@ function FormField({
         <input
           id={id}
           type={type}
+          inputMode={inputMode}
+          autoComplete={autoComplete}
           value={value}
           onChange={(event) => onChange(event.target.value)}
           placeholder={placeholder}
