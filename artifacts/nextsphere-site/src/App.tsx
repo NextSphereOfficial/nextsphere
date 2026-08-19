@@ -11,6 +11,7 @@ import GuidaDigitaleOspiti from './pages/GuidaDigitaleOspiti';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import Analytics from './pages/Analytics';
+import Contact from './pages/Contact';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -29,6 +30,7 @@ function Router() {
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/pricing" component={Pricing} />
+              <Route path="/contatti" component={Contact} />
               <Route path="/airbnb" component={Airbnb} />
               <Route path="/booking" component={Booking} />
               <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />

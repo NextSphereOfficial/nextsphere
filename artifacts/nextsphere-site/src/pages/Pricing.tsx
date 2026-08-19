@@ -111,12 +111,13 @@ export default function Pricing() {
                   <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
                     <span className="text-lg font-medium text-gray-300">{tier.label}</span>
                     {tier.quote ? (
-                      <button
-                        type="button"
+                      <Link
+                        href="/contatti"
                         className="px-4 py-2 text-sm font-semibold text-primary border border-primary/50 rounded-lg hover:bg-primary/10 transition-colors"
+                        onClick={() => trackCta('pricing_quote')}
                       >
                         {t('pricing.quoteCta')}
-                      </button>
+                      </Link>
                     ) : (
                       <div className="text-right">
                         <span className="text-2xl font-bold">€{tier.price}<sup className="text-sm align-super">*</sup></span>

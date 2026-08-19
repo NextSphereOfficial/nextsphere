@@ -6,6 +6,10 @@ import { logger } from "./lib/logger";
 
 const app: Express = express();
 
+// The public artifact is reached through one Replit/Vercel edge proxy. This
+// lets Express use the forwarded visitor address for request throttling.
+app.set("trust proxy", 1);
+
 app.use(
   pinoHttp({
     logger,

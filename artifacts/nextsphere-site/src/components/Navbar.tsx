@@ -150,6 +150,12 @@ export function Navbar() {
             >
               {t('nav.pricing')}
             </Link>
+            <Link
+              href="/contatti"
+              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+            >
+              {t('nav.contact')}
+            </Link>
           </motion.div>
 
           {/* ── Right controls ── */}
@@ -250,6 +256,19 @@ export function Navbar() {
                   onClick={() => setMenuOpen(false)}
                 >
                   {t('nav.pricing')}
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.43, duration: 0.3, ease: easing }}
+              >
+                <Link
+                  href="/contatti"
+                  className="text-2xl font-semibold text-white hover:text-primary transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t('nav.contact')}
                 </Link>
               </motion.div>
             </nav>

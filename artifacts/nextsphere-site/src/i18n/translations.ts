@@ -18,6 +18,8 @@ export const translations = {
     'meta.home.description': 'NextSphere is the AI chatbot for B&B and vacation rental hosts. Guests scan a QR code and get instant 24/7 answers in their language. Zero effort for you.',
     'meta.privacy.description': 'NextSphere Privacy Policy — how we collect, use and protect your personal data.',
     'meta.cookie.description': 'NextSphere Cookie Policy — what cookies we use and how to manage them.',
+    'meta.contact.title': 'Contact NextSphere | Request a Custom Quote',
+    'meta.contact.description': 'Tell us about your property and receive a custom NextSphere quote for your B&B, holiday rental or apartment.',
 
     // Navbar
     'nav.startFreeTrial': 'Start free trial',
@@ -29,6 +31,7 @@ export const translations = {
     'nav.airbnb': 'For Airbnb hosts',
     'nav.booking': 'For Booking.com hosts',
     'nav.guestGuide': 'Digital guest guide',
+    'nav.contact': 'Contact',
     
     // Hero
     'hero.badge': 'NextSphere — the digital concierge for your property',
@@ -132,7 +135,7 @@ export const translations = {
     'home.pricing.viewAll': 'See full plan details on the pricing page',
     'pricing.from': 'Starting from',
     'pricing.scalesDown': 'Custom pricing for 10+ properties.',
-    'pricing.vatNote': 'Final prices, no additional costs.',
+    'pricing.vatNote': '*Final prices, no additional costs.',
     'home.howItWorks.learnMore': 'What is a digital guest guide? →',
     'pricing.page.hero.badge': 'Simple, transparent pricing',
     'pricing.page.hero.title': 'One price. Everything included.',
@@ -154,6 +157,37 @@ export const translations = {
     'pricing.page.faq.a4': 'Your price is locked in for the duration of your subscription. We will give at least 30 days notice of any changes.',
     'pricing.page.cta.title': 'Start today. Free for 14 days.',
     'pricing.page.cta.subtitle': 'No credit card. No commitment. Just happier guests.',
+
+    // Contact page
+    'contact.badge': 'Let’s talk about your property',
+    'contact.title': 'Get a custom quote.',
+    'contact.subtitle': 'Tell us about your properties and how you welcome your guests. We’ll help you find the right NextSphere setup.',
+    'contact.emailLabel': 'Prefer email?',
+    'contact.emailText': 'Write to us directly at',
+    'contact.responseTitle': 'A real conversation, not an automated reply.',
+    'contact.responseText': 'We read every message and will get back to you with the information you need.',
+    'contact.form.title': 'Tell us a little about you',
+    'contact.form.subtitle': 'We’ll use these details only to reply to your request.',
+    'contact.form.name': 'Name',
+    'contact.form.namePlaceholder': 'Your name',
+    'contact.form.email': 'Email',
+    'contact.form.emailPlaceholder': 'you@example.com',
+    'contact.form.phone': 'Phone number',
+    'contact.form.phonePlaceholder': '+39 333 123 4567',
+    'contact.form.message': 'Message',
+    'contact.form.messagePlaceholder': 'Tell us how many properties you manage or what you would like to improve.',
+    'contact.form.privacyPrefix': 'By sending this form, you agree that we can use your details to reply to your request. Read our',
+    'contact.form.privacyLink': 'Privacy Policy',
+    'contact.form.submit': 'Send request',
+    'contact.form.submitting': 'Sending...',
+    'contact.form.successTitle': 'Request sent.',
+    'contact.form.successText': 'Thank you. We’ll get back to you as soon as possible.',
+    'contact.form.sendAnother': 'Send another request',
+    'contact.form.errorGeneric': 'We could not send your request. Please try again or email us directly.',
+    'contact.form.errorName': 'Enter at least 2 characters.',
+    'contact.form.errorEmail': 'Enter a valid email address.',
+    'contact.form.errorPhone': 'Enter a valid phone number.',
+    'contact.form.errorMessage': 'Your message must contain at least 10 characters.',
 
     // Airbnb page
     'airbnb.hero.badge': 'Built for Airbnb hosts',
@@ -281,13 +315,13 @@ export const translations = {
     'legal.privacy.h1.text': 'The data controller is NextSphere. You can contact us at info@nextsphere.it.',
     // h2 — revisit whenever a new category of personal data is collected (accounts, forms, payments, etc.)
     'legal.privacy.h2': '2. Data Collected',
-    'legal.privacy.h2.text': 'We store your language preference locally in your browser (localStorage). This data is never transmitted to our servers. If you accept our cookie banner, we may also collect anonymized usage analytics to help us understand how visitors use the site.',
+    'legal.privacy.h2.text': 'We store your language preference locally in your browser (localStorage). This data is never transmitted to our servers. If you send us a contact request, we collect the name, email address, phone number and message you provide. If you accept our cookie banner, we may also collect anonymized usage analytics to help us understand how visitors use the site.',
     // h3 — revisit if the purpose of processing expands (e.g. marketing, profiling)
     'legal.privacy.h3': '3. Purpose of Processing',
-    'legal.privacy.h3.text': 'We use analytics data solely to improve our website and services. We do not sell your data to third parties.',
+    'legal.privacy.h3.text': 'We use contact-form data solely to respond to your request and discuss NextSphere with you. We use analytics data solely to improve our website and services. Contact requests are delivered through our email service provider, Resend, acting as a processor on our behalf. We do not sell your data to third parties.',
     // h4 — revisit if retention periods change or new data stores are introduced
     'legal.privacy.h4': '4. Data Retention',
-    'legal.privacy.h4.text': 'Language preference data is stored only in your browser\'s localStorage and can be cleared at any time by clearing your browser data. Analytics cookies, if accepted, are retained in accordance with our Cookie Policy.',
+    'legal.privacy.h4.text': 'Contact-form data is retained only for as long as needed to respond to your request and meet any applicable legal obligations. Language preference data is stored only in your browser\'s localStorage and can be cleared at any time by clearing your browser data. Analytics cookies, if accepted, are retained in accordance with our Cookie Policy.',
     // h5 — revisit if new rights apply (e.g. right to object to automated decisions, right to unsubscribe)
     'legal.privacy.h5': '5. Your Rights',
     'legal.privacy.h5.text': 'Under GDPR (Articles 15-20), you have the right to access, rectify, erase, or port your personal data. You may withdraw your consent to analytics cookies at any time via the cookie banner or by clearing your browser data. To exercise your rights, please contact privacy@nextsphere.it.',
@@ -328,6 +362,8 @@ export const translations = {
     'meta.home.description': 'NextSphere è il chatbot AI per host di B&B, case vacanze e appartamenti. Gli ospiti scansionano un QR code e ottengono risposte immediate 24/7 nella loro lingua. Zero sforzo per te.',
     'meta.privacy.description': 'Informativa sulla Privacy di NextSphere — come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.',
     'meta.cookie.description': 'Cookie Policy di NextSphere — quali cookie utilizziamo e come gestirli.',
+    'meta.contact.title': 'Contatta NextSphere | Richiedi un preventivo personalizzato',
+    'meta.contact.description': 'Raccontaci della tua struttura e ricevi un preventivo NextSphere su misura per B&B, case vacanze e appartamenti.',
 
     // Navbar
     'nav.startFreeTrial': 'Inizia la prova gratuita',
@@ -339,6 +375,7 @@ export const translations = {
     'nav.airbnb': 'Per host Airbnb',
     'nav.booking': 'Per host Booking.com',
     'nav.guestGuide': 'Guida digitale ospiti',
+    'nav.contact': 'Contatti',
     
     // Hero
     'hero.badge': 'NextSphere — il concierge digitale per la tua struttura',
@@ -442,7 +479,7 @@ export const translations = {
     'home.pricing.viewAll': 'Vedi tutti i dettagli nella pagina prezzi',
     'pricing.from': 'A partire da',
     'pricing.scalesDown': 'Prezzi personalizzati per strutture con 10+ appartamenti.',
-    'pricing.vatNote': 'Prezzi finali, nessun costo aggiuntivo.',
+    'pricing.vatNote': '*Prezzi finali, nessun costo aggiuntivo.',
     'home.howItWorks.learnMore': 'Cos\'è una guida digitale per ospiti? →',
     'pricing.page.hero.badge': 'Prezzi semplici e trasparenti',
     'pricing.page.hero.title': 'Un piano. Tutto incluso.',
@@ -464,6 +501,37 @@ export const translations = {
     'pricing.page.faq.a4': 'Il prezzo è bloccato per tutta la durata del tuo abbonamento. Notificheremo eventuali variazioni con almeno 30 giorni di preavviso.',
     'pricing.page.cta.title': 'Inizia oggi. Gratis per 14 giorni.',
     'pricing.page.cta.subtitle': 'Nessuna carta di credito. Nessun vincolo. Solo ospiti più soddisfatti.',
+
+    // Pagina Contatti
+    'contact.badge': 'Parliamo della tua struttura',
+    'contact.title': 'Richiedi un preventivo su misura.',
+    'contact.subtitle': 'Raccontaci delle tue strutture e di come accogli i tuoi ospiti. Ti aiuteremo a trovare la configurazione NextSphere più adatta.',
+    'contact.emailLabel': 'Preferisci scriverci?',
+    'contact.emailText': 'Mandaci una mail direttamente a',
+    'contact.responseTitle': 'Una conversazione vera, non una risposta automatica.',
+    'contact.responseText': 'Leggiamo ogni messaggio e ti risponderemo con tutte le informazioni che ti servono.',
+    'contact.form.title': 'Parlaci un po’ di te',
+    'contact.form.subtitle': 'Useremo questi dati solo per rispondere alla tua richiesta.',
+    'contact.form.name': 'Nome',
+    'contact.form.namePlaceholder': 'Il tuo nome',
+    'contact.form.email': 'Email',
+    'contact.form.emailPlaceholder': 'tu@esempio.it',
+    'contact.form.phone': 'Numero di telefono',
+    'contact.form.phonePlaceholder': '+39 333 123 4567',
+    'contact.form.message': 'Messaggio',
+    'contact.form.messagePlaceholder': 'Raccontaci quante strutture gestisci o cosa vorresti migliorare.',
+    'contact.form.privacyPrefix': 'Inviando il modulo, acconsenti all’uso dei tuoi dati per rispondere alla richiesta. Leggi la nostra',
+    'contact.form.privacyLink': 'Privacy Policy',
+    'contact.form.submit': 'Invia richiesta',
+    'contact.form.submitting': 'Invio in corso...',
+    'contact.form.successTitle': 'Richiesta inviata.',
+    'contact.form.successText': 'Grazie. Ti risponderemo il prima possibile.',
+    'contact.form.sendAnother': 'Invia un’altra richiesta',
+    'contact.form.errorGeneric': 'Non siamo riusciti a inviare la richiesta. Riprova oppure scrivici direttamente via email.',
+    'contact.form.errorName': 'Inserisci almeno 2 caratteri.',
+    'contact.form.errorEmail': 'Inserisci un indirizzo email valido.',
+    'contact.form.errorPhone': 'Inserisci un numero di telefono valido.',
+    'contact.form.errorMessage': 'Il messaggio deve contenere almeno 10 caratteri.',
 
     // Pagina Airbnb
     'airbnb.hero.badge': 'Pensato per host Airbnb',
@@ -591,13 +659,13 @@ export const translations = {
     'legal.privacy.h1.text': 'Il titolare del trattamento è NextSphere. Puoi contattarci a info@nextsphere.it.',
     // h2 — aggiornare ogni volta che si raccoglie una nuova categoria di dati personali
     'legal.privacy.h2': '2. Dati Raccolti',
-    'legal.privacy.h2.text': 'Memorizziamo la tua preferenza di lingua localmente nel tuo browser (localStorage). Questi dati non vengono mai trasmessi ai nostri server. Se accetti il nostro banner sui cookie, potremmo raccogliere anche dati analitici anonimi per capire come i visitatori utilizzano il sito.',
+    'legal.privacy.h2.text': 'Memorizziamo la tua preferenza di lingua localmente nel tuo browser (localStorage). Questi dati non vengono mai trasmessi ai nostri server. Se invii una richiesta di contatto, raccogliamo il nome, l’indirizzo email, il numero di telefono e il messaggio che ci fornisci. Se accetti il nostro banner sui cookie, potremmo raccogliere anche dati analitici anonimi per capire come i visitatori utilizzano il sito.',
     // h3 — aggiornare se le finalità si espandono (es. marketing, profilazione)
     'legal.privacy.h3': '3. Finalità del Trattamento',
-    'legal.privacy.h3.text': 'Utilizziamo i dati analitici esclusivamente per migliorare il nostro sito web e i nostri servizi. Non vendiamo i tuoi dati a terze parti.',
+    'legal.privacy.h3.text': 'Utilizziamo i dati del modulo contatti esclusivamente per rispondere alla tua richiesta e parlare con te di NextSphere. Utilizziamo i dati analitici esclusivamente per migliorare il nostro sito web e i nostri servizi. Le richieste di contatto vengono recapitate tramite il nostro fornitore di servizi email, Resend, che opera come responsabile del trattamento per nostro conto. Non vendiamo i tuoi dati a terze parti.',
     // h4 — aggiornare se cambiano i periodi di conservazione o si aggiungono nuovi archivi
     'legal.privacy.h4': '4. Conservazione dei Dati',
-    'legal.privacy.h4.text': 'La preferenza di lingua è memorizzata solo nel localStorage del tuo browser e può essere eliminata in qualsiasi momento cancellando i dati del browser. I cookie analitici, se accettati, vengono conservati in conformità con la nostra Cookie Policy.',
+    'legal.privacy.h4.text': 'I dati del modulo contatti vengono conservati solo per il tempo necessario a rispondere alla richiesta e ad adempiere agli eventuali obblighi di legge. La preferenza di lingua è memorizzata solo nel localStorage del tuo browser e può essere eliminata in qualsiasi momento cancellando i dati del browser. I cookie analitici, se accettati, vengono conservati in conformità con la nostra Cookie Policy.',
     // h5 — aggiornare se si aggiungono nuovi diritti (es. opposizione a decisioni automatizzate, opt-out)
     'legal.privacy.h5': '5. I Tuoi Diritti',
     'legal.privacy.h5.text': 'Ai sensi del GDPR (Art. 15-20), hai il diritto di accedere, rettificare, cancellare o trasferire i tuoi dati personali. Puoi revocare il consenso ai cookie analitici in qualsiasi momento tramite il banner dei cookie o cancellando i dati del browser. Per esercitare i tuoi diritti, contatta privacy@nextsphere.it.',
