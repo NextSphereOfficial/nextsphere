@@ -106,11 +106,11 @@
       "description": "Chatbot AI per host di affitti brevi e B&B. Gli ospiti scansionano un QR code e ottengono risposte 24/7 nella loro lingua.",
       "offers": {
         "@type": "AggregateOffer",
-        "lowPrice": "19.00",
+        "lowPrice": "24.00",
         "highPrice": "39.00",
         "priceCurrency": "EUR",
-        "offerCount": "5",
-        "description": "Piani NextSphere da €19 a €39/unità/mese, IVA inclusa"
+        "offerCount": "4",
+        "description": "Piani NextSphere da €24 a €39/unità/mese, prezzi finali senza costi aggiuntivi"
       },
       "featureList": [
         "Disponibile 24/7",
@@ -165,7 +165,7 @@
           "name": "Quanto costa NextSphere?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Il piano base parte da €39/mese per un singolo appartamento, IVA inclusa. Il prezzo scende fino a €19/mese per strutture con 10 o più unità. Puoi provarlo gratis per 14 giorni senza carta di credito."
+            "text": "Il piano base parte da €39/mese per un singolo appartamento. Per strutture con 10 o più unità è possibile richiedere un preventivo personalizzato. Puoi provarlo gratis per 14 giorni senza carta di credito."
           }
         },
         {
@@ -190,6 +190,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Essential app bootstrap: never block this script through cookie consent. -->
+    <script type="module" src="/src/main.tsx" data-cookieconsent="ignore"></script>
   </body>
 </html>

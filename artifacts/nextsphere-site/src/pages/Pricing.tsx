@@ -30,10 +30,10 @@ const pricingSchema = [
     url: 'https://nextsphere.it/pricing',
     offers: {
       '@type': 'AggregateOffer',
-      lowPrice: '19.00',
+      lowPrice: '24.00',
       highPrice: '39.00',
       priceCurrency: 'EUR',
-      offerCount: '5',
+      offerCount: '4',
     },
   },
 ];
@@ -46,7 +46,7 @@ export default function Pricing() {
     { label: t('pricing.tier2'), price: '34', per: true },
     { label: t('pricing.tier3'), price: '29', per: true },
     { label: t('pricing.tier4'), price: '24', per: true },
-    { label: t('pricing.tier5'), price: '19', per: true },
+    { label: t('pricing.tier5'), quote: true },
   ];
 
   const includes = [
@@ -110,12 +110,21 @@ export default function Pricing() {
                 {tiers.map((tier, i) => (
                   <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
                     <span className="text-lg font-medium text-gray-300">{tier.label}</span>
-                    <div className="text-right">
-                      <span className="text-2xl font-bold">€{tier.price}<sup className="text-sm align-super">*</sup></span>
-                      <span className="text-sm text-gray-500 ml-1">
-                        {tier.per ? ` ${t('pricing.cad')} ` : ' '}{t('pricing.month')}
-                      </span>
-                    </div>
+                    {tier.quote ? (
+                      <button
+                        type="button"
+                        className="px-4 py-2 text-sm font-semibold text-primary border border-primary/50 rounded-lg hover:bg-primary/10 transition-colors"
+                      >
+                        {t('pricing.quoteCta')}
+                      </button>
+                    ) : (
+                      <div className="text-right">
+                        <span className="text-2xl font-bold">€{tier.price}<sup className="text-sm align-super">*</sup></span>
+                        <span className="text-sm text-gray-500 ml-1">
+                          {tier.per ? ` ${t('pricing.cad')} ` : ' '}{t('pricing.month')}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

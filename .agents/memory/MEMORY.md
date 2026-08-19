@@ -1,1 +1,2 @@
 - [Deployment pipeline](deployment-pipeline.md) — Replit → GitHub (NextSphereOfficial/nextsphere) → Vercel auto-deploy on push to main
+- [Cookiebot SPA bootstrap](cookiebot-spa-bootstrap.md) — Cookiebot automatic blocking must exclude the essential React/Vite entry script.

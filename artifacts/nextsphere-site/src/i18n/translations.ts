@@ -73,6 +73,7 @@ export const translations = {
     'pricing.month': '/ month',
     'pricing.badge': '14-day free trial · No credit card required',
     'pricing.cta': 'Start free trial',
+    'pricing.quoteCta': 'Request a quote',
     
     // FAQ
     'faq.title': 'Frequently Asked Questions',
@@ -112,6 +113,9 @@ export const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
     'footer.cookieSettings': 'Cookie Settings',
+    'footer.address': 'Registered office',
+    'footer.vatNumber': 'VAT no.',
+    'footer.taxCode': 'Tax code',
     'footer.rights': '© 2026 NextSphere. All rights reserved.',
 
     // Meta tags — new SEO pages
@@ -127,8 +131,8 @@ export const translations = {
     // Pricing page
     'home.pricing.viewAll': 'See full plan details on the pricing page',
     'pricing.from': 'Starting from',
-    'pricing.scalesDown': 'Price drops to €19/mo for 10+ properties.',
-    'pricing.vatNote': '*taxes included.',
+    'pricing.scalesDown': 'Custom pricing for 10+ properties.',
+    'pricing.vatNote': 'Final prices, no additional costs.',
     'home.howItWorks.learnMore': 'What is a digital guest guide? →',
     'pricing.page.hero.badge': 'Simple, transparent pricing',
     'pricing.page.hero.title': 'One price. Everything included.',
@@ -379,6 +383,7 @@ export const translations = {
     'pricing.month': '/ mese',
     'pricing.badge': '14 giorni di prova gratuita · Nessuna carta di credito',
     'pricing.cta': 'Inizia la prova gratuita',
+    'pricing.quoteCta': 'Richiedi un preventivo',
     
     // FAQ
     'faq.title': 'Domande Frequenti',
@@ -418,6 +423,9 @@ export const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
     'footer.cookieSettings': 'Impostazioni Cookie',
+    'footer.address': 'Sede',
+    'footer.vatNumber': 'P.IVA',
+    'footer.taxCode': 'C.F.',
     'footer.rights': '© 2026 NextSphere. Tutti i diritti riservati.',
 
     // Meta tag — nuove pagine SEO
@@ -433,8 +441,8 @@ export const translations = {
     // Pagina Prezzi
     'home.pricing.viewAll': 'Vedi tutti i dettagli nella pagina prezzi',
     'pricing.from': 'A partire da',
-    'pricing.scalesDown': 'Scende fino a €19/mese per 10+ strutture.',
-    'pricing.vatNote': '*imposte incluse.',
+    'pricing.scalesDown': 'Prezzi personalizzati per strutture con 10+ appartamenti.',
+    'pricing.vatNote': 'Prezzi finali, nessun costo aggiuntivo.',
     'home.howItWorks.learnMore': 'Cos\'è una guida digitale per ospiti? →',
     'pricing.page.hero.badge': 'Prezzi semplici e trasparenti',
     'pricing.page.hero.title': 'Un piano. Tutto incluso.',
