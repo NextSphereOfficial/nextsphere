@@ -221,6 +221,9 @@ export default function Booking() {
               {t('hero.cta.primary')}
             </a>
             <p className="mt-5 text-sm text-gray-600">{t('pricing.badge')}</p>
+            <p className="mx-auto mt-8 max-w-xl text-xs leading-relaxed text-gray-500">
+              {t('booking.disclaimer')}
+            </p>
           </motion.div>
         </div>
       </section>

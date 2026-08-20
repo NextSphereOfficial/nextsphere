@@ -18,6 +18,8 @@ export const translations = {
     'meta.home.description': 'NextSphere is the AI chatbot for B&B and vacation rental hosts. Guests scan a QR code and get instant 24/7 answers in their language. Zero effort for you.',
     'meta.privacy.description': 'NextSphere Privacy Policy — how we collect, use and protect your personal data.',
     'meta.cookie.description': 'NextSphere Cookie Policy — what cookies we use and how to manage them.',
+    'meta.legalNotes.title': 'Legal Notice | NextSphere',
+    'meta.legalNotes.description': 'Legal and company information for NextSphere.',
     'meta.contact.title': 'Contact NextSphere | Request a Custom Quote',
     'meta.contact.description': 'Tell us about your property and receive a custom NextSphere quote for your B&B, holiday rental or apartment.',
 
@@ -115,6 +117,7 @@ export const translations = {
     'footer.nav.legal': 'Legal',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
+    'footer.legalNotes': 'Legal Notice',
     'footer.cookieSettings': 'Cookie Settings',
     'footer.address': 'Registered office',
     'footer.vatNumber': 'VAT no.',
@@ -218,6 +221,7 @@ export const translations = {
     'airbnb.benefits.b4.desc': 'Guests scan the QR code and chat directly in their browser. Zero friction, zero downloads.',
     'airbnb.cta.title': 'Ready to stop answering the same questions?',
     'airbnb.cta.subtitle': 'Set up NextSphere in 10 minutes. 14-day free trial, no credit card.',
+    'airbnb.disclaimer': 'NextSphere is not affiliated with Airbnb Inc. or Booking.com. The mentioned trademarks belong to their respective owners and are referenced solely for descriptive purposes, to indicate which users the service is intended for.',
 
     // Booking page
     'booking.hero.badge': 'Built for Booking.com hosts',
@@ -248,6 +252,7 @@ export const translations = {
     'booking.benefits.b4.desc': 'Informed, independent guests leave more positive reviews. NextSphere improves the experience without any extra effort from you.',
     'booking.cta.title': 'Your Booking.com property deserves a digital assistant.',
     'booking.cta.subtitle': 'Set up NextSphere in 10 minutes. 14-day free trial, no credit card.',
+    'booking.disclaimer': 'NextSphere is not affiliated with Airbnb Inc. or Booking.com. The mentioned trademarks belong to their respective owners and are referenced solely for descriptive purposes, to indicate which users the service is intended for.',
 
     // Guida digitale ospiti page
     'guideDigitale.hero.badge': 'The intelligent digital guide',
@@ -307,6 +312,14 @@ export const translations = {
     // ─────────────────────────────────────────────────────────────────────────
 
     // Legal Pages
+    'legal.notes.title': 'Legal Notice',
+    'legal.notes.intro': 'Company and contact information for NextSphere.',
+    'legal.notes.h1': 'Site owner',
+    'legal.notes.name': 'Name',
+    'legal.notes.registeredOffice': 'Registered office',
+    'legal.notes.vatNumber': 'VAT no.',
+    'legal.notes.taxCode': 'Tax code',
+    'legal.notes.email': 'Email',
     'legal.privacy.title': 'Privacy Policy',
     'legal.privacy.lastUpdated': `Last updated: ${privacyLastUpdatedEN}`,
     'legal.privacy.p1': 'This Privacy Policy describes how NextSphere ("we", "us", or "our") collects, uses, and shares your personal information when you use our website and services.',
@@ -362,6 +375,8 @@ export const translations = {
     'meta.home.description': 'NextSphere è il chatbot AI per host di B&B, case vacanze e appartamenti. Gli ospiti scansionano un QR code e ottengono risposte immediate 24/7 nella loro lingua. Zero sforzo per te.',
     'meta.privacy.description': 'Informativa sulla Privacy di NextSphere — come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.',
     'meta.cookie.description': 'Cookie Policy di NextSphere — quali cookie utilizziamo e come gestirli.',
+    'meta.legalNotes.title': 'Note legali | NextSphere',
+    'meta.legalNotes.description': 'Informazioni legali e societarie di NextSphere.',
     'meta.contact.title': 'Contatta NextSphere | Richiedi un preventivo personalizzato',
     'meta.contact.description': 'Raccontaci della tua struttura e ricevi un preventivo NextSphere su misura per B&B, case vacanze e appartamenti.',
 
@@ -459,6 +474,7 @@ export const translations = {
     'footer.nav.legal': 'Legale',
     'footer.privacy': 'Privacy Policy',
     'footer.cookie': 'Cookie Policy',
+    'footer.legalNotes': 'Note legali',
     'footer.cookieSettings': 'Impostazioni Cookie',
     'footer.address': 'Sede',
     'footer.vatNumber': 'P.IVA',
@@ -562,6 +578,7 @@ export const translations = {
     'airbnb.benefits.b4.desc': 'Scansionano il QR code e chattano direttamente nel browser. Zero attriti, zero download.',
     'airbnb.cta.title': 'Pronto a smettere di rispondere alle stesse domande?',
     'airbnb.cta.subtitle': 'Configura NextSphere in 10 minuti. 14 giorni gratis, nessuna carta di credito.',
+    'airbnb.disclaimer': 'NextSphere non è affiliata ad Airbnb Inc. né a Booking.com. I marchi citati appartengono ai rispettivi titolari e sono richiamati a soli fini descrittivi, per indicare a quali utenti il servizio è destinato.',
 
     // Pagina Booking
     'booking.hero.badge': 'Pensato per host Booking.com',
@@ -592,6 +609,7 @@ export const translations = {
     'booking.benefits.b4.desc': 'Ospiti informati e autonomi lasciano recensioni più positive. NextSphere migliora l\'esperienza senza che tu debba fare nulla di extra.',
     'booking.cta.title': 'La tua struttura Booking merita un assistente digitale.',
     'booking.cta.subtitle': 'Configura NextSphere in 10 minuti. 14 giorni gratis, nessuna carta di credito.',
+    'booking.disclaimer': 'NextSphere non è affiliata ad Airbnb Inc. né a Booking.com. I marchi citati appartengono ai rispettivi titolari e sono richiamati a soli fini descrittivi, per indicare a quali utenti il servizio è destinato.',
 
     // Pagina Guida digitale ospiti
     'guideDigitale.hero.badge': 'La guida digitale intelligente',
@@ -651,6 +669,14 @@ export const translations = {
     // ─────────────────────────────────────────────────────────────────────────
 
     // Legal Pages
+    'legal.notes.title': 'Note legali',
+    'legal.notes.intro': 'Informazioni societarie e di contatto di NextSphere.',
+    'legal.notes.h1': 'Titolare del sito',
+    'legal.notes.name': 'Nome',
+    'legal.notes.registeredOffice': 'Sede',
+    'legal.notes.vatNumber': 'P.IVA',
+    'legal.notes.taxCode': 'Codice fiscale',
+    'legal.notes.email': 'Email',
     'legal.privacy.title': 'Privacy Policy',
     'legal.privacy.lastUpdated': `Ultimo aggiornamento: ${privacyLastUpdatedIT}`,
     'legal.privacy.p1': 'Questa Privacy Policy descrive come NextSphere ("noi", o "nostro") raccoglie, utilizza e condivide le tue informazioni personali quando utilizzi il nostro sito web e i nostri servizi.',

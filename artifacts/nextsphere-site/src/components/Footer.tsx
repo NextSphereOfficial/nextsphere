@@ -29,18 +29,6 @@ export function Footer() {
             <p className="text-gray-400 max-w-sm">
               {t('footer.tagline')}
             </p>
-            <address className="mt-8 text-sm text-gray-500 not-italic leading-relaxed">
-              <p className="font-medium text-gray-300">Samir Attar</p>
-              <p>{t('footer.address')}: Via Guglielmo Ciardi 38</p>
-              <p>30174 Mestre (VE)</p>
-              <p>{t('footer.vatNumber')}: 04990030274</p>
-              <p>{t('footer.taxCode')}: TTRSMR91E22L736W</p>
-              <p>
-                <a href="mailto:info@nextsphere.it" className="hover:text-primary transition-colors">
-                  info@nextsphere.it
-                </a>
-              </p>
-            </address>
           </div>
 
           <div className="md:col-span-8 flex flex-wrap gap-10 md:justify-end">
@@ -85,6 +73,11 @@ export function Footer() {
             <div>
               <h4 className="font-heading font-semibold text-white mb-6">{t('footer.nav.legal')}</h4>
               <ul className="space-y-4 text-sm text-gray-400">
+                <li>
+                  <Link href="/note-legali" className="hover:text-primary transition-colors">
+                    {t('footer.legalNotes')}
+                  </Link>
+                </li>
                 <li>
                   <Link href="/privacy-policy" className="hover:text-primary transition-colors">
                     {t('footer.privacy')}

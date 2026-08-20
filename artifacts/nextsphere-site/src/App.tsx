@@ -10,6 +10,7 @@ import Booking from './pages/Booking';
 import GuidaDigitaleOspiti from './pages/GuidaDigitaleOspiti';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
+import LegalNotes from './pages/LegalNotes';
 import Analytics from './pages/Analytics';
 import Contact from './pages/Contact';
 import { Navbar } from './components/Navbar';
@@ -36,6 +37,7 @@ function Router() {
               <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />
               <Route path="/privacy-policy" component={PrivacyPolicy} />
               <Route path="/cookie-policy" component={CookiePolicy} />
+              <Route path="/note-legali" component={LegalNotes} />
               <Route component={NotFound} />
             </Switch>
           </main>
