@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const BASE = 'https://nextsphere.it';
@@ -8,6 +9,8 @@ interface SEOProps {
   canonical: string;
   ogImage?: string;
   lang?: string;
+  robots?: string;
+  includeAlternateLanguages?: boolean;
   /** JSON-LD schema objects to inject alongside standard tags */
   schema?: object | object[];
 }
@@ -18,24 +21,35 @@ export function SEO({
   canonical,
   ogImage = `${BASE}/og-image.png`,
   lang = 'it',
+  robots = 'index, follow',
+  includeAlternateLanguages = true,
   schema,
 }: SEOProps) {
   const locale = lang === 'it' ? 'it_IT' : 'en_GB';
   const altLang = lang === 'it' ? 'en' : 'it';
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
+  useEffect(() => {
+    const staticRobots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"][data-static-seo="true"]');
+    staticRobots?.remove();
+  }, [robots]);
+
   return (
     <Helmet>
       <html lang={lang} />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content={robots} />
 
       {/* Canonical + hreflang for every inner page */}
       <link rel="canonical" href={canonical} />
-      <link rel="alternate" hrefLang={lang}      href={canonical} />
-      <link rel="alternate" hrefLang={altLang}   href={canonical} />
-      <link rel="alternate" hrefLang="x-default" href={canonical} />
+      {includeAlternateLanguages && (
+        <>
+          <link rel="alternate" hrefLang={lang} href={canonical} />
+          <link rel="alternate" hrefLang={altLang} href={canonical} />
+          <link rel="alternate" hrefLang="x-default" href={canonical} />
+        </>
+      )}
 
       {/* Open Graph */}
       <meta property="og:title"       content={title} />

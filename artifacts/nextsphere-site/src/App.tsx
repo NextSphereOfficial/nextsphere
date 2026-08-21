@@ -11,6 +11,8 @@ import GuidaDigitaleOspiti from './pages/GuidaDigitaleOspiti';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import LegalNotes from './pages/LegalNotes';
+import LegalHub from './pages/LegalHub';
+import LegalDocumentPage from './pages/LegalDocument';
 import Analytics from './pages/Analytics';
 import Contact from './pages/Contact';
 import { Navbar } from './components/Navbar';
@@ -38,6 +40,8 @@ function Router() {
               <Route path="/privacy-policy" component={PrivacyPolicy} />
               <Route path="/cookie-policy" component={CookiePolicy} />
               <Route path="/note-legali" component={LegalNotes} />
+              <Route path="/legale" component={LegalHub} />
+              <Route path="/legale/:slug" component={LegalDocumentPage} />
               <Route component={NotFound} />
             </Switch>
           </main>

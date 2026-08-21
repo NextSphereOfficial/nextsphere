@@ -74,8 +74,8 @@ export function Footer() {
               <h4 className="font-heading font-semibold text-white mb-6">{t('footer.nav.legal')}</h4>
               <ul className="space-y-4 text-sm text-gray-400">
                 <li>
-                  <Link href="/note-legali" className="hover:text-primary transition-colors">
-                    {t('footer.legalNotes')}
+                  <Link href="/legale" className="hover:text-primary transition-colors">
+                    {t('footer.legalDocuments')}
                   </Link>
                 </li>
                 <li>
