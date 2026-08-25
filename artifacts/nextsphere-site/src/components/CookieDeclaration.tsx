@@ -5,6 +5,7 @@ const COOKIEBOT_ID = '8e716c22-e3f3-49b6-b6ef-b91a5d3920c5';
 const DECLARATION_TIMEOUT_MS = 15_000;
 
 type DeclarationState = 'loading' | 'loaded' | 'error';
+type DeclarationError = 'load' | 'domain';
 
 type CookieDeclarationController = {
   culture?: string;
@@ -23,6 +24,7 @@ export function CookieDeclaration() {
   const { t, lang } = useTranslation();
   const declarationRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<DeclarationState>('loading');
+  const [errorType, setErrorType] = useState<DeclarationError>('load');
 
   useEffect(() => {
     const container = declarationRef.current;
@@ -59,8 +61,9 @@ export function CookieDeclaration() {
       releaseRun();
     };
 
-    const failDeclaration = () => {
+    const failDeclaration = (type: DeclarationError = 'load') => {
       if (active && !declarationInjected) {
+        setErrorType(type);
         setState('error');
       }
       completeRun();
@@ -70,7 +73,7 @@ export function CookieDeclaration() {
       if (existingReportScripts.has(node) || reportScripts.has(node)) return;
 
       reportScripts.add(node);
-      node.addEventListener('error', failDeclaration, { once: true });
+      node.addEventListener('error', () => failDeclaration(), { once: true });
       node.addEventListener(
         'load',
         () => {
@@ -93,6 +96,7 @@ export function CookieDeclaration() {
     });
 
     setState('loading');
+    setErrorType('load');
     void runBeforeThisOne.then(() => {
       if (!active) {
         completeRun();
@@ -135,13 +139,18 @@ export function CookieDeclaration() {
             return;
           }
 
+          if (/\bnot authorized\b|non autorizzato.*cookie declaration/i.test(declarationContent)) {
+            failDeclaration('domain');
+            return;
+          }
+
           injectDeclaration.call(loadedController, declarationContent);
           declarationInjected = true;
           setState('loaded');
           completeRun();
         };
       };
-      declarationScript.onerror = failDeclaration;
+      declarationScript.onerror = () => failDeclaration();
 
       container.appendChild(declarationScript);
     });
@@ -181,7 +190,11 @@ export function CookieDeclaration() {
       )}
       {state === 'error' && (
         <p className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800" role="alert">
-          {t('legal.cookie.declaration.error')}
+          {t(
+            errorType === 'domain'
+              ? 'legal.cookie.declaration.domainError'
+              : 'legal.cookie.declaration.error',
+          )}
         </p>
       )}
 

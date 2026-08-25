@@ -8,3 +8,5 @@ Cookiebot’s declaration script (`cd.js`) is not the final declaration response
 **Why:** Treating the first script’s `load` event as success can leave users with a blank policy. Starting another load during a language or route transition lets a delayed report write through the global singleton into the newer page state.
 
 **How to apply:** Keep the declaration integration as the only owner of the external scripts. When it unmounts, make the previous injector inert and let its report settle before launching the next declaration request. Do not replace the generated cookie list with hand-authored fallback rows.
+
+**Preview behavior:** Cookiebot can return its raw domain-authorization error inside the declaration payload for temporary Replit preview hosts. Detect that response and present the app’s translated preview notice instead; keep the real generated declaration untouched for the authorized `nextsphere.it` domain.

@@ -406,6 +406,7 @@ export const translations = {
     'legal.cookie.declaration.intro': 'The table below is generated automatically by Cookiebot from the latest scan of nextsphere.it. It lists the cookies and trackers detected on this website.',
     'legal.cookie.declaration.loading': 'Loading the latest Cookiebot declaration…',
     'legal.cookie.declaration.error': 'The Cookiebot declaration could not be loaded. Please refresh the page or use Cookie Settings to manage your consent.',
+    'legal.cookie.declaration.domainError': 'The Cookiebot declaration is enabled for the official nextsphere.it domain. This preview domain is not authorized in Cookiebot, so the live declaration will appear after publication.',
   },
   it: {
     // Meta tags (per-page SEO)
@@ -801,6 +802,7 @@ export const translations = {
     'legal.cookie.declaration.intro': 'La tabella seguente viene generata automaticamente da Cookiebot sulla base dell’ultima scansione di nextsphere.it. Elenca i cookie e i tracker rilevati su questo sito.',
     'legal.cookie.declaration.loading': 'Caricamento della dichiarazione Cookiebot aggiornata…',
     'legal.cookie.declaration.error': 'Non è stato possibile caricare la dichiarazione Cookiebot. Ricarica la pagina o usa le Impostazioni Cookie per gestire il consenso.',
+    'legal.cookie.declaration.domainError': 'La dichiarazione Cookiebot è attiva per il dominio ufficiale nextsphere.it. Questo dominio di anteprima non è autorizzato da Cookiebot; la dichiarazione reale sarà visibile dopo la pubblicazione.',
   }
 };
 
