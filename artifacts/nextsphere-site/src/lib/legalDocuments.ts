@@ -18,19 +18,9 @@ export const legalDocuments: LegalDocument[] = [
     descriptionKey: 'legal.documents.privacyAttachment.description',
   },
   {
-    slug: 'privacy-site',
-    titleKey: 'legal.documents.websitePrivacy.title',
-    descriptionKey: 'legal.documents.websitePrivacy.description',
-  },
-  {
     slug: 'privacy-strutture',
     titleKey: 'legal.documents.accommodationPrivacy.title',
     descriptionKey: 'legal.documents.accommodationPrivacy.description',
-  },
-  {
-    slug: 'privacy-ospiti',
-    titleKey: 'legal.documents.guestPrivacy.title',
-    descriptionKey: 'legal.documents.guestPrivacy.description',
   },
   {
     slug: 'termini-lumo',
@@ -41,11 +31,6 @@ export const legalDocuments: LegalDocument[] = [
     slug: 'informativa-ai',
     titleKey: 'legal.documents.aiInformation.title',
     descriptionKey: 'legal.documents.aiInformation.description',
-  },
-  {
-    slug: 'cookie',
-    titleKey: 'legal.documents.cookiePolicy.title',
-    descriptionKey: 'legal.documents.cookiePolicy.description',
   },
 ];
 
