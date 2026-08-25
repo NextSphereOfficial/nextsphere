@@ -401,7 +401,11 @@ export const translations = {
     'legal.cookie.h3.text': 'You can block cookies by activating the setting on your browser that allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies (including essential cookies) you may not be able to access all or parts of our site.',
     // h4 — revisit whenever a third-party service that sets cookies is added or removed
     'legal.cookie.h4': '4. Third Parties',
-    'legal.cookie.h4.text': 'We currently do not use any third-party marketing cookies.'
+    'legal.cookie.h4.text': 'We currently do not use any third-party marketing cookies.',
+    'legal.cookie.declaration.title': 'Cookiebot Cookie Declaration',
+    'legal.cookie.declaration.intro': 'The table below is generated automatically by Cookiebot from the latest scan of nextsphere.it. It lists the cookies and trackers detected on this website.',
+    'legal.cookie.declaration.loading': 'Loading the latest Cookiebot declaration…',
+    'legal.cookie.declaration.error': 'The Cookiebot declaration could not be loaded. Please refresh the page or use Cookie Settings to manage your consent.',
   },
   it: {
     // Meta tags (per-page SEO)
@@ -792,7 +796,11 @@ export const translations = {
     'legal.cookie.h3.text': 'Puoi bloccare i cookie attivando le impostazioni del tuo browser. Tuttavia, se blocchi tutti i cookie (inclusi quelli essenziali) potresti non essere in grado di accedere a tutte le sezioni del sito.',
     // h4 — aggiornare ogni volta che si aggiunge o rimuove un servizio terzo che imposta cookie
     'legal.cookie.h4': '4. Terze parti',
-    'legal.cookie.h4.text': 'Attualmente non utilizziamo cookie di marketing di terze parti.'
+    'legal.cookie.h4.text': 'Attualmente non utilizziamo cookie di marketing di terze parti.',
+    'legal.cookie.declaration.title': 'Dichiarazione Cookiebot',
+    'legal.cookie.declaration.intro': 'La tabella seguente viene generata automaticamente da Cookiebot sulla base dell’ultima scansione di nextsphere.it. Elenca i cookie e i tracker rilevati su questo sito.',
+    'legal.cookie.declaration.loading': 'Caricamento della dichiarazione Cookiebot aggiornata…',
+    'legal.cookie.declaration.error': 'Non è stato possibile caricare la dichiarazione Cookiebot. Ricarica la pagina o usa le Impostazioni Cookie per gestire il consenso.',
   }
 };
 

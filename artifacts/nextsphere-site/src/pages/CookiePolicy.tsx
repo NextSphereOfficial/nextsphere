@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { SEO } from '../components/SEO';
+import { CookieDeclaration } from '../components/CookieDeclaration';
 
 export default function CookiePolicy() {
   const { t, lang } = useTranslation();
@@ -44,6 +45,8 @@ export default function CookiePolicy() {
             </section>
           </div>
         </div>
+
+        <CookieDeclaration />
       </div>
     </div>
   );

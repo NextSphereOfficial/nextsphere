@@ -1,3 +1,4 @@
 - [Deployment pipeline](deployment-pipeline.md) — Replit → GitHub (NextSphereOfficial/nextsphere) → Vercel auto-deploy on push to main
 - [Cookiebot SPA bootstrap](cookiebot-spa-bootstrap.md) — Cookiebot automatic blocking must exclude the essential React/Vite entry script.
+- [Cookiebot SPA declaration](cookiebot-spa-declaration.md) — Cookie Declaration uses a global two-stage loader; serialize SPA loads and wait for injection.
 - [OpenAPI email validation](openapi-email-validation.md) — In this workspace, use an email regex rather than OpenAPI `format: email` so Orval output remains compatible with Zod 3.
