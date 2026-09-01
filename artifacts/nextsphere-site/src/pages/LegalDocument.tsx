@@ -46,28 +46,27 @@ export default function LegalDocumentPage() {
           <h1 className="mt-3 font-heading text-4xl font-bold leading-tight text-gray-900">{title}</h1>
           <p className="mt-5 text-lg leading-relaxed text-gray-600">{description}</p>
 
-          <div className="mt-10 rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-6">
+          <div className="mt-10 rounded-2xl border border-primary/20 bg-primary/5 p-6">
             <div className="flex items-start gap-4">
               <Info className="mt-0.5 shrink-0 text-primary" size={21} />
               <div>
-                <h2 className="font-heading text-xl font-bold text-gray-900">{t('legal.hub.previewTitle')}</h2>
-                <p className="mt-2 leading-relaxed text-gray-600">{t('legal.hub.previewText')}</p>
+                <h2 className="font-heading text-xl font-bold text-gray-900">{t('legal.hub.documentReadyTitle')}</h2>
+                <p className="mt-2 leading-relaxed text-gray-600">{t('legal.hub.documentReadyText')}</p>
               </div>
             </div>
           </div>
 
           <div className="mt-8 border-t border-gray-100 pt-8">
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl bg-gray-200 px-5 py-3 font-semibold text-gray-500"
-              data-testid="btn-legal-pdf-pending"
+            <a
+              href={document.pdfPath}
+              download={document.downloadFileName}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              data-testid="btn-legal-pdf-download"
             >
               <Download size={18} />
               {t('legal.hub.downloadPdf')}
-            </button>
-            <p className="mt-3 text-sm text-gray-500">{t('legal.hub.downloadHint')}</p>
+            </a>
+            <p className="mt-3 text-sm text-gray-500">{t('legal.hub.downloadReadyHint')}</p>
           </div>
         </article>
       </div>

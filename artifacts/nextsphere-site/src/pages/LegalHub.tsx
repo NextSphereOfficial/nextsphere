@@ -90,7 +90,7 @@ export default function LegalHub() {
                     <FileText size={21} />
                   </div>
                   <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-500">
-                    {t('legal.hub.pdfPending')}
+                    {t('legal.hub.pdfAvailable')}
                   </span>
                 </div>
                 <h3 className="mt-5 font-heading text-lg font-bold leading-snug text-gray-900">
