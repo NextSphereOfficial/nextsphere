@@ -6,6 +6,8 @@ export type LegalDocument = {
   descriptionKey: TranslationKey;
   pdfPath: string;
   downloadFileName: string;
+  pageImageBasePath: string;
+  pageCount: number;
 };
 
 export const legalDocuments: LegalDocument[] = [
@@ -13,36 +15,46 @@ export const legalDocuments: LegalDocument[] = [
     slug: 'conditions-general',
     titleKey: 'legal.documents.conditionsGeneral.title',
     descriptionKey: 'legal.documents.conditionsGeneral.description',
-    pdfPath: '/legal/conditions-general.pdf',
-    downloadFileName: 'Condizioni_Generali.pdf',
+    pdfPath: '/legal/Condizioni_Generali_1788290748971.pdf',
+    downloadFileName: 'Condizioni_Generali_1788290748971.pdf',
+    pageImageBasePath: '/legal/pages/conditions-general',
+    pageCount: 19,
   },
   {
     slug: 'allegato-privacy',
     titleKey: 'legal.documents.privacyAttachment.title',
     descriptionKey: 'legal.documents.privacyAttachment.description',
-    pdfPath: '/legal/allegato-privacy.pdf',
-    downloadFileName: 'Allegato_Privacy_DPA.pdf',
+    pdfPath: '/legal/Allegato_Privacy_DPA_1788290748970.pdf',
+    downloadFileName: 'Allegato_Privacy_DPA_1788290748970.pdf',
+    pageImageBasePath: '/legal/pages/allegato-privacy',
+    pageCount: 16,
   },
   {
     slug: 'privacy-strutture',
     titleKey: 'legal.documents.accommodationPrivacy.title',
     descriptionKey: 'legal.documents.accommodationPrivacy.description',
-    pdfPath: '/legal/privacy-strutture.pdf',
-    downloadFileName: 'Privacy_Policy_Strutture.pdf',
+    pdfPath: '/legal/Privacy_Policy_Strutture_1788290748972.pdf',
+    downloadFileName: 'Privacy_Policy_Strutture_1788290748972.pdf',
+    pageImageBasePath: '/legal/pages/privacy-strutture',
+    pageCount: 5,
   },
   {
     slug: 'termini-lumo',
     titleKey: 'legal.documents.lumoTerms.title',
     descriptionKey: 'legal.documents.lumoTerms.description',
-    pdfPath: '/legal/termini-lumo.pdf',
-    downloadFileName: 'Termini_Utilizzo_Lumo.pdf',
+    pdfPath: '/legal/Termini_Utilizzo_Lumo_1788290748972.pdf',
+    downloadFileName: 'Termini_Utilizzo_Lumo_1788290748972.pdf',
+    pageImageBasePath: '/legal/pages/termini-lumo',
+    pageCount: 3,
   },
   {
     slug: 'informativa-ai',
     titleKey: 'legal.documents.aiInformation.title',
     descriptionKey: 'legal.documents.aiInformation.description',
-    pdfPath: '/legal/informativa-ai.pdf',
-    downloadFileName: 'Informativa_AI.pdf',
+    pdfPath: '/legal/Informativa_AI_1788290748971.pdf',
+    downloadFileName: 'Informativa_AI_1788290748971.pdf',
+    pageImageBasePath: '/legal/pages/informativa-ai',
+    pageCount: 5,
   },
 ];
 

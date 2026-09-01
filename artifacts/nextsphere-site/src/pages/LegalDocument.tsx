@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, Download, FileText, Info } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 import NotFound from './not-found';
+import { LegalDocumentReader } from '../components/LegalDocumentReader';
 import { SEO } from '../components/SEO';
 import { useTranslation } from '../hooks/useTranslation';
 import { getLegalDocument } from '../lib/legalDocuments';
@@ -55,6 +56,24 @@ export default function LegalDocumentPage() {
               </div>
             </div>
           </div>
+
+          <section className="mt-10" aria-labelledby="legal-document-reader-title">
+            <div className="flex items-center gap-3">
+              <FileText className="text-primary" size={21} aria-hidden="true" />
+              <h2 id="legal-document-reader-title" className="font-heading text-xl font-bold text-gray-900">
+                {t('legal.hub.readDocumentTitle')}
+              </h2>
+            </div>
+            <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+              <LegalDocumentReader
+                title={title}
+                pageCount={document.pageCount}
+                pageImageBasePath={document.pageImageBasePath}
+                pageLabel={t('legal.hub.pdfPageLabel')}
+              />
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-gray-500">{t('legal.hub.readDocumentHint')}</p>
+          </section>
 
           <div className="mt-8 border-t border-gray-100 pt-8">
             <a
