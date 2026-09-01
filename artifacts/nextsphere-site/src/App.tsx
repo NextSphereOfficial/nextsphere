@@ -1,7 +1,8 @@
+import { useLayoutEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
-import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
@@ -18,6 +19,32 @@ import Contact from './pages/Contact';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { scrollToPageTop } from './lib/navigation';
+
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    if (window.location.hash) {
+      return;
+    }
+
+    scrollToPageTop();
+    const frame = window.requestAnimationFrame(scrollToPageTop);
+    const timeout = window.setTimeout(scrollToPageTop, 0);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+    };
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   return (
@@ -57,6 +84,7 @@ function App() {
     <LanguageProvider>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+          <ScrollToTop />
           <Router />
         </WouterRouter>
         <Toaster />

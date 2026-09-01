@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
+import { scrollToPageTop } from '../lib/navigation';
 import logoLight from '@assets/logo_trasparenza_chiaro_1785754195220.png';
 
 declare global {
@@ -23,7 +24,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           <div className="md:col-span-4">
-            <Link href="/">
+            <Link href="/" onClick={scrollToPageTop}>
               <img src={logoLight} alt="NextSphere" className="h-8 w-auto mb-6" />
             </Link>
             <p className="text-gray-400 max-w-sm">
@@ -39,7 +40,7 @@ export function Footer() {
                 <li><a href="/#how-it-works" className="hover:text-primary transition-colors">{t('footer.nav.howItWorks')}</a></li>
                 <li><a href="/#features" className="hover:text-primary transition-colors">{t('footer.nav.features')}</a></li>
                 <li>
-                  <Link href="/pricing" className="hover:text-primary transition-colors">
+                  <Link href="/pricing" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.nav.pricingPage')}
                   </Link>
                 </li>
@@ -52,17 +53,17 @@ export function Footer() {
               <h4 className="font-heading font-semibold text-white mb-6">{t('footer.nav.solutions')}</h4>
               <ul className="space-y-4 text-sm text-gray-400">
                 <li>
-                  <Link href="/airbnb" className="hover:text-primary transition-colors">
+                  <Link href="/airbnb" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.nav.airbnb')}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/booking" className="hover:text-primary transition-colors">
+                  <Link href="/booking" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.nav.booking')}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/guida-digitale-ospiti" className="hover:text-primary transition-colors">
+                  <Link href="/guida-digitale-ospiti" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.nav.guestGuide')}
                   </Link>
                 </li>
@@ -74,17 +75,17 @@ export function Footer() {
               <h4 className="font-heading font-semibold text-white mb-6">{t('footer.nav.legal')}</h4>
               <ul className="space-y-4 text-sm text-gray-400">
                 <li>
-                  <Link href="/legale" className="hover:text-primary transition-colors">
+                  <Link href="/legale" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.legalDocuments')}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy-policy" className="hover:text-primary transition-colors">
+                  <Link href="/privacy-policy" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.privacy')}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cookie-policy" className="hover:text-primary transition-colors">
+                  <Link href="/cookie-policy" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
                     {t('footer.cookie')}
                   </Link>
                 </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Download, FileText, Info } from 'lucide-react';
+import { ArrowLeft, Download, FileText } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 import NotFound from './not-found';
 import { LegalDocumentReader } from '../components/LegalDocumentReader';
@@ -47,16 +47,6 @@ export default function LegalDocumentPage() {
           <h1 className="mt-3 font-heading text-4xl font-bold leading-tight text-gray-900">{title}</h1>
           <p className="mt-5 text-lg leading-relaxed text-gray-600">{description}</p>
 
-          <div className="mt-10 rounded-2xl border border-primary/20 bg-primary/5 p-6">
-            <div className="flex items-start gap-4">
-              <Info className="mt-0.5 shrink-0 text-primary" size={21} />
-              <div>
-                <h2 className="font-heading text-xl font-bold text-gray-900">{t('legal.hub.documentReadyTitle')}</h2>
-                <p className="mt-2 leading-relaxed text-gray-600">{t('legal.hub.documentReadyText')}</p>
-              </div>
-            </div>
-          </div>
-
           <section className="mt-10" aria-labelledby="legal-document-reader-title">
             <div className="flex items-center gap-3">
               <FileText className="text-primary" size={21} aria-hidden="true" />
@@ -72,7 +62,6 @@ export default function LegalDocumentPage() {
                 pageLabel={t('legal.hub.pdfPageLabel')}
               />
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-gray-500">{t('legal.hub.readDocumentHint')}</p>
           </section>
 
           <div className="mt-8 border-t border-gray-100 pt-8">

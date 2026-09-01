@@ -14,7 +14,7 @@ export function LegalDocumentReader({
   pageLabel,
 }: LegalDocumentReaderProps) {
   return (
-    <div className="h-[75vh] min-h-[560px] overflow-y-auto bg-gray-100 p-3 sm:p-5">
+    <div className="h-[52vh] min-h-[360px] max-h-[560px] overflow-y-auto bg-gray-100 p-3 sm:p-5">
       <div className="flex flex-col gap-5">
         {Array.from({ length: pageCount }, (_, index) => {
           const pageNumber = index + 1;

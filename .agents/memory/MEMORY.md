@@ -3,3 +3,4 @@
 - [Cookiebot SPA declaration](cookiebot-spa-declaration.md) — Cookie Declaration uses a global two-stage loader; serialize SPA loads and wait for injection.
 - [OpenAPI email validation](openapi-email-validation.md) — In this workspace, use an email regex rather than OpenAPI `format: email` so Orval output remains compatible with Zod 3.
 - [Inline legal PDFs](inline-legal-pdfs.md) — Render legal documents as static page images for reliable desktop/mobile reading; keep originals for download.
+- [SPA route scroll](spa-route-scroll.md) — Footer page links must reset scroll both on click and after route change to defeat delayed browser restoration.
