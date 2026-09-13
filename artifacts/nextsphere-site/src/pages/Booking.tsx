@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, ScanLine, Clock, Globe2, Star, Zap } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { useTranslation } from '../hooks/useTranslation';
+import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
 
 const fadeUp = {
@@ -92,7 +93,7 @@ export default function Booking() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="#"
+                href={PLATFORM_URL}
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.35)]"
                 onClick={() => trackCta('booking_hero')}
               >
@@ -214,7 +215,7 @@ export default function Booking() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('booking.cta.title')}</h2>
             <p className="text-gray-400 text-lg mb-10">{t('booking.cta.subtitle')}</p>
             <a
-              href="#"
+              href={PLATFORM_URL}
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
               onClick={() => trackCta('booking_cta')}
             >

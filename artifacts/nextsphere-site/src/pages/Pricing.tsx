@@ -5,6 +5,7 @@ import { Check, ShieldCheck, ScanLine, Globe2, Clock, PhoneOff, Zap } from 'luci
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { SEO } from '../components/SEO';
 import { useTranslation } from '../hooks/useTranslation';
+import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
 
 const fadeUp = {
@@ -132,7 +133,7 @@ export default function Pricing() {
               <div className="text-center relative z-10">
                 <p className="text-primary font-medium mb-6 text-sm">✓ {t('pricing.badge')}</p>
                 <a
-                  href="#"
+                  href={PLATFORM_URL}
                   className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
                   onClick={() => trackCta('pricing')}
                 >
@@ -210,7 +211,7 @@ export default function Pricing() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('pricing.page.cta.title')}</h2>
             <p className="text-gray-400 text-lg mb-10">{t('pricing.page.cta.subtitle')}</p>
             <a
-              href="#"
+              href={PLATFORM_URL}
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
               onClick={() => trackCta('pricing')}
             >

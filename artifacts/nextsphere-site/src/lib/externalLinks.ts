@@ -1,0 +1,1 @@
+export const PLATFORM_URL = 'https://app.nextsphere.it/';

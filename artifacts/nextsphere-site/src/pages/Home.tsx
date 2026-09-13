@@ -5,6 +5,7 @@ import { SEO } from '../components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
 import { track } from '@vercel/analytics';
 
@@ -179,7 +180,7 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <a
-                href="#pricing"
+                href={PLATFORM_URL}
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.35)]"
                 data-testid="hero-cta-primary"
                 onClick={() => trackCta('hero_primary')}
@@ -325,13 +326,13 @@ export default function Home() {
 
               <div className="relative z-10">
                 <p className="text-primary font-medium mb-6 text-sm">✓ {t('pricing.badge')}</p>
-                <Link
-                  href="/pricing"
+                <a
+                  href={PLATFORM_URL}
                   className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
                   onClick={() => trackCta('pricing')}
                 >
                   {t('pricing.cta')}
-                </Link>
+                </a>
                 <p className="mt-5 text-sm text-gray-600">{t('home.pricing.viewAll')}</p>
               </div>
 
@@ -412,7 +413,7 @@ export default function Home() {
               {t('cta.final.subtitle')}
             </p>
             <a
-              href="#"
+              href={PLATFORM_URL}
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-base font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_48px_rgba(222,182,125,0.3)]"
               onClick={() => trackCta('final_banner')}
             >
