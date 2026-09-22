@@ -25,10 +25,9 @@ export default function LegalDocumentPage() {
       <SEO
         title={`${title} | NextSphere`}
         description={description}
-        canonical={`https://nextsphere.it/legale/${document.slug}`}
+        canonical={`https://www.nextsphere.it/legale/${document.slug}`}
         lang={lang}
         robots="noindex, follow"
-        includeAlternateLanguages={false}
       />
 
       <div className="mx-auto max-w-3xl px-6">

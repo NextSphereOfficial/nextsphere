@@ -10,7 +10,7 @@ export default function LegalNotes() {
       <SEO
         title={`${t('legal.notes.title')} | NextSphere`}
         description={t('meta.legalNotes.description')}
-        canonical="https://nextsphere.it/note-legali"
+        canonical="https://www.nextsphere.it/note-legali"
         lang={lang}
       />
       <div className="max-w-3xl mx-auto px-6 bg-white p-10 rounded-3xl shadow-sm border border-gray-100">

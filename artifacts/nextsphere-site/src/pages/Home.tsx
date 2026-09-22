@@ -109,7 +109,7 @@ export default function Home() {
       <SEO
         title={t('meta.home.title')}
         description={t('meta.home.description')}
-        canonical="https://nextsphere.it/"
+        canonical="https://www.nextsphere.it/"
         lang={lang}
       />
 

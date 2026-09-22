@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
       <SEO
         title={`${t('legal.privacy.title')} | NextSphere`}
         description={t('meta.privacy.description')}
-        canonical="https://nextsphere.it/privacy-policy"
+        canonical="https://www.nextsphere.it/privacy-policy"
         lang={lang}
       />
       <div className="max-w-3xl mx-auto px-6 bg-white p-10 rounded-3xl shadow-sm border border-gray-100">

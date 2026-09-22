@@ -11,7 +11,7 @@ export default function CookiePolicy() {
       <SEO
         title={`${t('legal.cookie.title')} | NextSphere`}
         description={t('meta.cookie.description')}
-        canonical="https://nextsphere.it/cookie-policy"
+        canonical="https://www.nextsphere.it/cookie-policy"
         lang={lang}
       />
       <div className="max-w-3xl mx-auto px-6 bg-white p-10 rounded-3xl shadow-sm border border-gray-100">

@@ -91,7 +91,7 @@ export default function Contact() {
       <SEO
         title={t('meta.contact.title')}
         description={t('meta.contact.description')}
-        canonical="https://nextsphere.it/contatti"
+        canonical="https://www.nextsphere.it/contatti"
         lang={lang}
       />
 

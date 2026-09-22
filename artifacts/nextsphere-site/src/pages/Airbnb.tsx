@@ -21,17 +21,17 @@ const airbnbSchema = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://nextsphere.it/' },
-      { '@type': 'ListItem', position: 2, name: 'Airbnb', item: 'https://nextsphere.it/airbnb' },
+      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.nextsphere.it/' },
+      { '@type': 'ListItem', position: 2, name: 'Airbnb', item: 'https://www.nextsphere.it/airbnb' },
     ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'NextSphere per host Airbnb',
-    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
+    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://www.nextsphere.it' },
     serviceType: 'Assistente digitale per host Airbnb',
-    url: 'https://nextsphere.it/airbnb',
+    url: 'https://www.nextsphere.it/airbnb',
     description: 'NextSphere risponde automaticamente alle domande degli ospiti Airbnb tramite QR code, 24/7, in oltre 30 lingue.',
     areaServed: 'IT',
   },
@@ -60,7 +60,7 @@ export default function Airbnb() {
       <SEO
         title={t('meta.airbnb.title')}
         description={t('meta.airbnb.description')}
-        canonical="https://nextsphere.it/airbnb"
+        canonical="https://www.nextsphere.it/airbnb"
         lang={lang}
         schema={airbnbSchema}
       />

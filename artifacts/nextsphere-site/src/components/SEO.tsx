@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const BASE = 'https://nextsphere.it';
+const BASE = 'https://www.nextsphere.it';
 
 interface SEOProps {
   title: string;
@@ -10,7 +10,6 @@ interface SEOProps {
   ogImage?: string;
   lang?: string;
   robots?: string;
-  includeAlternateLanguages?: boolean;
   /** JSON-LD schema objects to inject alongside standard tags */
   schema?: object | object[];
 }
@@ -22,11 +21,9 @@ export function SEO({
   ogImage = `${BASE}/og-image.png`,
   lang = 'it',
   robots = 'index, follow',
-  includeAlternateLanguages = true,
   schema,
 }: SEOProps) {
   const locale = lang === 'it' ? 'it_IT' : 'en_GB';
-  const altLang = lang === 'it' ? 'en' : 'it';
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
   useEffect(() => {
@@ -41,15 +38,8 @@ export function SEO({
       <meta name="description" content={description} />
       <meta name="robots" content={robots} />
 
-      {/* Canonical + hreflang for every inner page */}
+      {/* One canonical URL per route. Language selection does not change the URL. */}
       <link rel="canonical" href={canonical} />
-      {includeAlternateLanguages && (
-        <>
-          <link rel="alternate" hrefLang={lang} href={canonical} />
-          <link rel="alternate" hrefLang={altLang} href={canonical} />
-          <link rel="alternate" hrefLang="x-default" href={canonical} />
-        </>
-      )}
 
       {/* Open Graph */}
       <meta property="og:title"       content={title} />

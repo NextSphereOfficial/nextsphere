@@ -13,10 +13,9 @@ export default function LegalHub() {
       <SEO
         title={t('meta.legalHub.title')}
         description={t('meta.legalHub.description')}
-        canonical="https://nextsphere.it/legale"
+        canonical="https://www.nextsphere.it/legale"
         lang={lang}
         robots="noindex, follow"
-        includeAlternateLanguages={false}
       />
 
       <section className="relative overflow-hidden bg-[#0D0D0D] pb-24 pt-36">

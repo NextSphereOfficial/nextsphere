@@ -18,17 +18,17 @@ const pricingSchema = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://nextsphere.it/' },
-      { '@type': 'ListItem', position: 2, name: 'Prezzi', item: 'https://nextsphere.it/pricing' },
+      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.nextsphere.it/' },
+      { '@type': 'ListItem', position: 2, name: 'Prezzi', item: 'https://www.nextsphere.it/pricing' },
     ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'NextSphere — Chatbot AI per affitti brevi',
-    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://nextsphere.it' },
+    provider: { '@type': 'Organization', name: 'NextSphere', url: 'https://www.nextsphere.it' },
     serviceType: 'Chatbot AI per host turistici',
-    url: 'https://nextsphere.it/pricing',
+    url: 'https://www.nextsphere.it/pricing',
     offers: {
       '@type': 'AggregateOffer',
       lowPrice: '24.00',
@@ -69,7 +69,7 @@ export default function Pricing() {
       <SEO
         title={t('meta.pricing.title')}
         description={t('meta.pricing.description')}
-        canonical="https://nextsphere.it/pricing"
+        canonical="https://www.nextsphere.it/pricing"
         lang={lang}
         schema={pricingSchema}
       />
