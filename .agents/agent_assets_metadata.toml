@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "_7SurbOvjcyJDV1-N522c"
+uri = "file://artifacts/nextsphere-site/public/media/nextsphere-demo.mp4"
+type = "video"
+title = "Demo NextSphere — 20 secondi"
+description = "Montaggio Full HD della registrazione reale: configurazione guidata e risposta della chat con gli stessi orari di check-in. MP4 senza audio, ottimizzato per web."
+logical_id = "7e2a5e6d-2737-4e69-8721-ff24b581b920"
+content_hash = "sha256:81c1e1ce106c0338911877d564045dbcb0eb122ade907d7b60a5051c63e6bd54"
+size = 912843
+mtime_ms = 1790851569646
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:1d6a9426-938d-4a10-a906-9ab88392113a/7e2a5e6d-2737-4e69-8721-ff24b581b920/100d24ea-1c36-4b5d-b431-c7b9ababb532"
+storage_version_token = "1790851802167367"
+content_type = "video/mp4"

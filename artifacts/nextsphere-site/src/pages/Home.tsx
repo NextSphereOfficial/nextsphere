@@ -7,6 +7,7 @@ import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'luci
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
+import DemoVideo from '../components/DemoVideo';
 import { track } from '@vercel/analytics';
 
 // --- Animation variants ---
@@ -38,6 +39,7 @@ export default function Home() {
   useEffect(() => {
     const sections: { id: string; label: string }[] = [
       { id: 'hero',      label: 'hero' },
+      { id: 'demo', label: 'demo' },
       { id: 'how-it-works', label: 'how_it_works' },
       { id: 'features',  label: 'features' },
       { id: 'pricing',   label: 'pricing' },
@@ -199,9 +201,11 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Bottom fade into white */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+        {/* Continue the dark hero into the product demo. */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent to-[#0D0D0D] pointer-events-none" />
       </section>
+
+      <DemoVideo />
 
       {/* ─── 2. HOW IT WORKS ─────────────────────────────────────── */}
       <section id="how-it-works" className="py-32 bg-white">
