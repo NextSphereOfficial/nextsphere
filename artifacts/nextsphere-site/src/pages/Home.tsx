@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PLATFORM_URL } from '../lib/externalLinks';
-import { trackCta } from '../lib/trackCta';
+import { trackAnalyticsEvent, trackCta } from '../lib/trackCta';
 import DemoVideo from '../components/DemoVideo';
 import { track } from '@vercel/analytics';
 
@@ -48,10 +48,24 @@ export default function Home() {
     ];
 
     const fired = new Set<string>();
+    let demoVisible = false;
+    const trackVisibleDemo = () => {
+      if (demoVisible && !fired.has('demo')
+        && trackAnalyticsEvent('section_view', { section: 'demo' }, 'demo_section_view')) {
+        fired.add('demo');
+      }
+    };
+    const consentEvents = ['CookiebotOnConsentReady', 'CookiebotOnAccept', 'CookiebotOnDecline', 'ns:cookie-consent-changed'];
+    for (const event of consentEvents) window.addEventListener(event, trackVisibleDemo);
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
+          if (entry.target.id === 'demo') {
+            demoVisible = entry.isIntersecting;
+            trackVisibleDemo();
+            continue;
+          }
           if (entry.isIntersecting) {
             const section = sections.find((s) => s.id === entry.target.id);
             if (section && !fired.has(section.label)) {
@@ -69,7 +83,10 @@ export default function Home() {
       if (el) observer.observe(el);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      for (const event of consentEvents) window.removeEventListener(event, trackVisibleDemo);
+    };
   }, []);
 
   // Scroll depth tracking: fire once per milestone (25/50/75/100%)

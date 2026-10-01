@@ -5,3 +5,4 @@
 - [Inline legal PDFs](inline-legal-pdfs.md) — Render legal documents as static page images for reliable desktop/mobile reading; keep originals for download.
 - [SPA route scroll](spa-route-scroll.md) — Footer page links must reset scroll both on click and after route change to defeat delayed browser restoration.
 - [Canonical domain](canonical-domain.md) — Use https://www.nextsphere.it consistently; apex redirects permanently to www.
+- [Demo analytics semantics](demo-analytics-semantics.md) — viewing runs are not unique people or external conversions; preserve the no-identifier reporting scope.

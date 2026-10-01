@@ -4,7 +4,11 @@ import { sql } from "drizzle-orm";
 
 const analyticsRouter = Router();
 
-/** POST /analytics/cta  — record a single CTA click */
+/**
+ * Existing location-based aggregator, also used by the demo funnel.
+ * Demo keys: demo_section_view, demo_video_{start|complete}_{auto|manual}_{initial|replay}.
+ * Keep the existing request/response contract and GET aggregations unchanged.
+ */
 analyticsRouter.post("/analytics/cta", async (req, res) => {
   const { location, sessionId } = req.body as {
     location?: string;
@@ -17,10 +21,13 @@ analyticsRouter.post("/analytics/cta", async (req, res) => {
   }
 
   try {
+    const demoEvent = location === "demo" || location === "demo_section_view"
+      || /^demo_video_(start|complete)_(auto|manual)_(initial|replay)$/.test(location);
     await db.insert(ctaEventsTable).values({
       location,
-      sessionId: sessionId ?? null,
-      userAgent: (req.headers["user-agent"] as string) ?? null,
+      // Demo reports only need fixed counters, not visitor metadata.
+      sessionId: demoEvent ? null : sessionId ?? null,
+      userAgent: demoEvent ? null : (req.headers["user-agent"] as string) ?? null,
     });
     res.status(201).json({ ok: true });
   } catch (err) {

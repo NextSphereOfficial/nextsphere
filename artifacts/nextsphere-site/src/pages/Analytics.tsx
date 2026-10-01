@@ -171,13 +171,16 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 async function fetchStats(): Promise<CtaStat[]> {
   const res = await fetch(`${BASE}/api/analytics/cta`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const rows: CtaStat[] = await res.json();
+  // The API also holds demo-view counters; these are not CTA clicks.
+  return rows.filter((row) => row.location !== 'demo_section_view' && !row.location.startsWith('demo_video_'));
 }
 
 async function fetchTimeseries(): Promise<TimeseriesRow[]> {
   const res = await fetch(`${BASE}/api/analytics/cta/timeseries`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const rows: TimeseriesRow[] = await res.json();
+  return rows.filter((row) => row.location !== 'demo_section_view' && !row.location.startsWith('demo_video_'));
 }
 
 function Dashboard() {

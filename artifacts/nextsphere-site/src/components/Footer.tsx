@@ -8,6 +8,7 @@ declare global {
   interface Window {
     Cookiebot?: {
       renew: () => void;
+      consent?: { statistics?: boolean };
     };
   }
 }

@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, AlertTriangle, Loader2, Clock, MessageCircle, SlidersHorizontal, Maximize, Minimize } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { PLATFORM_URL } from '../lib/externalLinks';
-import { trackCta } from '../lib/trackCta';
+import { trackAnalyticsEvent, trackCta } from '../lib/trackCta';
+import { DemoWatchSession, type DemoVideoEvent, type DemoVideoProperties } from '../lib/demoWatchSession';
 
 const BASE = import.meta.env.BASE_URL;
 const SRC = `${BASE}media/nextsphere-demo.mp4`.replace(/\/{2,}/g, '/');
@@ -14,6 +15,10 @@ const PORTRAIT = typeof __NEXTSPHERE_DEMO_PORTRAIT__ === 'undefined' ? null : __
 type IosVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
 
 type Status = 'idle' | 'loading' | 'playing' | 'paused' | 'ended' | 'error';
+
+function trackVideo(event: DemoVideoEvent, properties: DemoVideoProperties) {
+  return trackAnalyticsEvent(event, properties, `${event}_${properties.mode}_${properties.watch}`);
+}
 
 export default function DemoVideo() {
   const { t } = useTranslation();
@@ -33,6 +38,9 @@ export default function DemoVideo() {
   const inView = useRef(false);
   const reduce = useRef(false);
   const pending = useRef<null | 'auto' | 'manual'>(null);
+  const watchSession = useRef(new DemoWatchSession());
+  const playMode = useRef<'auto' | 'manual'>('auto');
+  const lastSource = useRef<string | null>(null);
 
   // Switch the actual source, not an enlarged/cropped landscape video.
   useEffect(() => {
@@ -90,6 +98,7 @@ export default function DemoVideo() {
       return;
     }
     autoStarted.current = mode === 'auto';
+    playMode.current = mode;
     setStatus((s) => (s === 'playing' ? s : 'loading'));
     v.play().then(() => {
       if (document.hidden || userPaused.current || (mode === 'auto' && (!inView.current || reduce.current))) v.pause();
@@ -200,13 +209,17 @@ export default function DemoVideo() {
     }
     userPaused.current = false;
     autoplayed.current = true;
-    if (v && v.ended) v.currentTime = 0;
+    if (v && v.ended) {
+      watchSession.current.restart();
+      v.currentTime = 0;
+    }
     requestPlay('manual');
   };
   const replay = () => {
     const v = videoRef.current;
     userPaused.current = false;
     autoplayed.current = true;
+    watchSession.current.restart();
     if (v && v.getAttribute('src')) v.currentTime = 0;
     requestPlay('manual');
   };
@@ -216,12 +229,20 @@ export default function DemoVideo() {
     userPaused.current = false;
     autoplayed.current = true;
     setStatus('loading');
+    watchSession.current.restart();
     v.load();
     safePlay('manual');
   };
 
   const playing = status === 'playing' || status === 'loading';
   const src = portrait && PORTRAIT ? `${BASE}${PORTRAIT.src}`.replace(/\/{2,}/g, '/') : SRC;
+  // A remounted video has a different run even if the previous one was paused.
+  useEffect(() => {
+    if (lastSource.current !== src) {
+      watchSession.current.restart();
+      lastSource.current = src;
+    }
+  }, [src]);
   const poster = portrait && PORTRAIT?.poster ? `${BASE}${PORTRAIT.poster}`.replace(/\/{2,}/g, '/') : POSTER;
   const btn = 'inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]';
 
@@ -252,10 +273,33 @@ export default function DemoVideo() {
               aria-describedby="demo-transcript"
               data-testid="demo-video"
               onWaiting={() => setStatus((s) => (s === 'idle' || s === 'error' ? s : 'loading'))}
-              onPlaying={() => setStatus('playing')}
+              onPlaying={(event) => {
+                setStatus('playing');
+                const v = event.currentTarget;
+                if (!v.paused && !v.ended && !document.hidden) {
+                  watchSession.current.playing(playMode.current, portrait ? 'portrait' : 'landscape', trackVideo);
+                }
+              }}
               onPlay={() => setStatus((s) => (s === 'playing' ? s : 'loading'))}
+              onSeeked={(event) => {
+                // Restarting an already-playing video need not fire playing again.
+                const v = event.currentTarget;
+                if (!v.paused && !v.ended && !document.hidden) {
+                  watchSession.current.playing(playMode.current, portrait ? 'portrait' : 'landscape', trackVideo);
+                }
+              }}
+              onTimeUpdate={(event) => {
+                // Some browsers neither seek nor re-fire playing for a restart at 0.
+                const v = event.currentTarget;
+                if (!v.paused && !v.ended && v.currentTime > 0 && !document.hidden) {
+                  watchSession.current.playing(playMode.current, portrait ? 'portrait' : 'landscape', trackVideo);
+                }
+              }}
               onPause={() => { const v = videoRef.current; if (v && !v.ended) setStatus('paused'); }}
-              onEnded={() => setStatus('ended')}
+              onEnded={(event) => {
+                setStatus('ended');
+                if (event.currentTarget.ended) watchSession.current.ended(trackVideo);
+              }}
               onError={() => setStatus('error')}
             />
             {status === 'loading' && (
