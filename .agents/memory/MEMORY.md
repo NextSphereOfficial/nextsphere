@@ -6,3 +6,4 @@
 - [SPA route scroll](spa-route-scroll.md) — Footer page links must reset scroll both on click and after route change to defeat delayed browser restoration.
 - [Canonical domain](canonical-domain.md) — Use https://www.nextsphere.it consistently; apex redirects permanently to www.
 - [Demo analytics semantics](demo-analytics-semantics.md) — viewing runs are not unique people or external conversions; preserve the no-identifier reporting scope.
+- [Browser media verification](browser-media-verification.md) — check the test browser's codec support before treating MP4 playback failures as application defects.

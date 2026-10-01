@@ -45,14 +45,23 @@ rendered or are absent never become video sources. Detection needs no FFmpeg
 on the production build host. This supports the independently produced vertical
 export without rebuilding that task's film here.
 
-Below 640 px, the player uses the detected portrait video (9:16 layout); desktop
-keeps the landscape demo. If no portrait export is present in the build, the real
-landscape film remains available without requests to missing files. Rebuild/restart
-the site for production after merging a new export so the metadata is refreshed.
+The home opens a single modal player from the hero or compact `#demo` teaser.
+No video element or MP4 request exists until the user opens it. At opening, screens
+below 640 px select the detected portrait video; larger screens select landscape.
+The source remains fixed for that opening even when the device rotates. If no
+portrait export is present in the build, the landscape remains available without
+requests to missing files. Rebuild/restart after adding an export.
 In development a debounced media watcher refreshes Vite automatically when a
 complete portrait export/poster is added by the independent video task. A matching
 `<movie-stem>-poster.jpg`, `.png` or `.webp` is selected when present.
 
-`object-contain` preserves every pixel and fullscreen keeps the playback controls
-available; iPhone/iPad can use the native video fullscreen API. The player continues
-to respect deferred loading, reduced motion and user pauses.
+The approved vertical export and poster are copied byte-for-byte from `exports`
+to `public/media` so both formats are actually served. No media rendering happens
+during the website build.
+
+`object-contain` preserves every pixel and fullscreen keeps playback controls
+available; iPhone/iPad can use the native video fullscreen API. Explicit opening
+requests muted playback, with a manual-play fallback when the browser blocks it.
+There is no viewport-triggered autoplay, including for reduced-motion visitors.
+Closing unmounts the player, pauses the video and releases its source; reopening
+starts a fresh run, preserving replay classification within the loaded page.
