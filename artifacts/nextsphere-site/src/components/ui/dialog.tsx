@@ -32,9 +32,11 @@ const DialogContent = React.forwardRef<
     overlayClassName?: string;
     closeLabel?: string;
     hideClose?: boolean;
+    portaled?: boolean;
   }
->(({ className, children, overlayClassName, closeLabel = 'Close', hideClose = false, ...props }, ref) => (
-  <DialogPortal>
+>(({ className, children, overlayClassName, closeLabel = 'Close', hideClose = false, portaled = true, ...props }, ref) => {
+  const content = (
+    <>
     <DialogOverlay className={overlayClassName} />
     <DialogPrimitive.Content
       ref={ref}
@@ -52,8 +54,10 @@ const DialogContent = React.forwardRef<
         </DialogPrimitive.Close>
       )}
     </DialogPrimitive.Content>
-  </DialogPortal>
-));
+    </>
+  );
+  return portaled ? <DialogPortal>{content}</DialogPortal> : content;
+});
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({

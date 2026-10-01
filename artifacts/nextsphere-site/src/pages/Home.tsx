@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { flushSync } from 'react-dom';
 import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { SEO } from '../components/SEO';
@@ -39,7 +40,9 @@ export default function Home() {
   const triggerRef = useRef<HTMLElement | null>(null);
   const openDemo = useCallback((source: 'hero' | 'teaser', e: React.MouseEvent<HTMLElement>) => {
     triggerRef.current = e.currentTarget;
-    setDemoOpen(true);
+    // Keep mounting and the player's first play() inside this tap's activation.
+    // Mobile Safari can reject playback first requested by a later passive effect.
+    flushSync(() => setDemoOpen(true));
     trackDemoOpen(source);
   }, []);
 

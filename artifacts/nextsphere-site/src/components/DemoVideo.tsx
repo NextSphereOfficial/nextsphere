@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, AlertTriangle, Loader2, Maximize, Minimize } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { trackAnalyticsEvent } from '../lib/trackCta';
@@ -54,15 +54,23 @@ export default function DemoVideo({ watchSession }: { watchSession: DemoWatchSes
     }).catch((error: unknown) => {
       if (current !== attempt.current) return;
       const name = error instanceof DOMException ? error.name : '';
-      if (name === 'AbortError') return;
-      setStatus(name === 'NotAllowedError' ? 'paused' : 'error');
+      setStatus(name === 'NotAllowedError' || name === 'AbortError' ? 'paused' : 'error');
     });
   }, [pause]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const v = videoRef.current;
+    // Set both native property and default/attribute before the first play request.
+    // React's muted prop alone is not sufficient for every mobile WebKit version.
+    if (v) {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute('muted', '');
+    }
     // Also restore the source for React's development StrictMode effect replay.
     if (v && !v.getAttribute('src')) { v.setAttribute('src', src); v.load(); }
+    // With Home's synchronous mount, this runs before the opening tap returns.
     play();
     const onVisibility = () => { if (document.hidden) pause(); };
     document.addEventListener('visibilitychange', onVisibility);

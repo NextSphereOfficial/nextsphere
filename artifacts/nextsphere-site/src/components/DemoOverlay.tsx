@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronDown, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './ui/dialog';
 import DemoVideo from './DemoVideo';
@@ -27,7 +28,9 @@ export default function DemoOverlay({ open, onOpenChange, triggerRef }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      {createPortal(open && (
       <DialogContent
+        portaled={false}
         hideClose
         overlayClassName="z-[100] bg-black/85"
         data-testid="demo-dialog"
@@ -86,6 +89,7 @@ export default function DemoOverlay({ open, onOpenChange, triggerRef }: Props) {
             </ol>
         </div>
       </DialogContent>
+      ), document.body)}
     </Dialog>
   );
 }

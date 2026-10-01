@@ -81,7 +81,14 @@ const homeAst = ts.createSourceFile(homePath, homeSource, ts.ScriptTarget.Latest
 let openDemoCallback;
 let heroClickHandler;
 let teaserClickHandler;
+let importsFlushSync = false;
 function findHomeHandlers(node) {
+  if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)
+    && node.moduleSpecifier.text === 'react-dom') {
+    const named = node.importClause?.namedBindings;
+    importsFlushSync = ts.isNamedImports(named)
+      && named.elements.some((element) => element.name.text === 'flushSync');
+  }
   if (ts.isVariableDeclaration(node) && node.name.getText(homeAst) === 'openDemo'
     && node.initializer && ts.isCallExpression(node.initializer)) {
     const callback = node.initializer.arguments[0];
@@ -103,21 +110,60 @@ findHomeHandlers(homeAst);
 assert.ok(openDemoCallback, 'Home must keep a single explicit openDemo handler');
 assert.ok(heroClickHandler, 'hero demo button should request the hero open source');
 assert.ok(teaserClickHandler, 'demo teaser should request the teaser open source');
+assert.ok(importsFlushSync, 'Home must import flushSync from react-dom for the explicit demo-open click');
+assert.match(openDemoCallback, /flushSync\s*\(/,
+  'the actual Home open handler must synchronously mount the dialog from the click activation');
 
 const openStates = [];
 const triggerRef = { current: null };
+const activationOrder = [];
+let clickActivation = false;
+let demoMountedSynchronously = false;
 const openDemo = evaluate(`module.exports = (${openDemoCallback});`, homePath, {
-  trackDemoOpen: analyticsModule.trackDemoOpen,
+  trackDemoOpen: (source) => {
+    activationOrder.push(`track:${source}`);
+    return analyticsModule.trackDemoOpen(source);
+  },
   triggerRef,
-  setDemoOpen: (open) => openStates.push(open),
+  flushSync: (callback) => {
+    assert.equal(clickActivation, true, 'flushSync must execute within the simulated user click activation');
+    activationOrder.push('flushSync:start');
+    callback();
+    assert.equal(demoMountedSynchronously, true,
+      'the open-state update must mount synchronously before flushSync returns');
+    activationOrder.push('flushSync:mounted');
+  },
+  setDemoOpen: (open) => {
+    openStates.push(open);
+    demoMountedSynchronously = open;
+    activationOrder.push(`state:${open}`);
+  },
 });
 const heroClick = evaluate(`module.exports = (${heroClickHandler});`, homePath, { openDemo });
 const teaserClick = evaluate(`module.exports = (${teaserClickHandler});`, homePath, { openDemo });
 const heroTarget = {};
 const teaserTarget = {};
-heroClick({ currentTarget: heroTarget });
-teaserClick({ currentTarget: teaserTarget });
+function clickWithActivation(handler, target) {
+  clickActivation = true;
+  try {
+    handler({ currentTarget: target });
+  } finally {
+    clickActivation = false;
+  }
+}
+clickWithActivation(heroClick, heroTarget);
+clickWithActivation(teaserClick, teaserTarget);
 assert.equal(openStates.length, 2, 'each explicit click should request one overlay open');
+assert.deepEqual(activationOrder, [
+  'flushSync:start',
+  'state:true',
+  'flushSync:mounted',
+  'track:hero',
+  'flushSync:start',
+  'state:true',
+  'flushSync:mounted',
+  'track:teaser',
+], 'the dialog must mount synchronously during each click before the matching open event is tracked');
 assert.equal(triggerRef.current, teaserTarget, 'the clicked trigger should be retained for overlay focus');
 assert.deepEqual(plain(analyticsCalls), [
   { event: 'demo_open', properties: { source: 'hero' } },
@@ -130,13 +176,13 @@ assert.deepEqual(plain(aggregateCalls.map(({ options }) => JSON.parse(options.bo
 assert.ok(aggregateCalls.every(({ options }) => options.body.includes('"sessionId"') === false));
 
 consentWindow.Cookiebot.consent.statistics = false;
-heroClick({ currentTarget: heroTarget });
+clickWithActivation(heroClick, heroTarget);
 assert.equal(analyticsCalls.length, 2, 'denied statistics consent suppresses the open event');
 assert.equal(aggregateCalls.length, 2, 'denied statistics consent suppresses the API counter');
 consentWindow.Cookiebot.consent.statistics = true;
-teaserClick({ currentTarget: teaserTarget });
+clickWithActivation(teaserClick, teaserTarget);
 consentWindow.Cookiebot.consent.statistics = false; // revoke without reloading
-heroClick({ currentTarget: heroTarget });
+clickWithActivation(heroClick, heroTarget);
 assert.equal(analyticsCalls.length, 3, 'revocation suppresses subsequent opens immediately');
 assert.equal(aggregateCalls.length, 3, 'revocation suppresses subsequent API counters immediately');
 assert.equal(aggregateCalls.some(({ options }) => JSON.parse(options.body).location === 'hero_secondary'), false,

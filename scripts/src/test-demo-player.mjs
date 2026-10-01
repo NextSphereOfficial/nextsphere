@@ -92,6 +92,9 @@ function makeHarness({
   fullscreenReject = false,
   session = new DemoWatchSession(),
   playFailures = [],
+  pendingPlay = false,
+  activationRequired = false,
+  activationOnMount = false,
 } = {}) {
   const hooks = [];
   const observers = [];
@@ -100,8 +103,15 @@ function makeHarness({
   const analyticsCalls = [];
   const aggregateCalls = [];
   const playOutcomes = [...playFailures];
+  const pendingPlayPromises = [];
+  const playSnapshots = [];
+  const nativeStateTimeline = [];
   let cursor = 0;
   let effectsToRun = [];
+  let layoutEffectsToRun = [];
+  let activeEffectPhase = 'render';
+  let userActivation = false;
+  let hasRendered = false;
   let tree;
   let videoProps;
   let player;
@@ -129,6 +139,7 @@ function makeHarness({
       return this.attributes.get(name) ?? null;
     },
     setAttribute(name, value) {
+      nativeStateTimeline.push(`attribute:${name}`);
       this.attributes.set(name, String(value));
     },
     removeAttribute(name) {
@@ -136,13 +147,30 @@ function makeHarness({
     },
     play() {
       this.playCalls += 1;
-      this.paused = false;
-      this.ended = false;
+      nativeStateTimeline.push('play');
+      playSnapshots.push({
+        phase: activeEffectPhase,
+        userActivation,
+        muted: this.muted,
+        defaultMuted: this.defaultMuted,
+        playsInline: this.playsInline,
+        mutedAttribute: this.getAttribute('muted'),
+        timeline: [...nativeStateTimeline],
+      });
       const outcome = playOutcomes.shift();
       if (outcome) {
         this.paused = true;
         return Promise.reject(outcome);
       }
+      if (activationRequired && !userActivation) {
+        this.paused = true;
+        return Promise.reject(new DOMException('Playback requires user activation', 'NotAllowedError'));
+      }
+      if (pendingPlay) {
+        return new Promise((resolve, reject) => pendingPlayPromises.push({ resolve, reject }));
+      }
+      this.paused = false;
+      this.ended = false;
       return Promise.resolve();
     },
     pause() {
@@ -153,6 +181,17 @@ function makeHarness({
       this.loadCalls += 1;
     },
   };
+  for (const property of ['muted', 'defaultMuted', 'playsInline']) {
+    let value = false;
+    Object.defineProperty(video, property, {
+      configurable: true,
+      get: () => value,
+      set(next) {
+        value = Boolean(next);
+        nativeStateTimeline.push(`${property}:${value}`);
+      },
+    });
+  }
 
   class FakeIntersectionObserver {
     constructor(callback, options) {
@@ -319,6 +358,15 @@ function makeHarness({
       hooks[index] = previous ?? { kind: 'effect', dependencies: undefined, cleanup: undefined };
       if (changed) effectsToRun.push({ index, effect, dependencies });
     },
+    useLayoutEffect(effect, dependencies) {
+      const index = cursor++;
+      const previous = hooks[index];
+      const changed = !previous || !dependencies || !previous.dependencies
+        || dependencies.length !== previous.dependencies.length
+        || dependencies.some((value, i) => !Object.is(value, previous.dependencies[i]));
+      hooks[index] = previous ?? { kind: 'layoutEffect', dependencies: undefined, cleanup: undefined };
+      if (changed) layoutEffectsToRun.push({ index, effect, dependencies });
+    },
   };
 
   const icon = () => null;
@@ -381,6 +429,7 @@ function makeHarness({
   function render() {
     cursor = 0;
     effectsToRun = [];
+    layoutEffectsToRun = [];
     tree = DemoVideo({ watchSession: session });
     const playerNode = findNode(tree, (node) => node.type === 'div' && node.props.className?.includes('demo-player'));
     const videoNode = findNode(tree, (node) => node.type === 'video');
@@ -388,15 +437,28 @@ function makeHarness({
     playerNode.props.ref.current = player;
     videoNode.props.ref.current = video;
     videoProps = videoNode.props;
+    if ('muted' in videoNode.props) video.muted = videoNode.props.muted;
+    if ('defaultMuted' in videoNode.props) video.defaultMuted = videoNode.props.defaultMuted;
+    if ('playsInline' in videoNode.props) video.playsInline = videoNode.props.playsInline;
     if (videoNode.props.src) video.setAttribute('src', videoNode.props.src);
     else video.removeAttribute('src');
 
-    for (const pending of effectsToRun) {
-      const slot = hooks[pending.index];
-      slot.cleanup?.();
-      slot.dependencies = pending.dependencies;
-      slot.cleanup = pending.effect();
-    }
+    const runEffects = (queue, phase) => {
+      activeEffectPhase = phase;
+      for (const pending of queue) {
+        const slot = hooks[pending.index];
+        slot.cleanup?.();
+        slot.dependencies = pending.dependencies;
+        slot.cleanup = pending.effect();
+      }
+    };
+    userActivation = activationRequired && activationOnMount && !hasRendered;
+    runEffects(layoutEffectsToRun, 'layout');
+    userActivation = false;
+    runEffects(effectsToRun, 'passive');
+    activeEffectPhase = 'render';
+    userActivation = false;
+    hasRendered = true;
     return tree;
   }
 
@@ -414,7 +476,7 @@ function makeHarness({
 
   function unmount() {
     for (const hook of hooks) {
-      if (hook?.kind === 'effect') {
+      if (hook?.kind === 'effect' || hook?.kind === 'layoutEffect') {
         hook.cleanup?.();
         hook.cleanup = undefined;
       }
@@ -440,6 +502,17 @@ function makeHarness({
     },
     get mediaQueries() {
       return mediaQueries;
+    },
+    get playSnapshots() {
+      return playSnapshots;
+    },
+    resolvePendingPlay(index = 0) {
+      assert.ok(pendingPlayPromises[index], 'expected a pending play promise');
+      pendingPlayPromises[index].resolve();
+    },
+    rejectPendingPlay(error, index = 0) {
+      assert.ok(pendingPlayPromises[index], 'expected a pending play promise');
+      pendingPlayPromises[index].reject(error);
     },
     get observers() {
       return observers;
@@ -513,6 +586,21 @@ const portraitMetadata = {
   assert.equal(harness.findNode((node) => node.type === 'source'), null, 'do not add a second source element');
   assert.equal(harness.observers.length, 0, 'mounted player must not create intersection observers');
   assert.equal(harness.video.playCalls, 1, 'opening the player should request playback immediately');
+  assert.deepEqual(harness.playSnapshots[0], {
+    phase: 'layout',
+    userActivation: false,
+    muted: true,
+    defaultMuted: true,
+    playsInline: true,
+    mutedAttribute: '',
+    timeline: harness.playSnapshots[0].timeline,
+  }, 'the layout-phase first play must see native muted/defaultMuted/inline flags and a muted attribute');
+  const firstPlayTimeline = harness.playSnapshots[0].timeline;
+  const firstPlayPosition = firstPlayTimeline.lastIndexOf('play');
+  for (const write of ['muted:true', 'defaultMuted:true', 'playsInline:true', 'attribute:muted']) {
+    assert.ok(firstPlayTimeline.lastIndexOf(write) >= 0 && firstPlayTimeline.lastIndexOf(write) < firstPlayPosition,
+      `${write} must be applied before the first play()`);
+  }
   await drainPlayPromises();
   assert.deepEqual(harness.analyticsCalls, [], 'a successful play() promise is not evidence that playback started');
   assert.equal(harness.aggregateCalls.length, 0, 'no analytics aggregation before the actual playing event');
@@ -546,6 +634,33 @@ const portraitMetadata = {
 }
 
 {
+  const harness = makeHarness({
+    viewportWidth: 390,
+    portraitMetadata,
+    activationRequired: true,
+    activationOnMount: true,
+  });
+  harness.render();
+  assert.equal(harness.portrait, true, 'the first mobile open should choose portrait before mounting the player');
+  assert.equal(harness.videoProps['data-format'], 'portrait');
+  assert.equal(harness.videoProps.src, '/media/nextsphere-demo-vertical.mp4');
+  assert.equal(harness.video.playCalls, 1, 'the initial portrait mount should request playback on the first tap');
+  assert.equal(harness.playSnapshots[0].phase, 'layout',
+    'initial playback must run during layout commit, not a later passive effect');
+  assert.equal(harness.playSnapshots[0].userActivation, true,
+    'the simulated tap activation should still be live when layout playback is requested');
+  await drainPlayPromises();
+  assert.equal(harness.video.paused, false,
+    'activation-dependent playback should succeed when requested synchronously during the initial tap');
+  assert.deepEqual(harness.analyticsCalls, [], 'a resolved initial play promise is not an actual playback-start event');
+  harness.dispatchVideo('onPlaying');
+  assert.deepEqual(harness.analyticsCalls, [{
+    event: 'demo_video_start',
+    properties: { mode: 'manual', watch: 'initial', format: 'portrait' },
+  }], 'the first actual portrait playback should retain the existing start-event attribution');
+}
+
+{
   const harness = makeHarness({ viewportWidth: 1440, portraitMetadata });
   harness.render();
   assert.equal(harness.portrait, false, 'desktop width should select landscape presentation');
@@ -572,8 +687,38 @@ const portraitMetadata = {
   const harness = makeHarness({ playFailures: [new DOMException('cancelled', 'AbortError')] });
   harness.render();
   await drainPlayPromises();
-  assert.equal(harness.status, 'loading', 'AbortError should be ignored without turning into a visible error');
+  assert.equal(harness.status, 'paused', 'AbortError should settle to paused instead of leaving a permanent loading state');
   assert.deepEqual(harness.analyticsCalls, [], 'aborted playback must not create analytics');
+  const callsAfterAbort = harness.video.playCalls;
+  harness.render();
+  assert.equal(harness.video.playCalls, callsAfterAbort, 'an aborted initial request must not retry automatically');
+}
+
+{
+  const harness = makeHarness({ pendingPlay: true });
+  harness.render();
+  assert.equal(harness.video.playCalls, 1);
+  harness.unmount();
+  assert.equal(harness.video.paused, true, 'closing while play() is pending must pause the element');
+  assert.equal(harness.video.getAttribute('src'), null, 'closing must release the media source immediately');
+  harness.resolvePendingPlay();
+  await drainPlayPromises();
+  assert.equal(harness.video.playCalls, 1, 'settling a stale play promise after close must not start playback again');
+  assert.equal(harness.video.paused, true, 'a closed player must remain paused after its pending promise settles');
+  assert.deepEqual(harness.analyticsCalls, [], 'a stale pending request must not create playback events after close');
+}
+
+{
+  const harness = makeHarness({ pendingPlay: true });
+  harness.render();
+  const toggle = harness.findByTestId('demo-toggle');
+  toggle.props.onClick();
+  assert.equal(harness.video.paused, true, 'the explicit pause control should cancel a pending start');
+  harness.resolvePendingPlay();
+  await drainPlayPromises();
+  assert.equal(harness.video.playCalls, 1, 'settling a request after user pause must not trigger an automatic retry');
+  assert.equal(harness.video.paused, true, 'a user-paused video must not resume when its old promise settles');
+  assert.deepEqual(harness.analyticsCalls, [], 'user pause before actual playback must not create start analytics');
 }
 
 {
