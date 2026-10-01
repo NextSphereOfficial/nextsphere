@@ -41,7 +41,8 @@ if (videoStream.width !== 2212 || videoStream.height !== 1246 || Number(probe.fo
 const ffmpeg = args => execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-threads', '2', ...args], { maxBuffer: 2 * 1024 * 1024 });
 async function still(time, name) {
   const p = join(temporary, `${name}.png`);
-  ffmpeg(['-ss', String(time), '-i', source, '-frames:v', '1', '-y', p]);
+  ffmpeg(['-ss', String(time), '-i', source, '-vf',
+    'scale=4424:2492:flags=lanczos,unsharp=5:5:0.4:5:5:0', '-frames:v', '1', '-y', p]);
   return loadImage(p);
 }
 
@@ -52,12 +53,14 @@ try {
   const logo = await loadImage(resolve('attached_assets/logo_trasparenza_chiaro_1785754195220.png'));
   // Real typing only, accelerated 2x. We crop before PNG export to avoid huge caches.
   ffmpeg(['-ss', '33', '-t', '9', '-i', source, '-vf',
-    'crop=620:110:778:748,setpts=PTS/2,fps=24', '-frames:v', '108',
+    'crop=620:110:778:748,scale=1240:220:flags=lanczos,unsharp=5:5:0.4:5:5:0,setpts=PTS/2,fps=24', '-frames:v', '108',
     '-y', join(temporary, 'type-%03d.png')]);
   const typed = await Promise.all(Array.from({ length: 108 }, (_, i) =>
     loadImage(join(temporary, `type-${String(i + 1).padStart(3, '0')}.png`))));
   const canvas = createCanvas(W, H);
   const c = canvas.getContext('2d');
+  c.imageSmoothingEnabled = true;
+  c.imageSmoothingQuality = 'high';
   const ease = x => { x = Math.max(0, Math.min(1, x)); return 1 - (1 - x) ** 3; };
   const text = (content, x, y, size = 60, color = PAPER, weight = 600, family = 'Montserrat', align = 'left') => {
     c.fillStyle = color; c.font = `${weight} ${size}px "${family}"`; c.textAlign = align;
@@ -70,7 +73,8 @@ try {
   };
   const crop = (image, sx, sy, sw, sh, x, y, w, h, radius = 18) => {
     c.save(); c.beginPath(); c.roundRect(x, y, w, h, radius); c.clip();
-    c.drawImage(image, sx, sy, sw, sh, x, y, w, h); c.restore();
+    // Stills were enhanced at 2x; crop coordinates remain in source pixels.
+    c.drawImage(image, sx * 2, sy * 2, sw * 2, sh * 2, x, y, w, h); c.restore();
   };
   const label = (copy, x, y) => text(copy, x, y, 27, GOLD, 600, 'Inter');
   const badge = (copy, x, y, w = 380) => {
@@ -204,7 +208,7 @@ try {
   const encoder = spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y',
     '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS),
     '-i', 'pipe:0', '-an', '-c:v', 'libx264', '-threads', '2', '-preset', 'fast',
-    '-crf', '21', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', movie],
+    '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', movie],
   { stdio: ['pipe', 'ignore', 'pipe'] });
   let errorLog = '';
   encoder.stderr.on('data', data => { errorLog += data.toString(); });

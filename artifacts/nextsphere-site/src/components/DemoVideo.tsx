@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Play, Pause, RotateCcw, AlertTriangle, Loader2, Clock, MessageCircle, SlidersHorizontal } from 'lucide-react';
+import { Play, Pause, RotateCcw, AlertTriangle, Loader2, Clock, MessageCircle, SlidersHorizontal, Maximize, Minimize } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
@@ -7,6 +7,11 @@ import { trackCta } from '../lib/trackCta';
 const BASE = import.meta.env.BASE_URL;
 const SRC = `${BASE}media/nextsphere-demo.mp4`.replace(/\/{2,}/g, '/');
 const POSTER = `${BASE}media/nextsphere-demo-poster.jpg`.replace(/\/{2,}/g, '/');
+declare const __NEXTSPHERE_DEMO_PORTRAIT__: null | {
+  src: string; poster: string | null; width: number; height: number;
+};
+const PORTRAIT = typeof __NEXTSPHERE_DEMO_PORTRAIT__ === 'undefined' ? null : __NEXTSPHERE_DEMO_PORTRAIT__;
+type IosVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
 
 type Status = 'idle' | 'loading' | 'playing' | 'paused' | 'ended' | 'error';
 
@@ -17,12 +22,56 @@ export default function DemoVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [attached, setAttached] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
+  const playerRef = useRef<HTMLDivElement>(null);
+  const [portrait, setPortrait] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [canFullscreen, setCanFullscreen] = useState(false);
+  const [fullscreenError, setFullscreenError] = useState(false);
   const userPaused = useRef(false);
   const autoplayed = useRef(false);
   const autoStarted = useRef(false);
   const inView = useRef(false);
   const reduce = useRef(false);
   const pending = useRef<null | 'auto' | 'manual'>(null);
+
+  // Switch the actual source, not an enlarged/cropped landscape video.
+  useEffect(() => {
+    if (!PORTRAIT) return;
+    const mq = window.matchMedia('(max-width: 639px)');
+    const update = () => {
+      const v = videoRef.current;
+      if (v && !v.paused) v.pause();
+      pending.current = null;
+      setPortrait(mq.matches);
+      setStatus('idle');
+    };
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    const v = videoRef.current as IosVideo | null;
+    setCanFullscreen(Boolean(document.fullscreenEnabled && playerRef.current?.requestFullscreen) || Boolean(v?.webkitEnterFullscreen));
+    const update = () => setFullscreen(document.fullscreenElement === playerRef.current);
+    document.addEventListener('fullscreenchange', update);
+    return () => document.removeEventListener('fullscreenchange', update);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    setFullscreenError(false);
+    try {
+      if (document.fullscreenElement === playerRef.current) await document.exitFullscreen();
+      else if (document.fullscreenEnabled && playerRef.current?.requestFullscreen) await playerRef.current.requestFullscreen();
+      else {
+        const v = videoRef.current as IosVideo | null;
+        if (!v?.webkitEnterFullscreen) throw new Error('Fullscreen unavailable');
+        v.webkitEnterFullscreen();
+      }
+    } catch {
+      setFullscreenError(true);
+    }
+  };
 
   // In a client-rendered page the browser sees #demo before this section exists.
   useEffect(() => {
@@ -121,7 +170,8 @@ export default function DemoVideo() {
           pending.current = null;
           setStatus('paused');
         }
-        if (v && !v.paused) v.pause();
+        // Native video fullscreen (iOS) can report the inline frame offscreen.
+        if (v && !v.paused && !document.fullscreenElement && !(v as IosVideo & { webkitDisplayingFullscreen?: boolean }).webkitDisplayingFullscreen) v.pause();
       }
     }, { threshold: [0, 0.5, 1] });
     io.observe(el);
@@ -171,7 +221,9 @@ export default function DemoVideo() {
   };
 
   const playing = status === 'playing' || status === 'loading';
-  const btn = 'inline-flex items-center gap-2 h-11 px-5 rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]';
+  const src = portrait && PORTRAIT ? `${BASE}${PORTRAIT.src}`.replace(/\/{2,}/g, '/') : SRC;
+  const poster = portrait && PORTRAIT?.poster ? `${BASE}${PORTRAIT.poster}`.replace(/\/{2,}/g, '/') : POSTER;
+  const btn = 'inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]';
 
   return (
     <section id="demo" ref={sectionRef} aria-labelledby="demo-title" className="relative scroll-mt-24 bg-[#0D0D0D] text-white pb-24 pt-8 sm:pt-12 overflow-hidden">
@@ -185,16 +237,18 @@ export default function DemoVideo() {
           <p className="text-gray-400 text-lg leading-relaxed">{t('demo.subtitle')}</p>
         </div>
 
-        <div className="rounded-[1.5rem] p-2 sm:p-3 border border-white/10 bg-white/[0.04] shadow-[0_30px_80px_-20px_rgba(222,182,125,0.25)]">
-          <div ref={frameRef} className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black/60" role="region" aria-label={t('demo.region')}>
+        <div ref={playerRef} className={`demo-player rounded-[1.5rem] p-2 sm:p-3 border border-white/10 bg-white/[0.04] shadow-[0_30px_80px_-20px_rgba(222,182,125,0.25)] [&:fullscreen]:flex [&:fullscreen]:flex-col [&:fullscreen]:w-screen [&:fullscreen]:h-screen [&:fullscreen]:max-w-none [&:fullscreen]:rounded-none [&:fullscreen]:bg-[#0D0D0D] ${portrait ? 'max-w-[420px] mx-auto' : ''}`}>
+          <div ref={frameRef} className={`relative w-full rounded-2xl overflow-hidden bg-black/60 [.demo-player:fullscreen_&]:flex-1 [.demo-player:fullscreen_&]:min-h-0 [.demo-player:fullscreen_&]:aspect-auto ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`} role="region" aria-label={t('demo.region')}>
             <video
+              key={src}
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
-              poster={POSTER}
+              className="absolute inset-0 w-full h-full object-contain"
+              poster={poster}
               muted
               playsInline
               preload={attached ? 'metadata' : 'none'}
-              src={attached ? SRC : undefined}
+              src={attached ? src : undefined}
+              data-format={portrait ? 'portrait' : 'landscape'}
               aria-describedby="demo-transcript"
               data-testid="demo-video"
               onWaiting={() => setStatus((s) => (s === 'idle' || s === 'error' ? s : 'loading'))}
@@ -222,7 +276,7 @@ export default function DemoVideo() {
             )}
           </div>
           <div className="flex flex-wrap items-center justify-between gap-3 px-2 py-3 sm:px-3">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button type="button" onClick={toggle} disabled={status === 'error'} aria-pressed={playing}
                 className={`${btn} bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40`} data-testid="demo-toggle">
                 {playing ? <Pause size={16} aria-hidden /> : <Play size={16} aria-hidden />}
@@ -232,8 +286,17 @@ export default function DemoVideo() {
                 className={`${btn} bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-40`} data-testid="demo-replay">
                 <RotateCcw size={16} aria-hidden />{t('demo.replay')}
               </button>
+              {canFullscreen && (
+                <button type="button" onClick={toggleFullscreen} aria-pressed={fullscreen}
+                  className={`${btn} bg-white/5 border border-white/10 hover:bg-white/10`}
+                  data-testid="demo-fullscreen">
+                  {fullscreen ? <Minimize size={16} aria-hidden /> : <Maximize size={16} aria-hidden />}
+                  {fullscreen ? t('demo.exitFullscreen') : t('demo.fullscreen')}
+                </button>
+              )}
             </div>
             <p className="text-xs text-gray-500">{t('demo.langNote')}</p>
+            {fullscreenError && <p role="status" className="text-xs text-gray-400 w-full">{t('demo.fullscreenError')}</p>}
           </div>
         </div>
 

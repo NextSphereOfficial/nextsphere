@@ -30,12 +30,21 @@ const transpiled = ts.transpileModule(componentSource.replace(baseDeclaration, "
 const errors = (transpiled.diagnostics ?? []).filter((diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error);
 assert.deepEqual(errors, [], errors.map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')).join('\n'));
 
-function makeHarness({ hidden = false, reducedMotion = false } = {}) {
+function makeHarness({
+  hidden = false,
+  reducedMotion = false,
+  viewportWidth = 1024,
+  portraitMetadata = null,
+  fullscreenEnabled = true,
+  fullscreenReject = false,
+} = {}) {
   const hooks = [];
   const observers = [];
   const documentListeners = new Map();
+  const mediaQueries = [];
   let cursor = 0;
   let effectsToRun = [];
+  let player;
 
   const video = {
     attributes: new Map(),
@@ -82,18 +91,10 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     }
   }
 
-  const mediaListeners = new Set();
-  const mediaQuery = {
-    matches: reducedMotion,
-    addEventListener(type, listener) {
-      if (type === 'change') mediaListeners.add(listener);
-    },
-    removeEventListener(type, listener) {
-      if (type === 'change') mediaListeners.delete(listener);
-    },
-  };
   const document = {
     hidden,
+    fullscreenEnabled,
+    fullscreenElement: null,
     addEventListener(type, listener) {
       const listeners = documentListeners.get(type) ?? new Set();
       listeners.add(listener);
@@ -105,11 +106,40 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     dispatchEvent(type) {
       for (const listener of documentListeners.get(type) ?? []) listener();
     },
+    exitFullscreen() {
+      document.fullscreenElement = null;
+      document.dispatchEvent('fullscreenchange');
+      return Promise.resolve();
+    },
+  };
+  player = {
+    requestFullscreen() {
+      if (fullscreenReject) return Promise.reject(new Error('Fullscreen denied'));
+      document.fullscreenElement = player;
+      document.dispatchEvent('fullscreenchange');
+      return Promise.resolve();
+    },
   };
   const window = {
     IntersectionObserver: FakeIntersectionObserver,
     location: { hash: '' },
-    matchMedia: () => mediaQuery,
+    matchMedia(query) {
+      const media = {
+        media: query,
+        matches: query === '(prefers-reduced-motion: reduce)'
+          ? reducedMotion
+          : query === '(max-width: 639px)' && viewportWidth <= 639,
+        listeners: new Set(),
+        addEventListener(type, listener) {
+          if (type === 'change') this.listeners.add(listener);
+        },
+        removeEventListener(type, listener) {
+          if (type === 'change') this.listeners.delete(listener);
+        },
+      };
+      mediaQueries.push(media);
+      return media;
+    },
     requestAnimationFrame: () => 1,
     cancelAnimationFrame() {},
   };
@@ -157,6 +187,7 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     document,
     exports: module.exports,
     IntersectionObserver: FakeIntersectionObserver,
+    __NEXTSPHERE_DEMO_PORTRAIT__: portraitMetadata,
     jsx: (type, props, ...children) => ({
       type,
       props: children.length
@@ -174,7 +205,7 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
       if (specifier === 'react') return react;
       if (specifier === 'lucide-react') {
         return { Play: icon, Pause: icon, RotateCcw: icon, AlertTriangle: icon, Loader2: icon,
-          Clock: icon, MessageCircle: icon, SlidersHorizontal: icon };
+          Clock: icon, MessageCircle: icon, SlidersHorizontal: icon, Maximize: icon, Minimize: icon };
       }
       if (specifier === '../hooks/useTranslation') return { useTranslation: () => ({ t: (key) => key }) };
       if (specifier === '../lib/externalLinks') return { PLATFORM_URL: 'https://example.invalid' };
@@ -208,10 +239,12 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     tree = DemoVideo();
     const sectionNode = findNode(tree, (node) => node.type === 'section' && node.props.id === 'demo');
     const frameNode = findNode(tree, (node) => node.type === 'div' && node.props.role === 'region');
+    const playerNode = findNode(tree, (node) => node.type === 'div' && node.props.className?.includes('demo-player'));
     const videoNode = findNode(tree, (node) => node.type === 'video');
-    assert.ok(sectionNode && frameNode && videoNode, 'expected section, frame and video in DemoVideo output');
+    assert.ok(sectionNode && frameNode && playerNode && videoNode, 'expected player section, frame and video in DemoVideo output');
     sectionNode.props.ref.current = section ??= {};
     frameNode.props.ref.current = frame ??= {};
+    playerNode.props.ref.current = player;
     videoNode.props.ref.current = video;
     videoProps = videoNode.props;
     if (videoNode.props.src) video.setAttribute('src', videoNode.props.src);
@@ -230,6 +263,14 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     const node = findNode(tree, (candidate) => candidate.props?.['data-testid'] === testId);
     assert.ok(node, `expected element with data-testid=${testId}`);
     return node;
+  }
+
+  function findAllNodes(node, predicate, result = []) {
+    if (!node || typeof node !== 'object') return result;
+    if (predicate(node)) result.push(node);
+    const children = node.props?.children;
+    for (const child of Array.isArray(children) ? children : [children]) findAllNodes(child, predicate, result);
+    return result;
   }
 
   function getFrameObserver() {
@@ -257,15 +298,33 @@ function makeHarness({ hidden = false, reducedMotion = false } = {}) {
     get attached() {
       return hooks.filter((hook) => hook?.kind === 'state')[0]?.value;
     },
+    get portrait() {
+      return hooks.filter((hook) => hook?.kind === 'state')[2]?.value;
+    },
     get video() {
       return video;
     },
     get videoProps() {
       return videoProps;
     },
+    get videoCount() {
+      return findAllNodes(tree, (node) => node.type === 'video').length;
+    },
+    findNode(predicate) {
+      return findNode(tree, predicate);
+    },
     render,
     setHidden(value) {
       document.hidden = value;
+    },
+    setViewportWidth(value) {
+      viewportWidth = value;
+      for (const media of mediaQueries) {
+        const matches = media.media === '(max-width: 639px)' && viewportWidth <= 639;
+        if (matches === media.matches) continue;
+        media.matches = matches;
+        for (const listener of media.listeners) listener();
+      }
     },
   };
 }
@@ -353,6 +412,84 @@ for (const mode of ['auto', 'manual']) {
   harness.findByTestId('demo-toggle').props.onClick();
   await drainPlayPromises();
   assert.equal(harness.video.playCalls, 2, 'manual play should resume after a retained pause');
+}
+
+const portraitMetadata = {
+  src: 'media/nextsphere-demo-portrait.mp4',
+  poster: 'media/nextsphere-demo-portrait-poster.jpg',
+  width: 360,
+  height: 640,
+};
+
+{
+  const harness = makeHarness({ viewportWidth: 390, portraitMetadata });
+  harness.render();
+  harness.render(); // Apply the initial max-width media-query selection.
+  assert.equal(harness.portrait, true, 'phone width should select portrait presentation');
+  harness.enterFrame();
+  harness.render();
+  await drainPlayPromises();
+  assert.equal(harness.videoProps.src, '/media/nextsphere-demo-portrait.mp4');
+  assert.equal(harness.videoProps.poster, '/media/nextsphere-demo-portrait-poster.jpg');
+  assert.equal(harness.videoProps['data-format'], 'portrait');
+  assert.equal(harness.videoCount, 1, 'only one video element/source should be attached');
+  assert.equal(harness.findNode((node) => node.type === 'source'), null, 'do not attach a second source element');
+
+  harness.setViewportWidth(900);
+  harness.render();
+  assert.equal(harness.portrait, false, 'desktop width should switch back to landscape');
+  assert.equal(harness.videoProps.src, '/media/nextsphere-demo.mp4');
+  assert.equal(harness.videoProps.poster, '/media/nextsphere-demo-poster.jpg');
+  assert.equal(harness.videoCount, 1, 'viewport changes must still keep a single video element');
+}
+
+{
+  const harness = makeHarness({ viewportWidth: 1440, portraitMetadata });
+  harness.render();
+  harness.render();
+  harness.enterFrame();
+  harness.render();
+  await drainPlayPromises();
+  assert.equal(harness.portrait, false, 'desktop width should not select the portrait export');
+  assert.equal(harness.videoProps.src, '/media/nextsphere-demo.mp4');
+  assert.equal(harness.videoProps.poster, '/media/nextsphere-demo-poster.jpg');
+}
+
+{
+  const harness = makeHarness({ viewportWidth: 390, portraitMetadata: null });
+  harness.render();
+  harness.render();
+  harness.enterFrame();
+  harness.render();
+  await drainPlayPromises();
+  assert.equal(harness.portrait, false, 'missing portrait metadata should retain landscape fallback on mobile');
+  assert.equal(harness.videoProps.src, '/media/nextsphere-demo.mp4');
+  assert.equal(harness.videoProps.poster, '/media/nextsphere-demo-poster.jpg');
+}
+
+{
+  const harness = makeHarness();
+  harness.render();
+  harness.render(); // Fullscreen availability is reflected in the next render.
+  const fullscreenButton = harness.findByTestId('demo-fullscreen');
+  await fullscreenButton.props.onClick();
+  harness.render();
+  assert.equal(harness.findByTestId('demo-fullscreen').props['aria-pressed'], true, 'fullscreen entry should update state');
+
+  await harness.findByTestId('demo-fullscreen').props.onClick();
+  harness.render();
+  assert.equal(harness.findByTestId('demo-fullscreen').props['aria-pressed'], false, 'fullscreen exit should update state');
+}
+
+{
+  const harness = makeHarness({ fullscreenReject: true });
+  harness.render();
+  harness.render();
+  await harness.findByTestId('demo-fullscreen').props.onClick();
+  harness.render();
+  const notice = harness.findNode((node) => node.type === 'p' && node.props.role === 'status');
+  assert.equal(notice?.props.children, 'demo.fullscreenError', 'rejected fullscreen should show a nonfatal notice');
+  assert.ok(harness.findByTestId('demo-toggle'), 'fullscreen rejection should leave the player controls usable');
 }
 
 console.log('DemoVideo lifecycle regression checks passed.');
