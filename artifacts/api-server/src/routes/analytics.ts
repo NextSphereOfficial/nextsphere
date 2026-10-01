@@ -6,7 +6,8 @@ const analyticsRouter = Router();
 
 /**
  * Existing location-based aggregator, also used by the demo funnel.
- * Demo keys: demo_section_view, demo_video_{start|complete}_{auto|manual}_{initial|replay}.
+ * Demo keys: demo_section_view, demo_open_{hero|teaser},
+ * demo_video_{start|complete}_{auto|manual}_{initial|replay}.
  * Keep the existing request/response contract and GET aggregations unchanged.
  */
 analyticsRouter.post("/analytics/cta", async (req, res) => {
@@ -22,6 +23,7 @@ analyticsRouter.post("/analytics/cta", async (req, res) => {
 
   try {
     const demoEvent = location === "demo" || location === "demo_section_view"
+      || /^demo_open_(hero|teaser)$/.test(location)
       || /^demo_video_(start|complete)_(auto|manual)_(initial|replay)$/.test(location);
     await db.insert(ctaEventsTable).values({
       location,

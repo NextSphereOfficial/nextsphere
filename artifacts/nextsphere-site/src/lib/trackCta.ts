@@ -18,6 +18,11 @@ export function trackCta(location: string) {
   aggregate(location);
 }
 
+/** A demo overlay opening is intent, separate from platform CTAs and playback. */
+export function trackDemoOpen(source: 'hero' | 'teaser'): boolean {
+  return trackAnalyticsEvent('demo_open', { source }, `demo_open_${source}`);
+}
+
 /** Consent is checked for every event, including after mid-playback revocation. */
 export function trackAnalyticsEvent(
   name: string,

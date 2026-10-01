@@ -7,3 +7,4 @@
 - [Canonical domain](canonical-domain.md) — Use https://www.nextsphere.it consistently; apex redirects permanently to www.
 - [Demo analytics semantics](demo-analytics-semantics.md) — viewing runs are not unique people or external conversions; preserve the no-identifier reporting scope.
 - [Browser media verification](browser-media-verification.md) — check the test browser's codec support before treating MP4 playback failures as application defects.
+- [Demo search discovery](demo-search-discovery.md) — sitemap metadata does not establish video-index eligibility for an interaction-only overlay.

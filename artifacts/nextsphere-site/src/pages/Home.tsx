@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PLATFORM_URL } from '../lib/externalLinks';
-import { trackAnalyticsEvent, trackCta } from '../lib/trackCta';
+import { trackAnalyticsEvent, trackCta, trackDemoOpen } from '../lib/trackCta';
 import DemoTeaser from '../components/DemoTeaser';
 import DemoOverlay from '../components/DemoOverlay';
 import { track } from '@vercel/analytics';
@@ -37,9 +37,10 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const [demoOpen, setDemoOpen] = useState(false);
   const triggerRef = useRef<HTMLElement | null>(null);
-  const openDemo = useCallback((e: React.MouseEvent<HTMLElement>) => {
+  const openDemo = useCallback((source: 'hero' | 'teaser', e: React.MouseEvent<HTMLElement>) => {
     triggerRef.current = e.currentTarget;
     setDemoOpen(true);
+    trackDemoOpen(source);
   }, []);
 
   // Section-level scroll heatmap: fire once per section when it enters the viewport
@@ -217,7 +218,7 @@ export default function Home() {
                 type="button"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white border border-white/10 text-base font-semibold rounded-xl hover:bg-white/10 transition-all"
                 data-testid="hero-cta-secondary"
-                onClick={(e) => { trackCta('hero_secondary'); openDemo(e); }}
+                onClick={(e) => openDemo('hero', e)}
               >
                 {t('hero.cta.demo')}
               </button>
@@ -229,7 +230,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent to-[#0D0D0D] pointer-events-none" />
       </section>
 
-      <DemoTeaser onOpen={openDemo} />
+      <DemoTeaser onOpen={(e) => openDemo('teaser', e)} />
       <DemoOverlay open={demoOpen} onOpenChange={setDemoOpen} triggerRef={triggerRef} />
 
       {/* ─── 2. HOW IT WORKS ─────────────────────────────────────── */}

@@ -14,6 +14,13 @@ import {
   Legend,
 } from 'recharts';
 import { RefreshCw, Lock, TrendingUp, MousePointerClick, BarChart2 } from 'lucide-react';
+import {
+  demoOpenCounts,
+  demoViewingCounts,
+  platformCtaRows,
+  type DemoOpenCounts,
+  type DemoViewingCounts,
+} from '../lib/analyticsDashboardData';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -34,7 +41,7 @@ interface TimeseriesRow {
 // ---------------------------------------------------------------------------
 const LOCATION_LABELS: Record<string, string> = {
   hero_primary:    'Hero – Primary',
-  hero_secondary:  'Hero – Secondary',
+  hero_secondary:  'Hero – Secondary (legacy)',
   pricing:         'Pricing',
   final_banner:    'Final Banner',
   navbar_desktop:  'Navbar (Desktop)',
@@ -171,20 +178,20 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 async function fetchStats(): Promise<CtaStat[]> {
   const res = await fetch(`${BASE}/api/analytics/cta`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const rows: CtaStat[] = await res.json();
-  // The API also holds demo-view counters; these are not CTA clicks.
-  return rows.filter((row) => row.location !== 'demo_section_view' && !row.location.startsWith('demo_video_'));
+  return res.json();
 }
 
 async function fetchTimeseries(): Promise<TimeseriesRow[]> {
   const res = await fetch(`${BASE}/api/analytics/cta/timeseries`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const rows: TimeseriesRow[] = await res.json();
-  return rows.filter((row) => row.location !== 'demo_section_view' && !row.location.startsWith('demo_video_'));
+  return platformCtaRows(rows);
 }
 
 function Dashboard() {
   const [stats, setStats] = useState<CtaStat[]>([]);
+  const [demoOpens, setDemoOpens] = useState<DemoOpenCounts>({ total: 0, hero: 0, teaser: 0 });
+  const [demoViewing, setDemoViewing] = useState<DemoViewingCounts>({ starts: 0, completions: 0 });
   const [timeseries, setTimeseries] = useState<TimeseriesRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -195,7 +202,9 @@ function Dashboard() {
     setError(null);
     try {
       const [s, t] = await Promise.all([fetchStats(), fetchTimeseries()]);
-      setStats(s);
+      setStats(platformCtaRows(s));
+      setDemoOpens(demoOpenCounts(s));
+      setDemoViewing(demoViewingCounts(s));
       setTimeseries(t);
       setLastUpdated(new Date());
     } catch (e) {
@@ -277,6 +286,52 @@ function Dashboard() {
             icon={BarChart2}
           />
         </div>
+
+        {/* Demo opening intent is separate from playback and platform CTA clicks. */}
+        <section className="space-y-4" aria-labelledby="demo-opens-heading">
+          <div>
+            <h2 id="demo-opens-heading" className="text-base font-semibold">Demo Opens</h2>
+            <p className="text-gray-500 text-xs mt-1">
+              All-time opening requests. An open is not evidence that video playback started.
+            </p>
+          </div>
+          {loading && stats.length === 0 ? (
+            <div className="bg-white/5 border border-white/8 rounded-2xl p-5 text-gray-600 text-sm">
+              Loading demo activity…
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <StatCard label="Total demo opens" value={demoOpens.total} sub="all time" icon={MousePointerClick} />
+              <StatCard label="Opened from hero" value={demoOpens.hero} sub="Hero demo button" icon={MousePointerClick} />
+              <StatCard label="Opened from #demo teaser" value={demoOpens.teaser} sub="Compact demo teaser button" icon={MousePointerClick} />
+            </div>
+          )}
+          {!loading && !error && demoOpens.total === 0 && (
+            <p className="text-gray-600 text-sm">No consented demo opens recorded yet.</p>
+          )}
+        </section>
+
+        <section className="space-y-4" aria-labelledby="demo-viewing-heading">
+          <div>
+            <h2 id="demo-viewing-heading" className="text-base font-semibold">Demo Video Viewing</h2>
+            <p className="text-gray-500 text-xs mt-1">
+              Actual playback runs only; these counts are not unique viewers or platform registrations.
+            </p>
+          </div>
+          {loading && stats.length === 0 ? (
+            <div className="bg-white/5 border border-white/8 rounded-2xl p-5 text-gray-600 text-sm">
+              Loading viewing activity…
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <StatCard label="Video starts" value={demoViewing.starts} sub="actual playback start events" icon={BarChart2} />
+              <StatCard label="Video completions" value={demoViewing.completions} sub="actual playback completion events" icon={BarChart2} />
+            </div>
+          )}
+          {!loading && !error && demoViewing.starts === 0 && demoViewing.completions === 0 && (
+            <p className="text-gray-600 text-sm">No video viewing runs recorded yet.</p>
+          )}
+        </section>
 
         {/* Bar chart */}
         <div className="bg-white/5 border border-white/8 rounded-2xl p-6">

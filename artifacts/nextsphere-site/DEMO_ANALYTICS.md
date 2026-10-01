@@ -9,6 +9,7 @@ Non servono migrazioni o nuovi endpoint.
 | Significato | Evento Vercel | Proprietà | `location` nell'API |
 | --- | --- | --- | --- |
 | Sezione demo visibile almeno al 20%, una volta per montaggio della Home | `section_view` | `section: demo` | `demo_section_view` |
+| Richiesta esplicita di apertura della demo dall'hero o dal teaser `#demo` | `demo_open` | `source: hero` o `source: teaser` | `demo_open_hero` o `demo_open_teaser` |
 | Riproduzione effettivamente iniziata | `demo_video_start` | `mode`, `watch`, `format` | `demo_video_start_{mode}_{watch}` |
 | Video arrivato a `ended` | `demo_video_complete` | le stesse proprietà dell'avvio | `demo_video_complete_{mode}_{watch}` |
 | Clic sul CTA sotto la demo | `cta_click` | `location: demo` | `demo` |
@@ -49,9 +50,10 @@ Caricamento differito, autoplay, reduced motion e controlli restano invariati.
 In Vercel Analytics confrontare **nello stesso intervallo di tempo e con gli
 stessi filtri**:
 1. `section_view` filtrato su `section = demo` (esposizione della sezione).
-2. `demo_video_start`, separando `mode` e `watch`.
-3. `demo_video_complete`, con gli stessi filtri.
-4. `cta_click` filtrato su `location = demo`.
+2. `demo_open`, separando `source` (intenzione di apertura, non avvio playback).
+3. `demo_video_start`, separando `mode` e `watch`.
+4. `demo_video_complete`, con gli stessi filtri.
+5. `cta_click` filtrato su `location = demo`.
 
 Nell'API già esistente:
 - `GET /api/analytics/cta`: totali storici per `location`.
@@ -59,8 +61,10 @@ Nell'API già esistente:
   Sommare le righe delle date desiderate e le chiavi corrispondenti. Le date
   seguono il fuso orario del database, non necessariamente quello del report Vercel.
 - La dashboard CTA esistente esclude `demo_section_view` e `demo_video_*` da
-  totali e grafici di clic, mantenendo invece `demo` come vero CTA.
-  Per i nuovi contatori usare le risposte API o i filtri Vercel.
+  totali e grafici di clic, e mantiene separati anche `demo_open_*`; `demo`
+  resta invece un vero CTA verso la piattaforma.
+- La dashboard `/analytics` mostra il totale delle aperture e la ripartizione
+  hero/teaser separatamente dai conteggi di avvio/completamento effettivi e dai CTA.
 
 Esempio di tassi aggregati, evitando la divisione per zero:
 - completamento prima visione = somma `demo_video_complete_*_initial` /
@@ -70,6 +74,8 @@ Esempio di tassi aggregati, evitando la divisione per zero:
 - completamento autoplay = `demo_video_complete_auto_initial` /
   `demo_video_start_auto_initial`;
 - clic CTA rispetto all'esposizione = conteggio `demo` / `demo_section_view`.
+Le aperture dall'hero o dal teaser non vanno sommate ai CTA piattaforma o agli
+avvii video. I conteggi sono eventi di apertura, non persone uniche.
 Analizzare i replay a parte: non sommarli alle prime visioni per gonfiare il
 numero di persone coinvolte.
 
@@ -95,6 +101,9 @@ visioni storiche.
 
 `node --test artifacts/nextsphere-site/src/lib/demoWatchSession.test.ts`
 
+`node scripts/src/test-demo-open-analytics.mjs`
+
 I test eseguono la logica reale di deduplicazione e il controllo del consenso:
 autoplay/manuale, pause/riprese, replay, errori, cambio sorgente, consenso
-tardivo e revoca.
+tardivo e revoca. Il test delle aperture verifica entrambi gli ingressi, i
+contatori dashboard separati e il blocco dopo rifiuto/revoca del consenso.
