@@ -14,3 +14,17 @@ mtime_ms = 1790852330907
 storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:1d6a9426-938d-4a10-a906-9ab88392113a/7e2a5e6d-2737-4e69-8721-ff24b581b920/2873ffee-12f4-42ae-bfb9-450d6f9cea97"
 storage_version_token = "1790852595819026"
 content_type = "video/mp4"
+
+[[outputs]]
+id = "lpULHU8i9sTSNfM-bkfj5"
+uri = "file://exports/nextsphere-demo-vertical.mp4"
+type = "video"
+title = "Demo verticale NextSphere — Reels e Stories"
+description = "MP4 9:16 · 1080×1920 · 20 secondi · registrazione reale, testi italiani e orari 15:00–20:00. Senza audio."
+logical_id = "e82290c6-f273-4d5f-b285-f2145e208f7b"
+content_hash = "sha256:49139483a7c3c33143760aa617c3eddf37b8a6279016d71dbe2db76475317a83"
+size = 740199
+mtime_ms = 1790852136974
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:1d6a9426-938d-4a10-a906-9ab88392113a/e82290c6-f273-4d5f-b285-f2145e208f7b/92903272-adc6-4e3a-8546-cbca6eed1347"
+storage_version_token = "1790852182920067"
+content_type = "video/mp4"
