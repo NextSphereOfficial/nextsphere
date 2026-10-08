@@ -2,6 +2,32 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
+    <!-- Google Consent Mode v2: establish defaults before GTM or any Google tag. -->
+    <script data-cookieconsent="ignore">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      gtag('set', 'ads_data_redaction', true);
+    </script>
+    <!-- Google Tag Manager -->
+    <script data-cookieconsent="ignore">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TQNRZJG4');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Cookiebot stays outside GTM and updates Google consent after the visitor's choice. -->
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8e716c22-e3f3-49b6-b6ef-b91a5d3920c5" data-blockingmode="auto" type="text/javascript"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>NextSphere | Chatbot AI per B&B e Case Vacanze — Risposte 24/7</title>
     <meta name="description" content="NextSphere è il chatbot AI per host di B&B, case vacanze e appartamenti. Gli ospiti scansionano un QR code e ottengono risposte immediate 24/7 nella loro lingua. Zero sforzo per te." />
@@ -21,14 +47,9 @@
     <meta name="twitter:description" content="Risposte automatiche 24/7 per i tuoi ospiti." />
     <meta name="twitter:image" content="https://www.nextsphere.it/og-image.png" />
 
-    <!-- Cookiebot: gestione consenso cookie GDPR — deve precedere qualsiasi altro script tracciante -->
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8e716c22-e3f3-49b6-b6ef-b91a5d3920c5" data-blockingmode="auto" type="text/javascript"></script>
-
-    <!-- Google Analytics 4 — Cookiebot lo blocca automaticamente finché l'utente non accetta i cookie analitici -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5LPDQZCTX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+    <!-- Existing GA4: keep consent-gated until an intentional migration into GTM. -->
+    <script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-Y5LPDQZCTX"></script>
+    <script type="text/plain" data-cookieconsent="statistics">
       gtag('js', new Date());
       gtag('config', 'G-Y5LPDQZCTX');
     </script>
@@ -199,6 +220,10 @@
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQNRZJG4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <!-- Essential app bootstrap: never block this script through cookie consent. -->
     <script type="module" src="/src/main.tsx" data-cookieconsent="ignore"></script>

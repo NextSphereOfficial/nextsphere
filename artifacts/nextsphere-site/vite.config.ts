@@ -20,6 +20,20 @@ export default defineConfig({
   },
   plugins: [
     {
+      name: 'nextsphere-essential-bootstrap-consent',
+      transformIndexHtml: {
+        order: 'post',
+        handler(html) {
+          // Vite rebuilds the entry tag and drops its custom consent attribute.
+          // Exempt only our compiled app entry, never optional tracking scripts.
+          return html.replace(
+            /<script\b(?=[^>]*\btype=["']module["'])(?=[^>]*\bsrc=["'][^"']*\/assets\/index-[^"']+\.js["'])[^>]*>/g,
+            (tag) => tag.includes('data-cookieconsent=') ? tag : tag.replace('<script', '<script data-cookieconsent="ignore"'),
+          );
+        },
+      },
+    },
+    {
       name: 'nextsphere-demo-formats',
       configureServer(server) {
         // Isolated video work can merge after the website is already running.
