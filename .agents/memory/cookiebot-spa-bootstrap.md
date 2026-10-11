@@ -27,3 +27,14 @@ consent state and tag-level consent requirements govern the tags it manages.
 **How to apply:** Keep existing standalone GA4 statistics-gated until an intentional
 migration. Avoid adding the same GA4 property through both paths. Require consent
 checks for non-Google tags in GTM; Consent Mode alone is not their consent gate.
+
+Treat container diagnostics, browser transport, and GA4 ingestion as separate
+checks when analytics configuration is split between the page and GTM.
+
+**Why:** A paused in-container Google tag can produce a missing-tag diagnostic
+despite a working standalone configuration. Tag Assistant's sent-hit label and a
+collection endpoint HTTP 204 do not establish visibility in GA4 reports.
+
+**How to apply:** Check a normal non-preview visit with Statistics consent, then
+verify received events in the correct GA4 property. Do not reactivate a duplicate
+base tag solely to clear a diagnostic warning.
