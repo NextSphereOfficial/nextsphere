@@ -9,4 +9,4 @@
 - [Browser media verification](browser-media-verification.md) — check the test browser's codec support before treating MP4 playback failures as application defects.
 - [Mobile video activation](mobile-video-activation.md) — preserve the original opening gesture across lazy modal mounting and the first native playback request.
 - [Demo search discovery](demo-search-discovery.md) — sitemap metadata does not establish video-index eligibility for an interaction-only overlay.
-- [Pricing offer](pricing-offer.md) — one account price regardless of properties; lifetime €9,99 requires payment after the trial while the offer is active.
+- [Pricing offer](pricing-offer.md) — €11,99/structure, €9,99 promotional; activation-based lifetime copy, pause/cancel anytime, approved draft layouts.

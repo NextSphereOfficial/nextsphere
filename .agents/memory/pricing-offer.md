@@ -1,19 +1,25 @@
 ---
 name: Pricing and limited offer
-description: User-defined account pricing and eligibility for the lifetime promotional rate.
+description: Per-property prices, approved draft layouts and promotional wording.
 ---
 
-NextSphere costs €11,99 per month in total, independently of how many properties
-the customer has. The limited offer displays €11,99 struck through and €9,99
-per month.
+NextSphere costs €11,99 per month PER PROPERTY, or €9,99 per property during the
+limited offer (regular €11,99 struck through). This is not a total account price.
+The user clarified that the unit price does not decrease with property count;
+do not add quantity examples or explanations of volume pricing to the site.
 
-The user specified: “Chi si registra e paga dopo 14 giorni mentre l'offerta è
-attiva avrà il prezzo fermo a 9,99 per sempre.”
+Use activation-based promotional copy: “Attiva il tuo primo abbonamento durante
+l’offerta e mantieni €9,99/mese per sempre.” The user explicitly does not want
+registration-plus-payment conditions spelled out in the marketing copy.
 
-**Why:** The user changed the commercial model from property-count pricing to a
-single price and specified this promotion.
+State that the subscription may be paused or cancelled at any time.
 
-**How to apply:** Use the same terms in home and pricing page designs. Registration
-alone does not guarantee the discount: the first payment after the trial must
-also happen while the offer is active. No offer end date has been provided.
+**Why:** The user corrected the initial account-price interpretation: every
+property costs the same unit price, with no quantity discount. They approved both
+draft layouts and requested simpler activation wording plus pause/cancellation
+clarity.
+
+**How to apply:** Use the same terms in home and pricing page designs; retain the
+approved black/gold home and pricing layouts. No offer end date has been provided.
+Do not infer rules about retaining the discount after pausing or cancelling.
 The user requested mockup approval before changes to the public site.

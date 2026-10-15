@@ -9,7 +9,7 @@ export function HomeOffer() {
         <div className="relative mx-auto max-w-5xl">
           <div className="mb-8 flex items-center justify-center gap-3 text-[10px] font-semibold uppercase tracking-[.23em] text-[#8a7a63] sm:mb-10 sm:text-[11px]">
             <span className="h-px w-8 bg-[#c6a477]" />
-            Un prezzo per tutte le tue strutture
+            Più valore alla tua accoglienza
             <span className="h-px w-8 bg-[#c6a477]" />
           </div>
 
@@ -20,11 +20,11 @@ export function HomeOffer() {
                 L’accoglienza, senza le stesse domande.
               </h2>
               <p className="mx-auto max-w-sm text-[15px] leading-7 text-[#65615b] md:mx-0">
-                NextSphere risponde agli ospiti al posto tuo. Un solo prezzo per il tuo account, qualunque sia il numero delle tue strutture.
+                NextSphere risponde agli ospiti al posto tuo. Meno messaggi ripetitivi, più tempo da dedicare alla tua accoglienza.
               </p>
               <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#e5dccd] bg-white/70 px-3.5 py-2 text-[12px] font-medium text-[#615d56]">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#b89668]" />
-                Un account · tutte le tue proprietà
+                Il tuo concierge AI · disponibile 24/7
               </div>
             </div>
 
@@ -33,15 +33,15 @@ export function HomeOffer() {
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#deb67d]/30 bg-[#deb67d]/[.09] px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[.15em] text-[#e4c18f] sm:text-[11px]">
                   Offerta limitata
                 </div>
-                <p className="mb-1 text-[13px] text-white/60">Un solo prezzo mensile per account</p>
+                <p className="mb-1 text-[13px] text-white/60">Tutte le funzionalità incluse</p>
                 <div className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
                   <span className="text-[16px] text-white/45 line-through decoration-[#deb67d]/75 decoration-1">€11,99</span>
                   <span className="font-['Montserrat'] text-[57px] font-bold leading-none tracking-[-.06em] text-[#f2d6ad] sm:text-[68px]">€9,99</span>
-                  <span className="pb-1 text-[14px] text-white/60">/ mese</span>
+                  <span className="pb-1 text-[14px] text-white/60">/ mese per struttura</span>
                 </div>
                 <p className="mt-2 text-[13px] font-medium text-[#e5c493]">Prezzo bloccato per sempre*</p>
                 <p className="mx-auto mt-3 max-w-md text-[12px] leading-5 text-white/55">
-                  Indipendente dal numero di appartamenti o proprietà. Nessun piano per struttura.
+                  Risposte automatiche agli ospiti, in ogni lingua, 24/7.
                 </p>
 
                 <div className="mx-auto mt-6 max-w-sm border-t border-white/10 pt-5">
@@ -50,15 +50,15 @@ export function HomeOffer() {
                     Inizia la prova gratuita
                   </a>
                 </div>
-                <p className="mt-4 text-[10px] text-white/40">La prova non riserva automaticamente il prezzo speciale.</p>
+                <p className="mt-4 text-[12px] leading-5 text-white/70">Puoi sospendere o annullare l’abbonamento in qualsiasi momento.</p>
               </div>
             </article>
           </div>
 
           <div id="home-offer-conditions" className="offer-conditions mx-auto mt-6 max-w-3xl rounded-2xl border border-[#e7dfd3] bg-white/75 px-5 py-4 text-center sm:px-7">
             <p className="text-[12px] leading-5 text-[#625e57] sm:text-[13px] sm:leading-6">
-              <span className="font-semibold text-[#26231f]">*Come mantenere il prezzo speciale:</span>{' '}
-              Il prezzo di €9,99/mese resta bloccato per sempre se ti registri e completi il primo pagamento al termine dei 14 giorni di prova mentre l’offerta è ancora attiva.
+              <span className="font-semibold text-[#26231f]">*Il tuo prezzo, per sempre.</span>{' '}
+              Attiva il tuo primo abbonamento durante l’offerta e mantieni €9,99/mese per sempre.
             </p>
           </div>
         </div>
