@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { Check, ShieldCheck, ScanLine, Globe2, Clock, PhoneOff, Zap } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -7,6 +6,7 @@ import { SEO } from '../components/SEO';
 import { useTranslation } from '../hooks/useTranslation';
 import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
+import { PricingOfferIntro } from '../components/PricingOffer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -30,25 +30,22 @@ const pricingSchema = [
     serviceType: 'Chatbot AI per host turistici',
     url: 'https://www.nextsphere.it/pricing',
     offers: {
-      '@type': 'AggregateOffer',
-      lowPrice: '24.00',
-      highPrice: '39.00',
+      '@type': 'Offer',
+      price: '9.99',
       priceCurrency: 'EUR',
-      offerCount: '4',
+      url: 'https://www.nextsphere.it/pricing',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '9.99',
+        priceCurrency: 'EUR',
+        unitText: 'per property per month',
+      },
     },
   },
 ];
 
 export default function Pricing() {
   const { t, lang } = useTranslation();
-
-  const tiers = [
-    { label: t('pricing.tier1'), price: '39' },
-    { label: t('pricing.tier2'), price: '34', per: true },
-    { label: t('pricing.tier3'), price: '29', per: true },
-    { label: t('pricing.tier4'), price: '24', per: true },
-    { label: t('pricing.tier5'), quote: true },
-  ];
 
   const includes = [
     { icon: Zap,        label: t('pricing.page.includes.f1') },
@@ -74,77 +71,7 @@ export default function Pricing() {
         schema={pricingSchema}
       />
 
-      {/* ── HERO ── */}
-      <section className="relative bg-[#0D0D0D] pt-36 pb-24 overflow-hidden">
-        <div
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(222,182,125,0.2) 0%, transparent 70%)' }}
-        />
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <span className="inline-block py-1.5 px-4 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8">
-              ✨ {t('pricing.page.hero.badge')}
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              {t('pricing.page.hero.title')}
-            </h1>
-            <p className="text-lg text-gray-400 max-w-xl mx-auto">
-              {t('pricing.subtitle')}
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-white pointer-events-none" />
-      </section>
-
-      {/* ── PRICING TIERS ── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-2xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <div className="bg-[#0D0D0D] rounded-[2rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-              <motion.div
-                className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full blur-[90px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(222,182,125,0.25) 0%, transparent 70%)' }}
-                animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.9, 0.6] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <div className="space-y-6 relative z-10 mb-12">
-                {tiers.map((tier, i) => (
-                  <div key={i} className="flex items-center justify-between py-4 border-b border-white/10 last:border-0">
-                    <span className="text-lg font-medium text-gray-300">{tier.label}</span>
-                    {tier.quote ? (
-                      <Link
-                        href="/contatti"
-                        className="px-4 py-2 text-sm font-semibold text-primary border border-primary/50 rounded-lg hover:bg-primary/10 transition-colors"
-                        onClick={() => trackCta('pricing_quote')}
-                      >
-                        {t('pricing.quoteCta')}
-                      </Link>
-                    ) : (
-                      <div className="text-right">
-                        <span className="text-2xl font-bold">€{tier.price}<sup className="text-sm align-super">*</sup></span>
-                        <span className="text-sm text-gray-500 ml-1">
-                          {tier.per ? ` ${t('pricing.cad')} ` : ' '}{t('pricing.month')}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="text-center relative z-10">
-                <p className="text-primary font-medium mb-6 text-sm">✓ {t('pricing.badge')}</p>
-                <a
-                  href={PLATFORM_URL}
-                  className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
-                  onClick={() => trackCta('pricing')}
-                >
-                  {t('pricing.cta')}
-                </a>
-              </div>
-              <p className="relative z-10 mt-8 text-xs text-gray-600 text-left">{t('pricing.vatNote')}</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PricingOfferIntro />
 
       {/* ── WHAT'S INCLUDED ── */}
       <section className="py-24 bg-gray-50 border-y border-gray-200">

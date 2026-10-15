@@ -10,6 +10,7 @@ import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackAnalyticsEvent, trackCta, trackDemoOpen } from '../lib/trackCta';
 import DemoTeaser from '../components/DemoTeaser';
 import DemoOverlay from '../components/DemoOverlay';
+import { HomePricingOffer } from '../components/PricingOffer';
 import { track } from '@vercel/analytics';
 
 // --- Animation variants ---
@@ -323,57 +324,7 @@ export default function Home() {
       </section>
 
       {/* ─── 4. PRICING ──────────────────────────────────────────── */}
-      <section id="pricing" className="py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-gray-50 to-white -z-10" />
-
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t('pricing.title')}</h2>
-            <p className="text-xl text-gray-600">{t('pricing.subtitle')}</p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="max-w-2xl mx-auto"
-          >
-            <div className="bg-[#0D0D0D] rounded-[2rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden text-center">
-              {/* Animated glow */}
-              <motion.div
-                className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full blur-[90px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(222,182,125,0.25) 0%, transparent 70%)' }}
-                animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.9, 0.6] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-              />
-
-              <div className="relative z-10 mb-8">
-                <p className="text-gray-400 text-sm uppercase tracking-widest mb-3">{t('pricing.from')}</p>
-                <div className="flex items-end justify-center gap-2 mb-2">
-                  <span className="text-6xl md:text-7xl font-bold">€39<sup className="text-2xl align-super">*</sup></span>
-                  <span className="text-gray-400 text-lg pb-2">{t('pricing.month')}</span>
-                </div>
-                <p className="text-gray-500 text-sm">{t('pricing.scalesDown')}</p>
-              </div>
-
-              <div className="relative z-10">
-                <p className="text-primary font-medium mb-6 text-sm">✓ {t('pricing.badge')}</p>
-                <a
-                  href={PLATFORM_URL}
-                  className="block w-full py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-xl hover:bg-primary/90 transition-all hover:scale-[1.02]"
-                  onClick={() => trackCta('pricing')}
-                >
-                  {t('pricing.cta')}
-                </a>
-                <p className="mt-5 text-sm text-gray-600">{t('home.pricing.viewAll')}</p>
-              </div>
-
-              <p className="relative z-10 mt-8 text-xs text-gray-600 text-left">{t('pricing.vatNote')}</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <HomePricingOffer />
 
       {/* ─── 5. FAQ ──────────────────────────────────────────────── */}
       <section id="faq" className="py-32 bg-gray-50 border-t border-gray-200">

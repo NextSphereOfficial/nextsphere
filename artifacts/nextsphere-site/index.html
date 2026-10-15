@@ -119,12 +119,17 @@
       "operatingSystem": "Web",
       "description": "Chatbot AI per host di affitti brevi e B&B. Gli ospiti scansionano un QR code e ottengono risposte 24/7 nella loro lingua.",
       "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "24.00",
-        "highPrice": "39.00",
+        "@type": "Offer",
+        "price": "9.99",
         "priceCurrency": "EUR",
-        "offerCount": "4",
-        "description": "Piani NextSphere da €24 a €39/unità/mese, prezzi finali senza costi aggiuntivi"
+        "url": "https://www.nextsphere.it/pricing",
+        "description": "€9,99 al mese per struttura anziché €11,99. Attiva il primo abbonamento durante l’offerta e mantieni il prezzo per sempre. Puoi sospendere o annullare in qualsiasi momento.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "9.99",
+          "priceCurrency": "EUR",
+          "unitText": "per struttura al mese"
+        }
       },
       "featureList": [
         "Disponibile 24/7",
@@ -176,18 +181,10 @@
         },
         {
           "@type": "Question",
-          "name": "Quanto costa NextSphere?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Il piano base parte da €39/mese per un singolo appartamento. Per strutture con 10 o più unità è possibile richiedere un preventivo personalizzato. Puoi provarlo gratis per 14 giorni senza carta di credito."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "Cosa succede dopo i 14 giorni di prova?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Puoi scegliere il piano adatto al tuo numero di strutture. Se decidi di non continuare, il QR code smetterà semplicemente di funzionare — nessun addebito inaspettato."
+            "text": "Puoi attivare l’abbonamento per continuare a usare NextSphere. Attiva il tuo primo abbonamento durante l’offerta e mantieni €9,99 al mese per struttura per sempre. Puoi sospendere o annullare in qualsiasi momento."
           }
         },
         {
