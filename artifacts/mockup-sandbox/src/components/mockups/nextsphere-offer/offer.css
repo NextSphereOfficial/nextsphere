@@ -1,0 +1,93 @@
+.ns-offer-home,
+.ns-offer-pricing {
+  --offer-ink: #0d0d0d;
+  --offer-gold: #deb67d;
+  --offer-paper: #f7f5f1;
+  --offer-muted: #74716c;
+  color: var(--offer-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+.ns-offer-home *,
+.ns-offer-pricing * {
+  box-sizing: border-box;
+}
+
+.ns-offer-home h1,
+.ns-offer-home h2,
+.ns-offer-home h3,
+.ns-offer-pricing h1,
+.ns-offer-pricing h2,
+.ns-offer-pricing h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.ns-offer-home button,
+.ns-offer-pricing button,
+.ns-offer-home a,
+.ns-offer-pricing a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ns-offer-home .offer-panel,
+.ns-offer-pricing .offer-panel {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(222, 182, 125, .11), transparent 38%),
+    linear-gradient(145deg, #151412 0%, #0d0d0d 66%);
+  box-shadow: 0 24px 70px rgba(44, 35, 24, .14), 0 2px 5px rgba(13, 13, 13, .08);
+}
+
+.ns-offer-home .offer-panel::before,
+.ns-offer-pricing .offer-panel::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(222, 182, 125, .12);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.ns-offer-home .offer-cta,
+.ns-offer-pricing .offer-cta {
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.ns-offer-home .offer-cta:hover,
+.ns-offer-pricing .offer-cta:hover {
+  transform: translateY(-2px);
+  background-color: #e8c895;
+  box-shadow: 0 8px 22px rgba(222, 182, 125, .16);
+}
+
+.ns-offer-home .offer-cta:focus-visible,
+.ns-offer-pricing .offer-cta:focus-visible,
+.ns-offer-home .offer-conditions-link:focus-visible,
+.ns-offer-pricing .offer-conditions-link:focus-visible {
+  outline: 2px solid var(--offer-gold);
+  outline-offset: 4px;
+}
+
+.ns-offer-home .offer-conditions,
+.ns-offer-pricing .offer-conditions {
+  scroll-margin-top: 28px;
+}
+
+.ns-offer-pricing .offer-hero-glow {
+  background: radial-gradient(circle, rgba(222, 182, 125, .18) 0%, rgba(222, 182, 125, 0) 70%);
+}
+
+@media (max-width: 640px) {
+  .ns-offer-home .offer-panel::before,
+  .ns-offer-pricing .offer-panel::before {
+    inset: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ns-offer-home .offer-cta,
+  .ns-offer-pricing .offer-cta {
+    transition: none;
+  }
+}

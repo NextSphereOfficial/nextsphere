@@ -1,0 +1,13 @@
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/__mockup/fonts/inter-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/__mockup/fonts/montserrat-latin.woff2') format('woff2'); }
+:root {
+  --background: 0 0% 100%; --foreground: 0 0% 5%;
+  --primary: 35 59% 68%; --primary-foreground: 0 0% 5%;
+  --app-font-sans: 'Inter', sans-serif;
+  --app-font-heading: 'Montserrat', sans-serif;
+}
+.ns-preview { font-family: 'Inter', sans-serif; color: #0d0d0d; background: white; }
+.ns-preview h1, .ns-preview h2, .ns-preview h3 { font-family: 'Montserrat', sans-serif; }
+.ns-preview .bg-primary { background-color: #deb67d; }
+.ns-preview .text-primary { color: #deb67d; }
+.ns-preview .text-primary-foreground { color: #0d0d0d; }
