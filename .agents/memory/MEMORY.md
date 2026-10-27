@@ -11,3 +11,4 @@
 - [Demo search discovery](demo-search-discovery.md) — sitemap metadata does not establish video-index eligibility for an interaction-only overlay.
 - [Pricing offer](pricing-offer.md) — €11,99/structure, €9,99 promotional; activation-based lifetime copy, pause/cancel anytime, approved draft layouts.
 - [Pnpm workspace relinking](pnpm-workspace-relinking.md) — after a filtered dependency update, a frozen install may be needed before trusting missing-type errors.
+- [Product claims](product-claims.md) — guest-requested host contacts, no invented AI answers, Stripe payments; preserve approved pricing and use only real proof.
