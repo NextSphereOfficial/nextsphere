@@ -3,6 +3,7 @@ import { flushSync } from 'react-dom';
 import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { SEO } from '../components/SEO';
+import { homeVideoSchema } from '../lib/homeVideoSchema';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ShieldCheck, Zap, Globe2, ScanLine, Clock, PhoneOff } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -142,6 +143,15 @@ export default function Home() {
         description={t('meta.home.description')}
         canonical="https://www.nextsphere.it/"
         lang={lang}
+        schema={[homeVideoSchema, {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: [1, 2, 3, 4, 5, 6, 7].map(i => ({
+            '@type': 'Question',
+            name: t(`faq.q${i}` as any),
+            acceptedAnswer: { '@type': 'Answer', text: t(`faq.a${i}` as any) },
+          })),
+        }]}
       />
 
       {/* ─── 1. HERO ─────────────────────────────────────────────── */}
@@ -170,7 +180,7 @@ export default function Home() {
 
         {/* Hero content with subtle scroll drift */}
         <motion.div
-          className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-36 pb-24"
+          className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-28 pb-12 sm:pt-36 sm:pb-24"
           style={{ y: heroContentY }}
         >
           <div className="max-w-4xl mx-auto text-center">
@@ -186,7 +196,7 @@ export default function Home() {
             {/* Headline with gold highlight on last word */}
             <motion.h1
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.08] tracking-tight"
+              className="text-[32px] sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.08] tracking-tight"
             >
               {titleMain}{' '}
               <span className="text-primary relative inline-block">
@@ -201,10 +211,11 @@ export default function Home() {
 
             <motion.p
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-xl text-gray-400 mb-5 max-w-2xl mx-auto leading-relaxed"
             >
               {t('hero.subtitle')}
             </motion.p>
+            <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-[#e4c18f]">{t('hero.boundary')}</p>
 
             <motion.div
               initial="hidden" animate="visible" variants={fadeUp}
@@ -338,7 +349,7 @@ export default function Home() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <Accordion type="single" collapsible className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-              {[1, 2, 3, 4, 5, 6].map((i, idx) => (
+              {[1, 2, 3, 4, 5, 6, 7].map((i, idx) => (
                 <AccordionItem key={i} value={`item-${idx}`} className="px-6 border-b border-gray-100 last:border-0">
                   <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-primary transition-colors py-6">
                     {t(`faq.q${i}` as any)}

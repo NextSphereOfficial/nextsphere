@@ -18,6 +18,7 @@ function Price({ centered = false }: { centered?: boolean }) {
         <span className="pb-1 text-[14px] text-white/60">{t('offer.perProperty')}</span>
       </div>
       <p className="mt-2 text-[13px] font-semibold text-[#e5c493]">{t('offer.locked')}*</p>
+      {!centered && <p className="mt-3 max-w-sm text-[12px] leading-5 text-white/65">{t('offer.valueAnchor')}</p>}
     </>
   );
 }
@@ -37,6 +38,7 @@ function TrialAction({ centered = false }: { centered?: boolean }) {
         {t('pricing.cta')}
       </a>
       {!centered && <p className="mt-3 text-center text-[12px] leading-5 text-white/70">{t('offer.flexible')}</p>}
+      <p className="mt-2 text-center text-[11px] leading-5 text-white/55">{t('offer.stripe')}</p>
     </div>
   );
 }

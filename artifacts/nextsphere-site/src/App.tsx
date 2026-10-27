@@ -16,6 +16,7 @@ import LegalHub from './pages/LegalHub';
 import LegalDocumentPage from './pages/LegalDocument';
 import Analytics from './pages/Analytics';
 import Contact from './pages/Contact';
+import About from './pages/About';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -61,6 +62,7 @@ function Router() {
               <Route path="/" component={Home} />
               <Route path="/pricing" component={Pricing} />
               <Route path="/contatti" component={Contact} />
+              <Route path="/about" component={About} />
               <Route path="/airbnb" component={Airbnb} />
               <Route path="/booking" component={Booking} />
               <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />

@@ -31,6 +31,10 @@ export function Footer() {
             <p className="text-gray-400 max-w-sm">
               {t('footer.tagline')}
             </p>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-gray-400">{t('about.footerLine')}</p>
+            <Link href="/about" onClick={scrollToPageTop} className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
+              {t('about.footerLink')}
+            </Link>
           </div>
 
           <div className="md:col-span-8 flex flex-wrap gap-10 md:justify-end">

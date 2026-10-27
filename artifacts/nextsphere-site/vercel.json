@@ -24,6 +24,11 @@
       "source": "/api/:path*",
       "destination": "https://next-sphere-connect.replit.app/api/:path*"
     },
+    { "source": "/pricing", "destination": "/pricing.html" },
+    { "source": "/airbnb", "destination": "/airbnb.html" },
+    { "source": "/booking", "destination": "/booking.html" },
+    { "source": "/guida-digitale-ospiti", "destination": "/guida-digitale-ospiti.html" },
+    { "source": "/about", "destination": "/about.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

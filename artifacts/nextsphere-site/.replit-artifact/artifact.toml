@@ -17,7 +17,27 @@ run = "pnpm --filter @workspace/nextsphere-site run dev"
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/nextsphere-site", "run", "build" ]
 serve = "static"
-publicDir = "artifacts/nextsphere-site/dist/public"
+publicDir = "artifacts/nextsphere-site/dist"
+
+[[services.production.rewrites]]
+from = "/pricing"
+to = "/pricing.html"
+
+[[services.production.rewrites]]
+from = "/airbnb"
+to = "/airbnb.html"
+
+[[services.production.rewrites]]
+from = "/booking"
+to = "/booking.html"
+
+[[services.production.rewrites]]
+from = "/guida-digitale-ospiti"
+to = "/guida-digitale-ospiti.html"
+
+[[services.production.rewrites]]
+from = "/about"
+to = "/about.html"
 
 [[services.production.rewrites]]
 from = "/*"

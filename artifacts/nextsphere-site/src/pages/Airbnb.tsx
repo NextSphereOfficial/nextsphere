@@ -91,6 +91,7 @@ export default function Airbnb() {
             <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
               {t('airbnb.hero.subtitle')}
             </p>
+            <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-[#e4c18f]">{t('hero.boundary')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={PLATFORM_URL}

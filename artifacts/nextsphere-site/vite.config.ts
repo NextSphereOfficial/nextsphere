@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 import { findPortraitDemo } from './demoMedia';
+import { staticRouteMeta } from './staticRouteMeta';
 
 const rawPort = process.env.PORT;
 const port = rawPort ? Number(rawPort) : 3000;
@@ -19,6 +20,7 @@ export default defineConfig({
     __NEXTSPHERE_DEMO_PORTRAIT__: JSON.stringify(portraitDemo),
   },
   plugins: [
+    staticRouteMeta(),
     {
       name: 'nextsphere-essential-bootstrap-consent',
       transformIndexHtml: {

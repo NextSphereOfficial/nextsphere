@@ -29,7 +29,16 @@ export function SEO({
   useEffect(() => {
     const staticRobots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"][data-static-seo="true"]');
     staticRobots?.remove();
-  }, [robots]);
+    // Helmet manages its own tags (data-rh); remove only the initial HTML shell's
+    // counterparts so navigation and IT/EN changes never leave conflicting tags.
+    document.head.querySelectorAll('meta[name="description"], meta[property^="og:"], meta[name^="twitter:"], link[rel="canonical"]')
+      .forEach((tag) => { if (tag.getAttribute('data-rh') !== 'true') tag.remove(); });
+    document.head.querySelectorAll('script[type="application/ld+json"]').forEach((tag) => {
+      if (tag.getAttribute('data-rh') === 'true') return;
+      const data = JSON.parse(tag.textContent || '{}');
+      if (data['@type'] === 'FAQPage' || data['@type'] === 'VideoObject') tag.remove();
+    });
+  }, [robots, canonical, lang]);
 
   return (
     <Helmet>

@@ -53,7 +53,7 @@ export function Navbar() {
   }, []);
 
   const isHome       = location === '/';
-  const isDarkContext = isHome && !scrolled;
+  const isDarkContext = menuOpen || (!scrolled && (isHome || ['/pricing', '/airbnb', '/booking', '/guida-digitale-ospiti'].includes(location)));
   const logoSrc      = isDarkContext ? logoLight : logoDark;
   const textColor    = isDarkContext ? 'text-white' : 'text-gray-800';
 
@@ -61,7 +61,7 @@ export function Navbar() {
     <>
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          scrolled
+          menuOpen ? 'bg-[#0D0D0D]' : scrolled
             ? 'bg-white/85 backdrop-blur-md border-b border-gray-200/50 shadow-sm'
             : 'bg-transparent'
         }`}
@@ -72,8 +72,11 @@ export function Navbar() {
         <div className="relative max-w-7xl mx-auto px-6 flex items-center justify-end min-h-[48px]">
 
           {/* ── Logo ── */}
+          <Link href="/" className="mr-auto md:hidden" onClick={() => setMenuOpen(false)}>
+            <img src={logoSrc} alt="NextSphere" className="h-10 w-auto object-contain" />
+          </Link>
           <motion.div
-            className="absolute top-1/2 -translate-y-1/2 z-10"
+            className="hidden md:block absolute top-1/2 -translate-y-1/2 z-10"
             animate={{ left: scrolled ? 24 : '50%', x: scrolled ? '0%' : '-50%' }}
             transition={{ duration: 0.45, ease: easing }}
           >
@@ -163,20 +166,23 @@ export function Navbar() {
           <div className="flex items-center gap-4 relative z-10">
             <button
               onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-              className={`text-xs font-semibold tracking-wider transition-colors hover:opacity-70 ${textColor}`}
+              className={`min-h-11 min-w-14 rounded-lg px-1 text-xs font-semibold tracking-wider transition-colors hover:opacity-70 ${textColor}`}
               data-testid="toggle-language"
+              aria-label={lang === 'it' ? 'Switch to English' : 'Passa all’italiano'}
             >
-              <span className={lang === 'it' ? 'opacity-100' : 'opacity-50'}>IT</span>
+              <span className={lang === 'it' ? 'opacity-100 underline underline-offset-4 decoration-primary' : 'opacity-75'}>IT</span>
               <span className="mx-1.5 opacity-30">|</span>
-              <span className={lang === 'en' ? 'opacity-100' : 'opacity-50'}>EN</span>
+              <span className={lang === 'en' ? 'opacity-100 underline underline-offset-4 decoration-primary' : 'opacity-75'}>EN</span>
             </button>
 
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              className={`md:hidden p-1.5 rounded-lg transition-colors ${
+              className={`md:hidden min-h-11 min-w-11 inline-flex items-center justify-center rounded-lg transition-colors ${
                 isDarkContext ? 'text-white hover:bg-white/10' : 'text-gray-800 hover:bg-gray-100'
               }`}
               aria-label="Menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-site-menu"
               data-testid="btn-mobile-menu"
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -198,13 +204,14 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-site-menu"
             className="fixed inset-0 z-40 bg-[#0D0D0D] flex flex-col items-center justify-center gap-2 md:hidden overflow-y-auto py-20"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25, ease: easing }}
           >
-            <nav className="flex flex-col items-center gap-5 mb-8">
+            <nav className="flex flex-col items-center gap-5 mb-8 [&_a]:min-h-11 [&_a]:inline-flex [&_a]:items-center">
               {NAV_LINKS.map(({ key, href }, i) => (
                 <motion.a
                   key={key}
