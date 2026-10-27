@@ -20,3 +20,9 @@ Do not introduce new discounts or plans to satisfy the audit. Preserve the appro
 **Why:** The user agreed to these boundaries and explicitly said not to insert testimonials without authentic material.
 
 **How to apply:** Use verified product facts and authentic proof only. Do not infer privacy, retention or data-location guarantees from the audit's suggested wording.
+
+Use a personal, empathetic first-person voice for the founder page: recognize that a guest's new question can be the host's repeated interruption, and frame the product as helping hosts care for guests without always being on the phone.
+
+**Why:** The user requested a more emotional story that fellow hosts could identify with and explicitly approved that version as “perfetta”.
+
+**How to apply:** Preserve this editorial direction when integrating the approved founder story; avoid replacing it with impersonal promotional copy.
