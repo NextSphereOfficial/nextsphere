@@ -24,6 +24,17 @@ Replit (main branch) → GitHub (NextSphereOfficial/nextsphere) → Vercel auto-
 
 ## Media authoring versus website builds
 
+Application assets required at build time must live in version-controlled site
+directories, not in the upload area.
+
+**Why:** This environment globally ignores `attached_assets/*` through
+`/etc/.gitignore`. An upload can be available in Replit and pass a local build
+without ever reaching GitHub or the Vercel builder.
+
+**How to apply:** Retain small required assets with the site source and confirm
+Git includes them. A clean-source build is more meaningful than a build that
+can still access workspace-only uploads.
+
 Keep FFmpeg media rendering separate from the website's production build; do not
 make the static site's build depend on tools installed only in the Replit workspace.
 

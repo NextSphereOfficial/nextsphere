@@ -6,8 +6,8 @@ import { PLATFORM_URL } from '../lib/externalLinks';
 import { trackCta } from '../lib/trackCta';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../contexts/LanguageContext';
-import logoLight from '@assets/logo_trasparenza_chiaro_1785754195220.png';
-import logoDark from '@assets/logo_trasparenza_scuro_1785754195221.png';
+import logoLight from '../assets/logo-light.png';
+import logoDark from '../assets/logo-dark.png';
 
 const NAV_LINKS = [
   { key: 'nav.howItWorks', href: '/#how-it-works' },

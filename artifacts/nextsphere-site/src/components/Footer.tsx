@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { scrollToPageTop } from '../lib/navigation';
-import logoLight from '@assets/logo_trasparenza_chiaro_1785754195220.png';
+import logoLight from '../assets/logo-light.png';
 
 declare global {
   interface Window {
