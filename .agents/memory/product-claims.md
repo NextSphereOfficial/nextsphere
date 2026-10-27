@@ -32,3 +32,9 @@ Keep the homepage headline emotional rather than using it to explain the product
 **Why:** The user explicitly asked to restore the original headline because the gold badge already explains what NextSphere is, and the hero needs “un pò di emotività”.
 
 **How to apply:** Preserve the emotional headline when improving SEO or clarity elsewhere; use the badge and supporting text for the product explanation.
+
+Write host-facing guides so readers recognize their own interruptions and need to care for guests in Sam's experience; keep a useful blog tone without inventing personal episodes, statistics, legal conclusions or product capabilities.
+
+**Why:** The user approved the first two guide directions and said it is important for hosts to empathize with his needs and feel them as their own; the third guide should avoid assertions that are not known.
+
+**How to apply:** Ground editorial pieces in Sam's confirmed hosting challenges, distinguish guest assistance from check-in formalities, and review any policy or legal assertion before publication.

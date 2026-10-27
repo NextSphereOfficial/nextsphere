@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { Plugin } from 'vite';
 import { translations } from './src/i18n/translations';
+import { guideArticles } from './src/blog/articles';
 
 // The client and build-time metadata deliberately use the same translations.
 const routes = [
@@ -20,9 +21,25 @@ export function staticRouteMeta(): Plugin {
     async writeBundle(options) {
       if (!options.dir) throw new Error('Static route metadata requires a build output directory.');
       const shell = await readFile(path.join(options.dir, 'index.html'), 'utf8');
-      for (const [route, key] of routes) {
-        const title = translations.it[`meta.${key}.title`];
-        const description = translations.it[`meta.${key}.description`];
+      const pages = [
+        ...routes.map(([route, key]) => ({
+          route, file: route,
+          title: translations.it[`meta.${key}.title`],
+          description: translations.it[`meta.${key}.description`],
+        })),
+        {
+          route: 'blog', file: 'blog',
+          title: 'Guide per host | NextSphere',
+          description: 'Consigli pratici per chi accoglie ospiti in B&B e case vacanza, scritti da un host.',
+        },
+        ...guideArticles.it.map((article) => ({
+          route: `blog/${article.slug}`,
+          file: `blog-${article.slug}`,
+          title: `${article.title} | NextSphere`,
+          description: article.description,
+        })),
+      ];
+      for (const { route, file, title, description } of pages) {
         const url = `https://www.nextsphere.it/${route}`;
         let html = shell.replace(/<title>[\s\S]*?<\/title>/, `<title>${escape(title)}</title>`);
         const values: Record<string, string> = {
@@ -40,7 +57,7 @@ export function staticRouteMeta(): Plugin {
           const type = JSON.parse(json)['@type'];
           return type === 'FAQPage' || type === 'VideoObject' ? '' : tag;
         });
-        await writeFile(path.join(options.dir, `${route}.html`), html);
+        await writeFile(path.join(options.dir, `${file}.html`), html);
       }
     },
   };

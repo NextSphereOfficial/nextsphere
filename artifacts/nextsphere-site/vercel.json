@@ -29,6 +29,9 @@
     { "source": "/booking", "destination": "/booking.html" },
     { "source": "/guida-digitale-ospiti", "destination": "/guida-digitale-ospiti.html" },
     { "source": "/about", "destination": "/about.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog/ridurre-domande-ripetitive-ospiti", "destination": "/blog-ridurre-domande-ripetitive-ospiti.html" },
+    { "source": "/blog/self-check-in-assistenza-ospiti", "destination": "/blog-self-check-in-assistenza-ospiti.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

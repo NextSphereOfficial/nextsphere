@@ -24,6 +24,8 @@ const LegalDocumentPage = lazy(() => import('./pages/LegalDocument'));
 const Analytics = lazy(() => import('./pages/Analytics'));
 const Contact = lazy(() => import('./pages/Contact'));
 const About = lazy(() => import('./pages/About'));
+const Guides = lazy(() => import('./pages/Guides'));
+const GuideArticle = lazy(() => import('./pages/GuideArticle'));
 const NotFound = lazy(() => import('./pages/not-found'));
 
 function ScrollToTop() {
@@ -70,6 +72,8 @@ function Router() {
                 <Route path="/pricing" component={Pricing} />
                 <Route path="/contatti" component={Contact} />
                 <Route path="/about" component={About} />
+                <Route path="/blog" component={Guides} />
+                <Route path="/blog/:slug" component={GuideArticle} />
                 <Route path="/airbnb" component={Airbnb} />
                 <Route path="/booking" component={Booking} />
                 <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />

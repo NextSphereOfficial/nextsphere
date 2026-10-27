@@ -50,6 +50,11 @@ export function Footer() {
                   </Link>
                 </li>
                 <li><a href="/#faq" className="hover:text-primary transition-colors">{t('footer.nav.faq')}</a></li>
+                <li>
+                  <Link href="/blog" onClick={scrollToPageTop} className="hover:text-primary transition-colors">
+                    {t('nav.guides')}
+                  </Link>
+                </li>
               </ul>
             </div>
 

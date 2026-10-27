@@ -12,7 +12,7 @@ import logoDark from '../assets/logo-dark.png';
 const NAV_LINKS = [
   { key: 'nav.howItWorks', href: '/#how-it-works' },
   { key: 'nav.features',   href: '/#features'     },
-  { key: 'nav.faq',        href: '/#faq'           },
+  { key: 'nav.guides',     href: '/blog'           },
 ] as const;
 
 const SOLUTIONS_LINKS = [

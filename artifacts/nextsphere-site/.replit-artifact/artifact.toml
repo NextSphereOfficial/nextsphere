@@ -40,6 +40,18 @@ from = "/about"
 to = "/about.html"
 
 [[services.production.rewrites]]
+from = "/blog"
+to = "/blog.html"
+
+[[services.production.rewrites]]
+from = "/blog/ridurre-domande-ripetitive-ospiti"
+to = "/blog-ridurre-domande-ripetitive-ospiti.html"
+
+[[services.production.rewrites]]
+from = "/blog/self-check-in-assistenza-ospiti"
+to = "/blog-self-check-in-assistenza-ospiti.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 
