@@ -26,3 +26,9 @@ Use a personal, empathetic first-person voice for the founder page: recognize th
 **Why:** The user requested a more emotional story that fellow hosts could identify with and explicitly approved that version as “perfetta”.
 
 **How to apply:** Preserve this editorial direction when integrating the approved founder story; avoid replacing it with impersonal promotional copy.
+
+Keep the homepage headline emotional rather than using it to explain the product category; the user prefers “Ore risparmiate. Ospiti felici. Sempre.”
+
+**Why:** The user explicitly asked to restore the original headline because the gold badge already explains what NextSphere is, and the hero needs “un pò di emotività”.
+
+**How to apply:** Preserve the emotional headline when improving SEO or clarity elsewhere; use the badge and supporting text for the product explanation.

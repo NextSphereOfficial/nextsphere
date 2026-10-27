@@ -39,7 +39,7 @@ export const translations = {
     
     // Hero
     'hero.badge': 'NextSphere — the digital concierge for your property',
-    'hero.title': 'The AI concierge for your B&B. Answers for you.',
+    'hero.title': 'Hours back. Guests delighted. Always.',
     'hero.subtitle': 'NextSphere answers recurring questions from your B&B, vacation rental or Airbnb guests — automatically, via QR code, in any language, 24/7. No more repetitive messages.',
     'hero.boundary': 'It does not make up answers. When a guest asks to contact you, it shares your contact details.',
     'offer.stripe': 'Subscription payments handled by Stripe.',
@@ -509,7 +509,7 @@ export const translations = {
     
     // Hero
     'hero.badge': 'NextSphere — il concierge digitale per la tua struttura',
-    'hero.title': 'Il concierge AI per il tuo B&B. Risponde al posto tuo.',
+    'hero.title': 'Ore risparmiate. Ospiti felici. Sempre.',
     'hero.subtitle': 'NextSphere risponde automaticamente alle domande ricorrenti degli ospiti del tuo B&B, affitto breve o Airbnb — via QR code, in qualsiasi lingua, 24/7. Niente più messaggi ripetitivi.',
     'hero.boundary': 'Non inventa risposte. Quando l’ospite chiede di contattarti, gli fornisce i tuoi recapiti.',
     'offer.stripe': 'Pagamenti dell’abbonamento gestiti tramite Stripe.',
