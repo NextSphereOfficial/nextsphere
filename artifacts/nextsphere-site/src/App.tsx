@@ -1,26 +1,30 @@
-import { useLayoutEffect } from 'react';
+import { lazy, useLayoutEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import NotFound from '@/pages/not-found';
 import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 
 import Home from './pages/Home';
-import Pricing from './pages/Pricing';
-import Airbnb from './pages/Airbnb';
-import Booking from './pages/Booking';
-import GuidaDigitaleOspiti from './pages/GuidaDigitaleOspiti';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import CookiePolicy from './pages/CookiePolicy';
-import LegalNotes from './pages/LegalNotes';
-import LegalHub from './pages/LegalHub';
-import LegalDocumentPage from './pages/LegalDocument';
-import Analytics from './pages/Analytics';
-import Contact from './pages/Contact';
-import About from './pages/About';
+import { RouteContent } from './components/RouteContent';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { scrollToPageTop } from './lib/navigation';
+
+// Keep Home (including DemoOverlay/DemoVideo) eager: the opening tap must
+// synchronously mount the player and request playback, without an import await.
+const Pricing = lazy(() => import('./pages/Pricing'));
+const Airbnb = lazy(() => import('./pages/Airbnb'));
+const Booking = lazy(() => import('./pages/Booking'));
+const GuidaDigitaleOspiti = lazy(() => import('./pages/GuidaDigitaleOspiti'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+const LegalNotes = lazy(() => import('./pages/LegalNotes'));
+const LegalHub = lazy(() => import('./pages/LegalHub'));
+const LegalDocumentPage = lazy(() => import('./pages/LegalDocument'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const Contact = lazy(() => import('./pages/Contact'));
+const About = lazy(() => import('./pages/About'));
+const NotFound = lazy(() => import('./pages/not-found'));
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -51,28 +55,32 @@ function Router() {
   return (
     <Switch>
       {/* Analytics dashboard — standalone, no Navbar/Footer */}
-      <Route path="/analytics" component={Analytics} />
+      <Route path="/analytics">
+        <RouteContent><Analytics /></RouteContent>
+      </Route>
 
       {/* Public site routes */}
       <Route>
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-1">
-            <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/pricing" component={Pricing} />
-              <Route path="/contatti" component={Contact} />
-              <Route path="/about" component={About} />
-              <Route path="/airbnb" component={Airbnb} />
-              <Route path="/booking" component={Booking} />
-              <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />
-              <Route path="/privacy-policy" component={PrivacyPolicy} />
-              <Route path="/cookie-policy" component={CookiePolicy} />
-              <Route path="/note-legali" component={LegalNotes} />
-              <Route path="/legale" component={LegalHub} />
-              <Route path="/legale/:slug" component={LegalDocumentPage} />
-              <Route component={NotFound} />
-            </Switch>
+            <RouteContent>
+              <Switch>
+                <Route path="/" component={Home} />
+                <Route path="/pricing" component={Pricing} />
+                <Route path="/contatti" component={Contact} />
+                <Route path="/about" component={About} />
+                <Route path="/airbnb" component={Airbnb} />
+                <Route path="/booking" component={Booking} />
+                <Route path="/guida-digitale-ospiti" component={GuidaDigitaleOspiti} />
+                <Route path="/privacy-policy" component={PrivacyPolicy} />
+                <Route path="/cookie-policy" component={CookiePolicy} />
+                <Route path="/note-legali" component={LegalNotes} />
+                <Route path="/legale" component={LegalHub} />
+                <Route path="/legale/:slug" component={LegalDocumentPage} />
+                <Route component={NotFound} />
+              </Switch>
+            </RouteContent>
           </main>
           <Footer />
         </div>

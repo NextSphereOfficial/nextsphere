@@ -93,6 +93,22 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, 'dist'),
     emptyOutDir: true,
+    manifest: true,
+    rollupOptions: {
+      output: {
+        // Do not pull a lazy page's transitive dependencies into eager vendors.
+        onlyExplicitManualChunks: true,
+        manualChunks(id) {
+          if (!id.includes('/node_modules/')) return;
+          if (/\/node_modules\/(?:react|react-dom|scheduler)\//.test(id)) return 'react-vendor';
+          if (/\/node_modules\/(?:framer-motion|motion-dom|motion-utils)\//.test(id)) return 'motion-vendor';
+          // Charts belong to the on-demand analytics route, not the public home.
+          if (/\/node_modules\/(?:recharts|recharts-scale|d3-[^/]+|victory-vendor|react-smooth|decimal\.js-light|lodash)\//.test(id)) {
+            return 'analytics-charts';
+          }
+        },
+      },
+    },
   },
   server: {
     port,
