@@ -13,3 +13,4 @@
 - [Pnpm workspace relinking](pnpm-workspace-relinking.md) — after a filtered dependency update, a frozen install may be needed before trusting missing-type errors.
 - [Product claims](product-claims.md) — guest-requested host contacts, no invented AI answers, Stripe payments; preserve approved pricing and use only real proof.
 - [React head ownership](react-head-ownership.md) — Helmet on React 19 does not mark native head nodes with data-rh; never remove them from page effects.
+- [Homepage visual direction](homepage-visual-direction.md) — welcoming room imagery, unchanged copy, and the user's preference for the central warm halo.

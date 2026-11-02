@@ -13,6 +13,8 @@ import DemoTeaser from '../components/DemoTeaser';
 import DemoOverlay from '../components/DemoOverlay';
 import { HomePricingOffer } from '../components/PricingOffer';
 import { track } from '@vercel/analytics';
+import heroBedroom from '../assets/hero-warm-bedroom.webp';
+import heroBedroomMobile from '../assets/hero-warm-bedroom-mobile.webp';
 
 // --- Animation variants ---
 const fadeUp = {
@@ -158,22 +160,42 @@ export default function Home() {
       <section
         id="hero"
         ref={heroRef}
-        className="relative min-h-[100vh] flex items-center bg-[#0D0D0D] overflow-hidden"
+        className="relative min-h-[100vh] flex items-center bg-[#241b15] overflow-hidden"
       >
+        {/* An illustrative guest room sets the welcome; a restrained veil keeps the copy clear. */}
+        <picture className="absolute inset-0 pointer-events-none">
+          <source media="(max-width: 640px)" srcSet={heroBedroomMobile} />
+          <img
+            src={heroBedroom}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+        </picture>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(90deg, rgba(25,18,13,0.30) 0%, rgba(25,18,13,0.18) 48%, rgba(25,18,13,0.28) 100%), linear-gradient(180deg, rgba(25,18,13,0.32) 0%, rgba(25,18,13,0.10) 32%, rgba(25,18,13,0.24) 78%, rgba(13,13,13,0.86) 100%)'
+          }}
+        />
         {/* Parallax background orbs */}
         <motion.div
-          className="absolute inset-0 bg-radial-gradient opacity-60 pointer-events-none"
-          style={{ y: orb1Y }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ y: orb1Y, background: 'radial-gradient(ellipse 58% 57% at 50% 46%, rgba(24,17,12,0.40) 0%, rgba(24,17,12,0.17) 53%, transparent 100%)' }}
         />
         <motion.div
           className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[130px] pointer-events-none"
-          style={{ y: orb1Y, background: 'radial-gradient(circle, rgba(222,182,125,0.22) 0%, transparent 70%)' }}
+          style={{ y: orb1Y, background: 'radial-gradient(circle, rgba(222,182,125,0.17) 0%, transparent 70%)' }}
           animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0.85, 0.6] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           className="absolute bottom-0 left-1/4 w-[700px] h-[450px] rounded-full blur-[110px] pointer-events-none"
-          style={{ y: orb2Y, background: 'radial-gradient(circle, rgba(180,120,60,0.18) 0%, transparent 70%)' }}
+          style={{ y: orb2Y, background: 'radial-gradient(circle, rgba(180,120,60,0.14) 0%, transparent 70%)' }}
           animate={{ scale: [1, 1.08, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
@@ -211,11 +233,11 @@ export default function Home() {
 
             <motion.p
               initial="hidden" animate="visible" variants={fadeUp}
-              className="text-base sm:text-xl text-gray-400 mb-5 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-xl text-white/90 mb-5 max-w-2xl mx-auto leading-relaxed [text-shadow:0_1px_18px_rgba(25,18,13,0.72)]"
             >
               {t('hero.subtitle')}
             </motion.p>
-            <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-[#e4c18f]">{t('hero.boundary')}</p>
+            <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-[#f0d3a6] [text-shadow:0_1px_16px_rgba(25,18,13,0.8)]">{t('hero.boundary')}</p>
 
             <motion.div
               initial="hidden" animate="visible" variants={fadeUp}
@@ -231,7 +253,7 @@ export default function Home() {
               </a>
               <button
                 type="button"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white border border-white/10 text-base font-semibold rounded-xl hover:bg-white/10 transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#241b15]/45 backdrop-blur-sm text-white border border-white/30 text-base font-semibold rounded-xl hover:bg-[#241b15]/60 transition-all"
                 data-testid="hero-cta-secondary"
                 onClick={(e) => openDemo('hero', e)}
               >
@@ -241,8 +263,8 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Continue the dark hero into the product demo. */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent to-[#0D0D0D] pointer-events-none" />
+        {/* Fade the room naturally into the existing dark product demo. */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-b from-transparent via-[#0D0D0D]/55 to-[#0D0D0D] pointer-events-none" />
       </section>
 
       <DemoTeaser onOpen={(e) => openDemo('teaser', e)} />
