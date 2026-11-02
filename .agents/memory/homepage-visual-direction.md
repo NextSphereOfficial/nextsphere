@@ -14,3 +14,9 @@ The user likes the existing central halo because it makes the text more readable
 **Why:** The user explicitly said the halo “onestamente a me piace molto”.
 
 **How to apply:** Preserve that soft warm effect when compatible with the room photograph and readable text; do not obscure the photograph with an almost-black overlay.
+
+The user explicitly approved the generated room background with the softened central halo: “mi piace molto”.
+
+**Why:** This confirms the warmer direction and retained halo work together for the user.
+
+**How to apply:** Preserve this combination in future homepage refinements unless the user requests a different direction.
