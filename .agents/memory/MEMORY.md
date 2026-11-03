@@ -9,7 +9,7 @@
 - [Browser media verification](browser-media-verification.md) — check the test browser's codec support before treating MP4 playback failures as application defects.
 - [Mobile video activation](mobile-video-activation.md) — preserve the original opening gesture across lazy modal mounting and the first native playback request.
 - [Demo search discovery](demo-search-discovery.md) — sitemap metadata does not establish video-index eligibility for an interaction-only overlay.
-- [Pricing offer](pricing-offer.md) — €11,99/structure, €9,99 promotional; activation-based lifetime copy, pause/cancel anytime, approved draft layouts.
+- [Pricing offer](pricing-offer.md) — €9,99/structure, €6,49 promotional; activation-based lifetime copy, pause/cancel anytime, approved draft layouts.
 - [Pnpm workspace relinking](pnpm-workspace-relinking.md) — after a filtered dependency update, a frozen install may be needed before trusting missing-type errors.
 - [Product claims](product-claims.md) — guest-requested host contacts, no invented AI answers, Stripe payments; preserve approved pricing and use only real proof.
 - [React head ownership](react-head-ownership.md) — Helmet on React 19 does not mark native head nodes with data-rh; never remove them from page effects.

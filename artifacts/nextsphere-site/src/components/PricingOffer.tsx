@@ -13,8 +13,8 @@ function Price({ centered = false }: { centered?: boolean }) {
       </div>
       {centered && <p className="mb-1 text-[13px] text-white/60">{t('offer.allIncluded')}</p>}
       <div className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 ${centered ? 'justify-center' : ''}`}>
-        <del className="text-[16px] text-white/45 decoration-[#deb67d]/75 decoration-1">{format(11.99)}</del>
-        <span className="font-heading text-[57px] font-bold leading-none tracking-[-.06em] text-[#f2d6ad] sm:text-[68px]">{format(9.99)}</span>
+        <del className="text-[16px] text-white/45 decoration-[#deb67d]/75 decoration-1">{format(9.99)}</del>
+        <span className="font-heading text-[57px] font-bold leading-none tracking-[-.06em] text-[#f2d6ad] sm:text-[68px]">{format(6.49)}</span>
         <span className="pb-1 text-[14px] text-white/60">{t('offer.perProperty')}</span>
       </div>
       <p className="mt-2 text-[13px] font-semibold text-[#e5c493]">{t('offer.locked')}*</p>

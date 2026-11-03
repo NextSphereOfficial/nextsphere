@@ -31,12 +31,12 @@ const pricingSchema = [
     url: 'https://www.nextsphere.it/pricing',
     offers: {
       '@type': 'Offer',
-      price: '9.99',
+      price: '6.49',
       priceCurrency: 'EUR',
       url: 'https://www.nextsphere.it/pricing',
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
-        price: '9.99',
+        price: '6.49',
         priceCurrency: 'EUR',
         unitText: 'per property per month',
       },
